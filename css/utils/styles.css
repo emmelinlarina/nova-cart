@@ -5,8 +5,9 @@
     letter-spacing: 1px;
 }
 
-body {
-    color: white;    
-    font-family: sans-serif;
-    background-color: #192a51;
+html {
+    font-family: poppins, sans-serif;
+    font-size: 1.25rem;
+    text-decoration: none;
+    color: black;
 }

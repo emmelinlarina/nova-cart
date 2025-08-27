@@ -11,7 +11,9 @@
     <meta name="description" content="NovaCart register page">
     <script src="https://kit.fontawesome.com/e0e8f3b90b.js" crossorigin="anonymous"></script>
 
+    <link rel="stylesheet" href="css/utils/styles.css">
     <link rel="stylesheet" href="css/utils/components.css">
+    <link rel="stylesheet" href="css/utils/media.css">
     <link rel="stylesheet" href="css/account.css">
 
     <script src="https://kit.fontawesome.com/e0e8f3b90b.js" crossorigin="anonymous"></script>
@@ -27,7 +29,20 @@
 <body>
 
     <header>
-
+        <nav>
+            <ul class="navbar">
+                <li class="logo"><a href="index.html"><img src="images/logo/NovaCart_poppins_brown.png"
+                            alt="A minimalistic black-and-white icon of a rocket launching, with an atom-like structure encircling it, symbolizing science, space exploration and innovation."></a>
+                </li>
+                <input type="checkbox" id="check">
+                <span class="menu">
+                    <li><a href="#"><i class="fa-regular fa-circle-user"></i></a></li>
+                    <li><a href="#">Shop</a></li>
+                    <label for="check" class="close-menu"><i class="fa-solid fa-xmark"></i></label>
+                </span>
+                <label for="check" class="open-menu"><i class="fa-solid fa-bars"></i></label>
+            </ul>
+        </nav>
     </header>
 
 
@@ -40,18 +55,38 @@
     <footer>
         <div class="row">
             <div class="col">
-                <img src="images/logo/NovaCart_poppins_trans02.png">
+                <img src="images/logo/NovaCart_poppins_brown.png" alt="novacart logo">
+                <h4>Sign up</h4>
+                <h4>Log in</h4>
             </div>
             <div class="col">
-                <h1> <i class="fa-brands fa-discord"></i> Shipping and returns
+                <h3>Nova Cart</h3>
+                <p>789 Shopping Avenue, Suite 101</p>
+                <p>Selling City, SC 56789</p>
+                <p class="email-id">contact@novacart.com</p>
+                <h5>Phone: (987) 654-3210</h5>
             </div>
             <div class="col">
-                <h1><i class="fa-brands fa-facebook"></i> Help & FAQ</h1>
+                <h3>Help and FAQ</h3>
+                <ul>
+                    <li><a href="about.html">Shipping & Returns </a></li>
+                    <li><a href="contact.html">Contact us</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="">FAQ</a></li>
+                </ul>
             </div>
             <div class="col">
-                <h1><i class="fa-brands fa-facebook"></i> Visit us at</h1>
-                <h2>789 Stellar Avenue </h2>
-                <h2>Night city 80085</h2>
+                <h3>Newsletter</h3>
+                <form>
+                    <input type="email" placeholder="Enter your email here" required>
+                    <button type="submit"><i class="fa-solid fa-arrow-right"></i></button>
+                </form>
+                <div class="social-icons">
+                    <i class="fa-brands fa-discord"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-x-twitter"></i>
+                </div>
             </div>
         </div>
     </footer>

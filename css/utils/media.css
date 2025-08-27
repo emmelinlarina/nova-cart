@@ -1,0 +1,84 @@
+
+/* mobile nav bar / hamburger */
+
+@media (max-width: 645px) {
+    .menu {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: left;
+        width: 80%;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        z-index: 100;
+        background-color: #B6E1F4;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .menu li {
+        margin-top: 40px;
+    }
+    .menu li a {
+        padding: 10px; 
+        font-size: 1.5rem;
+        
+    }
+    .open-menu , .close-menu {display: block;}
+    #check:checked ~ .menu {right: 0;}
+
+    .navbar {
+        display: flex;
+        width: 100%;
+        padding: 25px 55px;
+    }
+
+    .logo {
+        flex-grow: 1;
+        text-align: center;
+        width: auto;  
+        max-width: 100%;
+    }
+
+}
+
+/* nav logo img */
+
+.logo img {width: 100px;
+    flex-direction: column;
+}
+
+
+/* FOOTER */
+
+@media (min-width: 1000px) and (max-width: 2560px) {
+    
+    footer {
+        
+        padding: 40px 50px 25px; /* change this after */
+        font-size: 0.7rem;
+    }
+    
+
+    .row {
+        width: 100%;
+        flex-direction: row;
+    }
+     
+    .col, .col h5, .col ul li  {
+        font-size: 0.75rem;
+    }
+
+    .col h3 {
+        font-size: 0.85rem;
+    }
+
+
+    form input {
+        width: 90%;
+
+    }
+
+ }
+
