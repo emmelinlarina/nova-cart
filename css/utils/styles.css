@@ -6,8 +6,9 @@
 }
 
 html {
-    font-family: poppins, sans-serif;
+    font-family: poppins, roboto;
     font-size: 1.25rem;
     text-decoration: none;
-    color: black;
+    color: #362E27;
+    background-color: #FAFAFA;
 }

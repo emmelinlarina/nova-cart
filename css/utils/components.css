@@ -62,8 +62,8 @@ padding: 10px 15px;
     
 }
 
-.open-menu { top: 50%;right: 35px; transform: translateY(-50%); }
-.close-menu { top: 20px; right: 20px; }
+.open-menu { top: 20px; right: 30px; transform: none; }
+.close-menu { top: 30px; right: 30px; }
 .logo img { width: 75px; }
 
 
@@ -73,22 +73,22 @@ padding: 10px 15px;
 footer {
     width: 100%;
     bottom: 0;
-    padding: 20px 20px 25px; /* change this after */
+    padding: 20px 20px 25px; 
     border: 125px;
     font-size: 0.8rem;
     line-height: 18px;
-    background: #C6D6F4;
-    color: black;
+    background: #224665;
+    color: #FAFAFA;
 }
 
 .row {
     width: 90%;
     margin: auto;
     display: flex;
-    flex-direction: column; /* change to flex wrap in media */
+    flex-direction: column; 
     align-items: flex-start;
     justify-content: space-between;
-    
+    gap: 8px;
 }
 
 .col img {
@@ -97,17 +97,11 @@ footer {
     padding: 0 0 0 0;
 }
 
-
-col {
-    padding: 10px 10px;
-    color: black;
-} 
-
 .col h4 {
     display: flex;
     align-items: center;
     justify-content: center;
-    
+    text-align: left;
 } 
 
 .col h3 {
@@ -127,11 +121,10 @@ col {
     list-style: none;
     line-height: 30px;
     font-size: 0.9rem;
-    color: black;
 }
 
 .col li a {
-    color: black;
+    color: #FAFAFA;
     text-decoration: none;
 }
 
@@ -147,7 +140,7 @@ col {
 form {
     padding-bottom: 5px;
     display: flex;
-    border-bottom: 1px solid rgb(0, 0, 0);
+    border-bottom: 1px solid #FAFAFA;
     margin-bottom: 15px;
     width: 270px;
 }
