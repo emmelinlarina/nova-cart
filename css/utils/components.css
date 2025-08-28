@@ -62,7 +62,7 @@ padding: 10px;
 .close-menu { top: 30px; right: 30px; }
 
 .logo a {display: inline-block; line-height: 0;}
-.logo img {width: 178px; margin-top: 10px;}
+.logo img {width: 178px; margin-top: 10px; visibility: hidden; }
 
 
 
