@@ -2,7 +2,20 @@
 /* mobile nav bar / hamburger */
 
 @media (max-width: 768px) {
-    .menu {
+    .navbar {
+        display: flex;
+        width: 100%;
+        padding: 80px 55px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .navbar p {
+    display: block;
+    line-height: 5px;
+    }
+    
+ .menu {
         flex-direction: column;
         align-items: center;
         justify-content: center;
@@ -28,20 +41,26 @@
     .open-menu , .close-menu {display: block;}
     #check:checked ~ .menu {right: 0;}
 
-    .navbar {
-        display: flex;
-        width: 100%;
-        padding: 100px 55px;
+   
+    .logo a {
+        display: inline-block;
+        line-height: 0;
     }
 
     .logo {
+        padding-top: 62px;
         flex-grow: 1;
         text-align: center;
         width: auto;  
         max-width: 100%;
     }
 
-    .logo img {width: 240px;}
+    .logo img {
+        width: 240px;
+        height: 120px;
+        flex-shrink: 0;
+        aspect-ratio: 2/1;
+    }
 
 }
 
