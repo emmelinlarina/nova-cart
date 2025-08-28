@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    letter-spacing: 1px;
 }
 
 html {
@@ -11,5 +10,10 @@ html {
     text-decoration: none;
     color: #362E27;
     background-color: #FAFAFA;
+    letter-spacing: 1px;
 }
 
+/* lists and links */
+
+ul {list-style: none;}
+a{text-decoration: none; color: inherit;}

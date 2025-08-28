@@ -4,49 +4,32 @@
 
 .navbar {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; justify-content: space-between; align-items: center;
     position: relative;
     background-color: #D8EAF0;
     padding: 0 94px 0 94px;
     height: 94px;
     color: #111110;
-    list-style: none;
-    text-decoration: none;
     font-weight: 500;
 }
 
 .navbar p {
     display: none;
-    color: #000010;
     text-align: center;
-    font-family: Poppins;
-    font-size: 16px;
-    font-style: normal;
+    font-size: 1rem;
     font-weight: 700;
-    line-height: normal;
-    letter-spacing: 0.48px;
+    letter-spacing: .03rem;
 }
 
 .menu {
-    display: flex;
-    list-style: none;
-    gap: 25px;
-    margin: 0;
-    padding: 0;
+    display: flex; gap: 25px;
+    margin: 0; padding: 0;
 }
 
-.menu li {
-    padding-left: 0;
-    font-size: 1.8rem;
-}
-
+.menu li {font-size: 1.8rem;}
 .menu a {
 display: inline-block;
-text-decoration: none;
 text-transform: uppercase;
-color: #362E27;
 padding: 10px;
 }
 
@@ -60,14 +43,11 @@ padding: 10px;
     width: 100%;
     height: 1px;
     transition: 0.15s ease-in-out;
-    
 }
 
 /* -----  HAMBURGER MENU ----- */
 
-#check {
-    display: none;
-}
+#check {display: none;}
 
 /* hamburger buttons */
 .open-menu , .close-menu , .i {
@@ -76,20 +56,13 @@ padding: 10px;
     color: black;
     font-size: 2.25rem;
     display: none;
-    
 }
 
 .open-menu { top: 20px; right: 30px; transform: none; }
 .close-menu { top: 30px; right: 30px; }
 
-.logo a {
-    display: inline-block;
-    line-height: 0;
-}
-.logo img { 
-    width: 178px; 
-    margin-top: 10px;
-}
+.logo a {display: inline-block; line-height: 0;}
+.logo img {width: 178px; margin-top: 10px;}
 
 
 
@@ -98,97 +71,43 @@ padding: 10px;
 
 footer {
     width: 100%;
-    bottom: 0;
     padding: 20px 20px 25px; 
-    border: 125px;
-    font-size: 0.8rem;
-    line-height: 18px;
+    font-size: 0.8rem; line-height: 18px;
     background: #224665;
     color: #FAFAFA;
 }
 
 .row {
-    width: 90%;
-    margin: auto;
-    display: flex;
-    flex-direction: column; 
-    align-items: flex-start;
-    justify-content: space-between;
+    width: 90%; margin: auto;
+    display: flex; flex-direction: column; 
+    align-items: flex-start; justify-content: space-between;
     gap: 8px;
 }
 
-.col img {
-    max-width: 100%;
-    width: 150px;
-    padding: 0 0 0 0;
-}
+.col img {max-width: 100%;width: 150px;}
 
-.col h4 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: left;
-} 
+.col h4 {display: flex; align-items: center; justify-content: center; text-align: left;} 
 
-.col h3 {
-    font-size: 0.9rem;
-    margin-bottom: 20px;
-    margin-top: 25px;
-    position: relative;
-}
+.col h3 {font-size: 0.9rem; margin: 20px 0 20px; position: relative;}
+.col h5 {font-size: 0.8rem; margin-top: 20px;  margin: 12px 0 25px;letter-spacing: 1px;}
 
-.col h5 {
-    font-size: 0.8rem;
-    margin-top: 20px;
-    letter-spacing: 1px;
-}
+.col ul li {line-height: 30px; font-size: 0.9rem;}
+.col li a {color: #FAFAFA;}
 
-.col ul li {
-    list-style: none;
-    line-height: 30px;
-    font-size: 0.9rem;
-}
+.col p {line-height: 25px;}
 
-.col li a {
-    color: #FAFAFA;
-    text-decoration: none;
-}
-
-.col p {
-    line-height: 25px;
-}
-
-.col h5 {
-    margin: 12px 0 25px;
-    font-size: 0.75rem;
-}
+/* form */
 
 form {
-    padding-bottom: 5px;
-    display: flex;
+    display: flex; width: 270px;
+    padding-bottom: 5px; margin-bottom: 15px;
     border-bottom: 1px solid #FAFAFA;
-    margin-bottom: 15px;
-    width: 270px;
 }
 
 form input {
-    width: 100%;
-    padding: 0;
-    background: transparent;
-    border: 0;
-}
+    width: 100%; padding: 0; background: transparent; border: 0;}
+form button {background: transparent; border: 0; padding: 5px; font-size: 1.1rem;}
 
-form button {
-    background: transparent;
-    border: 0;
-    padding: 5px;
-    font-size: 1.1rem;
-}
+.col a:hover {font-weight: 600;}
 
-.col a:hover {
-    font-weight: 600;
-}
-
-.social-icons {
-    font-size: 1.15rem;
-}
+.social-icons {font-size: 1.15rem;}

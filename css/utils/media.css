@@ -1,107 +1,61 @@
 
-/* mobile nav bar / hamburger */
+/* --- mobile nav bar / hamburger --- */
 
 @media (max-width: 768px) {
     .navbar {
-        display: flex;
+        display: flex; align-items: center; justify-content: center;
         width: 100%;
-        padding: 80px 55px;
-        align-items: center;
-        justify-content: center;
+        padding: 150px 55px;
     }
 
-    .navbar p {
-    display: block;
-    line-height: 5px;
-    }
+    .navbar p {display: block; line-height: 5px;}
     
  .menu {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: left;
-        width: 80%;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        right: -100%;
-        z-index: 100;
+        position: fixed; inset: 0 auto 20%;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        text-align: left; width: 80%; height: 100vh;
+        right: -100%; z-index: 100;
         background-color: #B6E1F4;
         transition: all 0.2s ease-in-out;
     }
 
-    .menu li {
-        margin-top: 40px;
-    }
-    .menu li a {
-        padding: 10px; 
-        font-size: 1.5rem;
-        
-    }
-    .open-menu , .close-menu {display: block;}
     #check:checked ~ .menu {right: 0;}
 
-   
-    .logo a {
-        display: inline-block;
-        line-height: 0;
-    }
+    .menu li {margin-top: 40px;}
+    .menu li a {padding: 10px; font-size: 1.5rem;}
 
-    .logo {
-        padding-top: 62px;
-        flex-grow: 1;
-        text-align: center;
-        width: auto;  
-        max-width: 100%;
-    }
+    .open-menu , .close-menu {display: block;}
+    
 
+   .logo {padding-top: 0; flex-grow: 1; text-align: center; width: auto;  max-width: 100%;}
+    .logo a {display: inline-block; line-height: 0;}
     .logo img {
         width: 240px;
         height: 120px;
-        flex-shrink: 0;
-        aspect-ratio: 2/1;
+        flex-shrink: 0;aspect-ratio: 2/1;
     }
 
 }
 
-/* nav logo img */
+/* --- Desktop ---  */
 
 
 
 @media (min-width: 769px) and (max-width: 2560px) { 
 
-    .logo img {width: 170px;}
-}
+    .logo img {width: 170px;}}
 
-/* FOOTER */
+
+/* --- FOOTER Desktop --- */
 
 @media (min-width: 1000px) and (max-width: 2560px) {
     
     footer {
-        
-        padding: 40px 50px 25px; /* change this after */
-        font-size: 0.7rem;
-    }
-    
-
-    .row {
-        width: 100%;
-        flex-direction: row;
-    }
-     
-    .col, .col h5, .col ul li  {
-        font-size: 0.75rem;
-    }
-
-    .col h3 {
-        font-size: 0.85rem;
-    }
-
-
-    form input {
-        width: 90%;
-
-    }
+        padding: 40px 50px 25px; font-size: 0.7rem;}
+    .row {width: 100%; flex-direction: row;}
+    .col, .col h5, .col ul li  {font-size: 0.75rem;}
+    .col h3 {font-size: 0.85rem;}
+    form input {width: 90%;}
 
  }
 
