@@ -3,19 +3,54 @@
 .logo img {visibility: visible; }
 
 .carousel {
-    position: relative; overflow: hidden; display: flex; align-items: center;}
+    display: grid;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: auto auto;
+    grid-template-areas: "track track" "prev next";
+}
+
+
 .carousel-track {
+    grid-area: track;
     display: flex;
     gap: 20px;
     overflow: hidden;
+    transition: transform .3s ease;
+    will-change: transform;
 }
 
 .carousel-item {
     min-width: 294px;
+    flex: 0 0 294px;
     height: 350px;
-    flex-shrink: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.carousel-item h3, .carousel-item .price {
+    margin: .4rem .6rem;
 }
 
 .carousel-btn {
-
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    width: 36px; height: 36px;
+    border: 0;
+    border-radius: 999px;
+    background: #d8eaf0;
+    cursor: pointer;
 }
+
+.carousel-btn-prev { grid-area: prev; justify-self: end; }
+.carousel-btn-next { grid-area: next; justify-self: start; }

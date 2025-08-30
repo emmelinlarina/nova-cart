@@ -1,10 +1,10 @@
 import { fetchProducts } from "./api/products.js";
 
-const loader = document.getElementById(`page-loader`);
-const track = document.querySelector(`.carousel-track`)
-const latestGrid = document.querySelector(`.latest-products`)
-const prevBtn = document.querySelector(`.carousel-btn-prev`)
-const nextBtn = document.querySelector(`.carousel-btn-next`)
+const loader = document.getElementById("page-loader");
+const track = document.querySelector(".carousel-track")
+const latestGrid = document.querySelector(".latest-products")
+const prevBtn = document.querySelector(".carousel-btn-prev")
+const nextBtn = document.querySelector(".carousel-btn-next")
 
 const imgSrc = (p) => p?.image?.url ?? "images/fallback.png"
 const imgAlt = (p) => p?.image?.alt ?? p.title ?? "Product image"
@@ -34,7 +34,7 @@ const cardHTML = (p) => `
 
 async function init() {
     try { 
-    loader.style.display = 'grid';
+    loader.style.display = "grid";
 
     const products = await fetchProducts();
 
@@ -87,7 +87,8 @@ function go(index, animate = true) {
     current = index;
 }
 
-requestAnimationFrame(() => go(current, false));
+
+whenImagesLoaded(track, () => requestAnimationFrame(()=> go(current, false)));
 
 nextBtn?.addEventListener("click", () => go(current + 1));
 prevBtn?.addEventListener("click", () => go(current - 1));
@@ -99,5 +100,13 @@ track.addEventListener("transitioned", () => {
 });
 
 window.addEventListener("resize", () => go(current, false));
+
+}function whenImagesLoaded(container, cb) {
+    const imgs = [...container.querySelectorAll('img')];
+    if (imgs.length === 0) return cb();
+    let left = imgs.length;
+    const done = () => (--left === 0 && cb());
+    imgs.forEach(img => img.complete ? done() : img.addEventListener('load', done, {once:true}));
 }
+
 init();
