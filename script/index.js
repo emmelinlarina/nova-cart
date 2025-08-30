@@ -22,6 +22,7 @@ const slideHTML = (p) => `
 
 const cardHTML = (p) => `
      <article class="product-card carousel-item ">
+     <article class="product-cart">
         <a class="card-link" href="product.html?id=${p.id}">
             <img src="${imgSrc(p)}" alt="${imgAlt(p)}" />
             <h3>${p.title}</h3>
@@ -93,7 +94,7 @@ whenImagesLoaded(track, () => requestAnimationFrame(()=> go(current, false)));
 nextBtn?.addEventListener("click", () => go(current + 1));
 prevBtn?.addEventListener("click", () => go(current - 1));
 
-track.addEventListener("transitioned", () => {
+track.addEventListener("transitionend", () => {
     const realCount = items.length;
     if (current === realCount + 1) go(1, false);
     if (current === 0) go(realCount, false);
