@@ -8,10 +8,10 @@ const nextBtn = document.querySelector(".carousel-btn-next")
 
 const imgSrc = (p) => p?.image?.url ?? "images/fallback.png"
 const imgAlt = (p) => p?.image?.alt ?? p.title ?? "Product image"
-const price = (p) => (p.discountedPrice ?? p.price) + " NOK"
+const price = (p) => (p.discountedPrice ?? p.price) + " $"
 
 const slideHTML = (p) => `
-    <article class="product-card carousel-item ">
+    <article class="product-card carousel-item">
         <a class="card-link" href="product.html?id=${p.id}">
             <img src="${imgSrc(p)}" alt="${imgAlt(p)}" />
             <h3>${p.title}</h3>
@@ -21,8 +21,7 @@ const slideHTML = (p) => `
 `;
 
 const cardHTML = (p) => `
-     <article class="product-card carousel-item ">
-     <article class="product-cart">
+     <article class="product-card">
         <a class="card-link" href="product.html?id=${p.id}">
             <img src="${imgSrc(p)}" alt="${imgAlt(p)}" />
             <h3>${p.title}</h3>
@@ -46,7 +45,6 @@ async function init() {
 
     const latest12 = products.slice(-12).reverse();
     latestGrid.innerHTML = latest12.map(cardHTML).join("");
-
      } catch (err) {
     console.error("Init error:", err)
     latestGrid.innerHTML = `<p>Could not load products.</p>`;
@@ -68,7 +66,14 @@ function setupCarousel() {
     track.prepend(lastClone);
     track.appendChild(firstClone);
 
+    const realCount = items.length;
     let current = 1;
+    let isAnimating = false;
+
+    const step = () => {
+        const slide = track.querySelector(".carousel-item");
+        
+    }
 
     function stepWidth() {
     const w = track.querySelector(".carousel-item").getBoundingClientRect().width;
@@ -103,11 +108,11 @@ track.addEventListener("transitionend", () => {
 window.addEventListener("resize", () => go(current, false));
 
 }function whenImagesLoaded(container, cb) {
-    const imgs = [...container.querySelectorAll('img')];
+    const imgs = [...container.querySelectorAll("img")];
     if (imgs.length === 0) return cb();
     let left = imgs.length;
     const done = () => (--left === 0 && cb());
-    imgs.forEach(img => img.complete ? done() : img.addEventListener('load', done, {once:true}));
+    imgs.forEach(img => img.complete ? done() : img.addEventListener("load", done, {once:true}));
 }
 
 init();
