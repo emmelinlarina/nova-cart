@@ -56,9 +56,9 @@ async function init() {
 // Carousel looping 
 function setupCarousel() {
     const items = track.querySelectorAll(".carousel-item");
-    if (items.length === 0) return; 
+    if (!items.length === 0) return; 
     
-
+    const realCount = items.length;
     const firstClone = items[0].cloneNode(true);
     const lastClone = items[items.length - 1].cloneNode(true);
     firstClone.dataset.clone = "first";
@@ -66,25 +66,23 @@ function setupCarousel() {
     track.prepend(lastClone);
     track.appendChild(firstClone);
 
-    const realCount = items.length;
     let current = 1;
     let isAnimating = false;
 
-    const step = () => {
-        const slide = track.querySelector(".carousel-item");
-        
-    }
+    
 
-    function stepWidth() {
-    const w = track.querySelector(".carousel-item").getBoundingClientRect().width;
+const stepWidth = () => {
+    const slide = track.querySelector(".carousel-item");
+    const w = slide.getBoundingClientRect().width;
     const gap = parseFloat(getComputedStyle(track).gap) || 0;
     return w + gap;
-}
+    };
 
-function go(index, animate = true) {
-    const step = stepWidth();
+
+const go = (index, animate = true) => {
+    const dx = -index * stepWidth();
     if (!animate) track.style.transition = "none";
-    track.style.transform = `translateX(${-index * step}px)`;
+    track.style.transform = `translateX(${dx}px)`;
     if (!animate) {
         track.getBoundingClientRect();
         track.style.transition = "transform .3s ease";
@@ -97,6 +95,7 @@ function go(index, animate = true) {
 whenImagesLoaded(track, () => requestAnimationFrame(()=> go(current, false)));
 
 nextBtn?.addEventListener("click", () => go(current + 1));
+
 prevBtn?.addEventListener("click", () => go(current - 1));
 
 track.addEventListener("transitionend", () => {

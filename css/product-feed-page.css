@@ -20,7 +20,7 @@
     grid-area: track;
     display: flex;
     gap: 12px;
-    overflow: hidden;
+
     transition: transform .3s ease;
     will-change: transform;
 }
