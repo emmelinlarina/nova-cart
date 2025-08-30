@@ -47,13 +47,21 @@
 
     <main>
 
+        <div id="page-loader">
+            <div class="spinner"></div>
+        </div>
 
-
-        <section class="latest-products">
-            <div id="page-loader">
-                <div class="spinner"></div>
+        <section class="carousel">
+            <button class="carousel-btn-prev"><i class="fa-solid fa-arrow-left"></i></button>
+            <div class="carousel-track">
+                <div class="carousel-item">Product 1</div>
+                <div class="carousel-item">Product 2</div>
+                <div class="carousel-item">Product 3</div>
+                <div class="carousel-item">Product 4</div>
             </div>
+            <button class="carousel-btn-next"><i class="fa-solid fa-arrow-right"></i></button>
         </section>
+        <section class="latest-products"></section>
 
 
     </main>
@@ -96,8 +104,8 @@
         </div>
     </footer>
 
-    <script type="module" src="data/index.js"></script>
-    <script type="module" src="data/product.js"></script>
+    <script type="module" src="script/api/products.js"></script>
+    <script type="module" src="script/index.js"></script>
 </body>
 
 </html>

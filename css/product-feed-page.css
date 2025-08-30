@@ -2,3 +2,20 @@
 
 .logo img {visibility: visible; }
 
+.carousel {
+    position: relative; overflow: hidden; display: flex; align-items: center;}
+.carousel-track {
+    display: flex;
+    gap: 20px;
+    overflow: hidden;
+}
+
+.carousel-item {
+    min-width: 294px;
+    height: 350px;
+    flex-shrink: 0;
+}
+
+.carousel-btn {
+
+}
