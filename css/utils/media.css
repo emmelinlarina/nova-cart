@@ -6,6 +6,7 @@
         display: flex; align-items: center; justify-content: center;
         width: 100%;
         padding: 150px 55px;
+        background-color: #FAFAFA;
     }
 
     .navbar p {display: block; line-height: 5px;}

@@ -3,63 +3,11 @@
 .logo img {visibility: visible; }
 
 
-/* ---- CAROUSEL ---- */ /*
-.carousel {
-    display: grid;
-    gap: 10px;
-    width: 294px;
-    margin: 0 auto;
-    overflow: hidden;
-    justify-items: center;
-    
-}
-
-
-.carousel-track {
-    justify-content: center;
-    grid-area:auto;
-    display: flex;
-    gap: 12px;
-    transition: transform .3s ease;
-    will-change: transform;
-}
-
-/* item on slides */ /*
-.carousel-item {
-    flex: auto;
-    height: 350px;
-    border-radius: 12px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-
-.carousel-item img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    display: block;
-}
-
-
-/* Arrow buttons */ /*
-.carousel-btn-prev, .carousel-btn-next {
-    display: inline-flex;
-    align-items: center; justify-content: center; justify-items: center;
-    width: 36px; height: 36px;
-    background: #cc6565;
-    cursor: pointer;
-}
-
-.carousel-btn-prev { grid-area: prev; justify-self: end; }
-.carousel-btn-next { grid-area: next; justify-self: start; }
-
-*/
 
 .slideshow {
     max-width: 294px;
     position: relative;
-    margin: 0 auto 16px;
+    margin: 0 auto;
 }
 
 .slideshow .mySlide {
@@ -67,21 +15,30 @@
 }
 
 .slideshow .card {
-    border-radius: 12px;
     overflow: hidden;
-    display: grid;
-    grid-template-rows: 220px auto;
+    grid-template-rows: 220px;
+}
+
+.slides {
+    max-width: 294px;
+    position: relative;
+    margin: 0 auto 16px;
+
 }
 
 .slideshow img {
     width: 100%;
-    height: 220px;
+    max-width: 294px;
+    height: auto;
+    max-height: 350px;
     object-fit: cover;
-    display: block;
+    border-radius: 15px;
 }
+
 
 .slideshow h3, .slideshow .price {
     margin: .4rem .6rem;
+    padding: 0;
 }
 
 .slideshow .controls {
@@ -98,21 +55,92 @@
     border-radius: 25%;
     cursor: pointer;
     font-size: 18px;
+    width: 55px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 100px;
+    background: #D8EAF0;
 }
+
 
 
 .latest-products {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    justify-items: center;
     text-align: center;
-    gap: 12px;
+    gap: 29px;
     padding: 12px 16px;
+    margin-bottom: 100px;
+}
+
+.latest-products h3, p {
+    
+    text-align: left;
+    padding-left: 40px;
+}
+
+.latest-products h3 {
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 25px; 
+    letter-spacing: 0.48px;
+}
+
+.latest-products p {
+    font-family: Poppins;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: 0.42px;
 }
 
 .latest-products .product-card img {
-    width: 100%;
-    height: 220px;
+    width: 165px;
+    height: 195px;
+    flex-shrink: 0;
     object-fit: cover;
-    display: block;
+    border-radius: 15px;
 }
+
+.info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+
+}
+
+.info h2 {
+    text-align: center;
+    font-family: Poppins;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.72px;
+    border-radius: 15px;
+    background: #D9D9D9;
+    margin-top: 52px;
+    padding: 10px 0 10px 0;
+}
+.info p {
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 25px; /* 138.889% */
+    letter-spacing: 0.54px;
+    margin: 25px 0 30px;
+}
+
+.info h3 {
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.64px;
+    padding-left: 40px;
+}
+

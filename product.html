@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="css/utils/styles.css">
     <link rel="stylesheet" href="css/utils/components.css">
+    <link rel="stylesheet" href="css/product.css">
     <link rel="stylesheet" href="css/utils/media.css">
     <link rel="stylesheet" href="css/cart.css">
 
@@ -48,6 +49,15 @@
 
     <main>
 
+        <div id="page-loader">
+            <div class="spinner"></div>
+        </div>
+
+        <section class="all">
+            <div class="products js-product-detail">
+                <p>loading products</p>
+            </div>
+        </section>
 
     </main>
 
@@ -89,7 +99,9 @@
         </div>
     </footer>
 
-    <script type="module" src="data/product.js"></script>
+    <script type="module" src="script/api/products.js"></script>
+    <script type="module" src="script/product.js"></script>
+
 </body>
 
 </html>
