@@ -3,11 +3,10 @@
 .logo img {visibility: visible; }
 
 
-/* ---- CAROUSEL ---- */
+/* ---- CAROUSEL ---- */ /*
 .carousel {
     display: grid;
     gap: 10px;
-    grid-template-areas: "track track" "prev next" ;
     width: 294px;
     margin: 0 auto;
     overflow: hidden;
@@ -17,18 +16,17 @@
 
 
 .carousel-track {
-    grid-area: track;
+    justify-content: center;
+    grid-area:auto;
     display: flex;
     gap: 12px;
-
     transition: transform .3s ease;
     will-change: transform;
 }
 
-/* item on slides */
+/* item on slides */ /*
 .carousel-item {
-    min-width: 294px;
-    flex: 0 0 294px;
+    flex: auto;
     height: 350px;
     border-radius: 12px;
     overflow: hidden;
@@ -43,21 +41,65 @@
     display: block;
 }
 
-.carousel-item h3, .carousel-item .price {
-    margin: .4rem .6rem;
-}
 
-/* Arrow buttons */
+/* Arrow buttons */ /*
 .carousel-btn-prev, .carousel-btn-next {
     display: inline-flex;
-    align-items: center; justify-content: center;
+    align-items: center; justify-content: center; justify-items: center;
     width: 36px; height: 36px;
-    background: #d8eaf0;
+    background: #cc6565;
     cursor: pointer;
 }
 
 .carousel-btn-prev { grid-area: prev; justify-self: end; }
 .carousel-btn-next { grid-area: next; justify-self: start; }
+
+*/
+
+.slideshow {
+    max-width: 294px;
+    position: relative;
+    margin: 0 auto 16px;
+}
+
+.slideshow .mySlide {
+    display: none;
+}
+
+.slideshow .card {
+    border-radius: 12px;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: 220px auto;
+}
+
+.slideshow img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.slideshow h3, .slideshow .price {
+    margin: .4rem .6rem;
+}
+
+.slideshow .controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.slideshow .controls button {
+    width: 36px;
+    height: 23px;
+    border: 0 ;
+    border-radius: 25%;
+    cursor: pointer;
+    font-size: 18px;
+}
+
 
 .latest-products {
     display: grid;

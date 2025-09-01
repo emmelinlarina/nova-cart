@@ -1,23 +1,24 @@
 import { fetchProducts } from "./api/products.js";
 
 const loader = document.getElementById("page-loader");
-const track = document.querySelector(".carousel-track")
 const latestGrid = document.querySelector(".latest-products")
-const prevBtn = document.querySelector(".carousel-btn-prev")
-const nextBtn = document.querySelector(".carousel-btn-next")
+
+const slidesWrap = document.querySelector("#slideshow .slides")
+const prevBtn = document.querySelector("#slideshow .prev")
+const nextBtn = document.querySelector("#slideshow .next")
 
 const imgSrc = (p) => p?.image?.url ?? "images/fallback.png"
 const imgAlt = (p) => p?.image?.alt ?? p.title ?? "Product image"
 const price = (p) => (p.discountedPrice ?? p.price) + " $"
 
 const slideHTML = (p) => `
-    <article class="product-card carousel-item">
-        <a class="card-link" href="product.html?id=${p.id}">
+    <div class="mySlide">
+        <a class="card" href="product.html?id=${p.id}">
             <img src="${imgSrc(p)}" alt="${imgAlt(p)}" />
             <h3>${p.title}</h3>
             <p class="price">${price(p)}</p>
         </a>
-    </article>
+    </div>
 `;
 
 const cardHTML = (p) => `
@@ -40,78 +41,49 @@ async function init() {
 
     // Carousel
     const latest3 = products.slice(-3);
-    track.innerHTML = latest3.map(slideHTML).join("");
-    setupCarousel();
-
-    const latest12 = products.slice(-12).reverse();
-    latestGrid.innerHTML = latest12.map(cardHTML).join("");
-     } catch (err) {
-    console.error("Init error:", err)
-    latestGrid.innerHTML = `<p>Could not load products.</p>`;
-     } finally {
-        loader.style.display ="none";
-    }
-}
-
-// Carousel looping 
-function setupCarousel() {
-    const items = track.querySelectorAll(".carousel-item");
-    if (!items.length === 0) return; 
-    
-    const realCount = items.length;
-    const firstClone = items[0].cloneNode(true);
-    const lastClone = items[items.length - 1].cloneNode(true);
-    firstClone.dataset.clone = "first";
-    lastClone.dataset.clone = "last";
-    track.prepend(lastClone);
-    track.appendChild(firstClone);
-
-    let current = 1;
-    let isAnimating = false;
-
+    slidesWrap.innerHTML = latest3.map(slideHTML).join("");
     
 
-const stepWidth = () => {
-    const slide = track.querySelector(".carousel-item");
-    const w = slide.getBoundingClientRect().width;
-    const gap = parseFloat(getComputedStyle(track).gap) || 0;
-    return w + gap;
-    };
+    let slideIndex = 1;
+    const showSlide = (n) => {
+        const slides = slidesWrap.querySelectorAll(".mySlide");
+        if (!slides.length) return; 
+        if (n > slides.length) slideIndex = 1;
+        if (n < 1) slideIndex = slides.length
+        slides.forEach(s => s.style.display = "none");
+        slides[slideIndex - 1].style.display = "block";
+            
+        };
+
+        const imgs = [...slidesWrap.querySelectorAll("img")];
+        if (imgs.length) {
+            let left = imgs.length;
+            const done = () => { left--; if (left === 0) showSlide(slideIndex); };
+            imgs.forEach(img => {
+                if (img.complete) done();
+                else img.addEventListener("load", done, {once: true});
+        });
+        } else { 
+            showSlide(slideIndex);
+        }
+   
+
+    prevBtn.addEventListener("click", () => showSlide(--slideIndex));
+    nextBtn.addEventListener("click", () => showSlide(++slideIndex));
+
+    const lastest12 = products.slice(-12).reverse();
+    latestGrid.innerHTML = lastest12.map(cardHTML).join("");
 
 
-const go = (index, animate = true) => {
-    const dx = -index * stepWidth();
-    if (!animate) track.style.transition = "none";
-    track.style.transform = `translateX(${dx}px)`;
-    if (!animate) {
-        track.getBoundingClientRect();
-        track.style.transition = "transform .3s ease";
-    }
+ }  catch (error) {
+    console.error("Init error", error);
+    latestGrid.innerHTML = `<p>Could not load products</p>`;
+ } finally {
+    loader.style.display = "none";
+ }
 
-    current = index;
 }
+    
 
-
-whenImagesLoaded(track, () => requestAnimationFrame(()=> go(current, false)));
-
-nextBtn?.addEventListener("click", () => go(current + 1));
-
-prevBtn?.addEventListener("click", () => go(current - 1));
-
-track.addEventListener("transitionend", () => {
-    const realCount = items.length;
-    if (current === realCount + 1) go(1, false);
-    if (current === 0) go(realCount, false);
-});
-
-window.addEventListener("resize", () => go(current, false));
-
-}function whenImagesLoaded(container, cb) {
-    const imgs = [...container.querySelectorAll("img")];
-    if (imgs.length === 0) return cb();
-    let left = imgs.length;
-    const done = () => (--left === 0 && cb());
-    imgs.forEach(img => img.complete ? done() : img.addEventListener("load", done, {once:true}));
-}
 
 init();
