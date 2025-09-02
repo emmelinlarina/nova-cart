@@ -37,18 +37,16 @@ function priceHTML(p) {
             const save = p.price - p.discountedPrice;
             return `
             <div class="price">
-                <span class="now">{money.format(product.discountedPrice)}</span>
-                <span class="was">{money.format(product.price)}</span>
-                <span class="save">Save {money.format(product.price - product.discountedPrice)}</span>
-            <div/>
-            `;
+                <span class="now">${money.format(product.discountedPrice)}</span>
+                <span class="was">${money.format(product.price)}</span>
+                <span class="save">Save ${money.format(product.price - product.discountedPrice)}</span>
+            <div/>`;
         }
 
         return `
         <div class="price">
             <span class="now">${money.format(p.price ?? 0)}</span>
-            </div>
-        `;
+            </div>`;
 }
 
 function renderProducts(p) {

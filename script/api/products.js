@@ -1,6 +1,4 @@
-export const API_BASE = 'https://v2.api.noroff'
-
-const API_URL = 'https://v2.api.noroff.dev/online-shop';
+export const API_URL = 'https://v2.api.noroff.dev/online-shop';
 
 export async function fetchProducts() {
   try {
