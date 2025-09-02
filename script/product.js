@@ -25,7 +25,12 @@ async function fetchingSingleProduct(id) {
     return json.data;
 }
 
-
+function saleBadge(p) {
+    if (typeof p.price !== 'number' || typeof p.discountedPrice !== 'number') return '';
+    if (p.discountedPrice >= p.price) return '';
+    const pct = Math.round((1 - (p.discountedPrice / p.price)) * 100);
+    return `<span class="badge-sale" aria-label="Save ${pct}%">-${pct}%</span>`;
+}
 
 function priceHTML(p) {
     const hasDiscount =
@@ -38,7 +43,7 @@ function priceHTML(p) {
             return `
             <div class="price">
                 <span class="now">${money.format(p.discountedPrice)}</span>
-                <span class="was">${money.format(p.price)}</span>
+                <span class="was" aria-label="was price">${money.format(p.price)}</span>
                 <span class="save">Save ${money.format(save)}</span>
             </div>`;
         }
@@ -59,10 +64,16 @@ function renderProducts(p) {
 
         <div class="column">
             <h1>${(p.title || '').toUpperCase()}</h1>
-            <img src="${imageUrl}" alt="${imageAlt}">
+
+            <div class="media">
+                <img src="${imageUrl}" alt="${imageAlt}">
+                ${saleBadge(p)}
+            </div>
+
             ${priceHTML(p)}
+
             <button class="btn js-add-to-cart" data-product-id="${p.id}">
-                    <i class="fa-solid fa-cart-shopping"></i>
+                        <i class="fa-solid fa-cart-shopping"></i>
             </button>
         </div>  
 
