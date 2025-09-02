@@ -1,43 +1,112 @@
-import { fetchProducts } from "./api/products.js";
 
-function renderProducts(product) {
-    titleElement.innerText = product.title;
-    const imageUrl = product.image?.url || 'images/placeholder.jpg';
-    const imageAlt = product.image?.alt || product.title;
+
+const loader = document.getElementById("page-loader");
+const productContainer = document.querySelector("#product-container");
+const titleElement = document.querySelector("title");
+
+
+function showLoader(show) {
+    if (!loader) return;
+  loader.style.display = show ? 'grid' : 'none';
+  document.body.classList.toggle("loading", show)
+}
+
+function getProductIdFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('id');
+}
+
+async function fetchingSingleProduct(id) {
+    const response = await fetch(`https://v2.api.noroff.dev/online-shop/${encodeURIComponent(id)}`);
+    if (!response.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    return json.data;
+}
+
+const fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'});
+
+function priceHTML(p) {
+    const hasDiscount =
+        typeof p.discountedPrice === 'number' && 
+        typeof p.price === 'number' &&
+        p.discountedPrice < p.price;
+
+        if (hasDiscount) {
+            const save = p.price - p.discountedPrice;
+            return `
+            <div class="price">
+                <span class="now">{fmt.format(product.discountedPrice)}</span>
+                <span class="was">{fmt.format(product.price)}</span>
+                <span class="save">Save {fmt.format(product.price - product.discountedPrice)}</span>
+            <div/>
+            `;
+        }
+
+        return `
+        <div class="price">
+            <span class="now">${fmt.format(product.price ?? 0)}</span>
+            </div>
+        `;
+}
+
+function renderProducts(p) {
+    titleElement.textContent = p.title || 'Product';
+
+    const imageUrl = p?.image?.url || 'images/fallback.png';
+    const imageAlt = p?.image?.alt || p?.title || 'Product image';
 
     productContainer.innerHTML = `
 
-        <div class="all">
-            <h1>${product.title.toUpperCase()}</h1>
+        <div class="column">
+            <h1>${(p.title || '').toUpperCase()}</h1>
             <img src="${imageUrl}" alt="${imageAlt}">
-            <h2>$${formatCurrency(product.price * 100)}</h2>
-            <button class="btn js-add-to-cart" data-product-id="${product.id}">
+            ${priceHTML(p)}
+            <button class="btn js-add-to-cart" data-product-id="${p.id}">
                     <i class="fa-solid fa-cart-shopping"></i>
             </button>
         </div>  
 
         <div class="column-1">
                 <h3>OVERVIEW</h3>
-                <p>"${product.description}"</p>
+                <p>"${p.description ?? ''}"</p>
+                ${Array.isArray(p.tags) && p.tags.length ? `
+                <ul class="tags">${p.tags.map(t => `<li>${t}</li>`).join('')}</ul>
+                `: ""}
         </div>
     `;
 
-    document.querySelector('.js-add-to-cart').addEventListener('click', () => {
-        addToCart(product);
-        updateCartQuantity();
-    })
+    const btn = productContainer.querySelector(".js-add-to-cart");
+    btn?.addEventListener("click", () => {
+        alert("Add to cart coming soon");
+    });
 }
 
 async function initProductPage() {
+    try {
+        showLoader(true);
+
+
     const id = getProductIdFromUrl();
     if (!id) {
       productContainer.innerHTML = '<p>Product not found</p>';
       return;
     }
+
+
     const product = await fetchingSingleProduct(id);
+    if (!product) {
+        productContainer.innerHTML = "<p>Product not found</p>";
+        return;
+    }
+
     renderProducts(product);
-    updateCartQuantity();
-    hideLoader(); 
+    } catch (e) {
+        console.error(e);
+        productContainer.innerHTML = `<p>Could not load product</p>`;
+    }   finally {
+    showLoader(false); 
+    window.scrollTo(0,0);
+    }
 }
 
 

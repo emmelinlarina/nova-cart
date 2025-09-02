@@ -1,3 +1,5 @@
+export const API_BASE = 'https://v2.api.noroff'
+
 const API_URL = 'https://v2.api.noroff.dev/online-shop';
 
 export async function fetchProducts() {
@@ -6,7 +8,7 @@ export async function fetchProducts() {
     const json = await response.json();
     return json.data;
   } catch (error) {
-    console.error('Error fetching procuts:', error);
+    console.error('Error fetching products:', error);
     return [];
   }
 }
