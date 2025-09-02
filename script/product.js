@@ -1,4 +1,4 @@
-const API_BASE = 'https://v2.api.noroff.dev'
+
 
 const loader = document.getElementById("page-loader");
 const productContainer = document.querySelector("#product-container");
@@ -37,10 +37,10 @@ function priceHTML(p) {
             const save = p.price - p.discountedPrice;
             return `
             <div class="price">
-                <span class="now">${money.format(product.discountedPrice)}</span>
-                <span class="was">${money.format(product.price)}</span>
-                <span class="save">Save ${money.format(product.price - product.discountedPrice)}</span>
-            <div/>`;
+                <span class="now">${money.format(p.discountedPrice)}</span>
+                <span class="was">${money.format(p.price)}</span>
+                <span class="save">Save ${money.format(save)}</span>
+            </div>`;
         }
 
         return `
@@ -67,7 +67,6 @@ function renderProducts(p) {
         </div>  
 
         <div class="column-1">
-                <h3>OVERVIEW</h3>
                 <p>"${p.description ?? ''}"</p>
                 ${Array.isArray(p.tags) && p.tags.length ? `
                 <ul class="tags">${p.tags.map(t => `<li>${t}</li>`).join('')}</ul>
@@ -75,8 +74,7 @@ function renderProducts(p) {
         </div>
     `;
 
-    const btn = productContainer.querySelector(".js-add-to-cart");
-    btn?.addEventListener("click", () => {
+    productContainer.querySelector(".js-add-to-cart").addEventListener("click", () => {
         alert("Add to cart coming soon");
     });
 }
