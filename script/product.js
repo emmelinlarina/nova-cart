@@ -1,8 +1,9 @@
-
+const API_BASE = 'https://v2.api.noroff.dev'
 
 const loader = document.getElementById("page-loader");
 const productContainer = document.querySelector("#product-container");
 const titleElement = document.querySelector("title");
+const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'});
 
 
 function showLoader(show) {
@@ -12,18 +13,19 @@ function showLoader(show) {
 }
 
 function getProductIdFromUrl() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('id');
+    const params = new URLSearchParams(location.search);
+    return params.get("id");
 }
 
 async function fetchingSingleProduct(id) {
-    const response = await fetch(`https://v2.api.noroff.dev/online-shop/${encodeURIComponent(id)}`);
-    if (!response.ok) throw new Error(`HTTP ${res.status}`);
-    const json = await res.json();
+    const url = `https://v2.api.noroff.dev/online-shop/${encodeURIComponent(id)}`;
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const json = await response.json();
     return json.data;
 }
 
-const fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'});
+
 
 function priceHTML(p) {
     const hasDiscount =
@@ -35,16 +37,16 @@ function priceHTML(p) {
             const save = p.price - p.discountedPrice;
             return `
             <div class="price">
-                <span class="now">{fmt.format(product.discountedPrice)}</span>
-                <span class="was">{fmt.format(product.price)}</span>
-                <span class="save">Save {fmt.format(product.price - product.discountedPrice)}</span>
+                <span class="now">{money.format(product.discountedPrice)}</span>
+                <span class="was">{money.format(product.price)}</span>
+                <span class="save">Save {money.format(product.price - product.discountedPrice)}</span>
             <div/>
             `;
         }
 
         return `
         <div class="price">
-            <span class="now">${fmt.format(product.price ?? 0)}</span>
+            <span class="now">${money.format(p.price ?? 0)}</span>
             </div>
         `;
 }
