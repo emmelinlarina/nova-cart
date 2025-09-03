@@ -2,6 +2,7 @@ import { fetchProducts } from "./api/products.js";
 
 const loader = document.getElementById("page-loader");
 const latestGrid = document.querySelector(".latest-products")
+const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'});
 
 const slideShow = document.getElementById("slideshow");
 const slidesWrap = document.querySelector("#slideshow .slides")
@@ -12,12 +13,45 @@ const imgSrc = (p) => p?.image?.url ?? "images/fallback.png"
 const imgAlt = (p) => p?.image?.alt ?? p.title ?? "Product image"
 const price = (p) => (p.discountedPrice ?? p.price) + " $"
 
+
+function saleBadge(p) {
+    if (typeof p.price !== 'number' || typeof p.discountedPrice !== 'number') return '';
+    if (p.discountedPrice >= p.price) return '';
+    const pct = Math.round((1 - (p.discountedPrice / p.price)) * 100);
+    return `<span class="badge-sale" aria-label="Save ${pct}%">-${pct}%</span>`;
+}
+
+function priceHTML(p) {
+    const hasDiscount =
+        typeof p.discountedPrice === 'number' && 
+        typeof p.price === 'number' &&
+        p.discountedPrice < p.price;
+
+        if (hasDiscount) {
+            const save = p.price - p.discountedPrice;
+            return `
+            <div class="price">
+                <span class="now">${money.format(p.discountedPrice)}</span>
+                <span class="was" aria-label="was price">${money.format(p.price)}</span>
+                <span class="save">Save ${money.format(save)}</span>
+            </div>`;
+        }
+
+        return `
+        <div class="price">
+            <span class="now">${money.format(p.price ?? 0)}</span>
+            </div>`;
+}
+
 const slideHTML = (p, i, total) => `
-    <div class="mySlide" role="group" aria-label="Slide" ${i+1} of ${total}" aria-hidden="true">
+    <div class="mySlide" role="group" aria-label="Slide ${i + 1} of ${total}" aria-hidden="true">
         <a class="card" href="product.html?id=${p.id}">
-            <img src="${imgSrc(p)}" alt="${imgAlt(p)}" />
+            <div class="media">
+                <img src="${imgSrc(p)}" alt="${imgAlt(p)}"/>
+                ${saleBadge(p)}
+            </div>
             <h3>${p.title}</h3>
-            <p class="price">${price(p)}</p>
+            ${priceHTML(p)}
         </a>
     </div>
 `;
@@ -25,9 +59,12 @@ const slideHTML = (p, i, total) => `
 const cardHTML = (p) => `
      <article class="product-card">
         <a class="card-link" href="product.html?id=${p.id}">
-            <img src="${imgSrc(p)}" alt="${imgAlt(p)}" />
+        <div class="media">
+                <img src="${imgSrc(p)}" alt="${imgAlt(p)}"/>
+                ${saleBadge(p)}
+            </div>
             <h3>${p.title}</h3>
-            <p class="price">${price(p)}</p>
+            ${priceHTML(p)}
         </a>
     </article>
 `;
