@@ -1,5 +1,3 @@
-
-
 const loader = document.getElementById("page-loader");
 const productContainer = document.querySelector("#product-container");
 const titleElement = document.querySelector("title");
