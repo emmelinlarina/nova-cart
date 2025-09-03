@@ -63,6 +63,7 @@ function starsHTML(rating) {
 
 const slideHTML = (p, i, total) => {
     const rating = avgRating(p);
+
     return `
     <div class="mySlide" role="group" aria-label="Slide ${i + 1} of ${total}" aria-hidden="true">
         <a class="card" href="product.html?id=${p.id}">
@@ -72,7 +73,8 @@ const slideHTML = (p, i, total) => {
             </div>
             <h3>${p.title}</h3>
             ${priceHTML(p)}
-            ${rating ? starsHTML(rating) : ""}
+            
+            ${rating != null ? starsHTML(rating) : ""}
         </a>
     </div>
 `};
@@ -88,7 +90,10 @@ const cardHTML = (p) => {
             </div>
                 <h3>${p.title}</h3>
                 ${priceHTML(p)}
-                ${rating ? starsHTML(rating) : ""}
+                <button class="btn js-add-to-cart" data-product-id="${p.id}">
+                        <i class="fa-solid fa-cart-shopping"></i>
+            </button>
+                ${rating != null ? starsHTML(rating) : ""}
         </a>
     </article>
 `};
