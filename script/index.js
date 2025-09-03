@@ -14,7 +14,6 @@ const imgAlt = (p) => p?.image?.alt ?? p.title ?? "Product image"
 const price = (p) => (p.discountedPrice ?? p.price) + " $"
 
 
-
 function saleBadge(p) {
     if (typeof p.price !== 'number' || typeof p.discountedPrice !== 'number') return '';
     if (p.discountedPrice >= p.price) return '';
@@ -44,7 +43,27 @@ function priceHTML(p) {
             </div>`;
 }
 
-const slideHTML = (p, i, total) => `
+function avgRating(p) {
+    const  list = Array.isArray(p.reviews) ? p.reviews : [];
+    if (!list.length) return null;
+    const sum = list.reduce((a, r) => a + (Number(r?.rating) || 0),0);
+    return sum / list.length;
+}
+
+function starsHTML(rating) {
+    const r = Math.max(0, Math.min(5, Number(rating) || 0));
+    const full = Math.floor(r);
+    const empty = 5 - full;
+    return `
+        <span class="stars" aria-label="Rated ${rating.toFixed(1)} out of 5">
+            ${'★'.repeat(full)}${'☆'.repeat(empty)}
+        </span>
+    `;
+}
+
+const slideHTML = (p, i, total) => {
+    const rating = avgRating(p);
+    return `
     <div class="mySlide" role="group" aria-label="Slide ${i + 1} of ${total}" aria-hidden="true">
         <a class="card" href="product.html?id=${p.id}">
             <div class="media">
@@ -53,22 +72,26 @@ const slideHTML = (p, i, total) => `
             </div>
             <h3>${p.title}</h3>
             ${priceHTML(p)}
+            ${rating ? starsHTML(rating) : ""}
         </a>
     </div>
-`;
+`};
 
-const cardHTML = (p) => `
+const cardHTML = (p) => {
+    const rating = avgRating(p);
+    return `
      <article class="product-card">
         <a class="card-link" href="product.html?id=${p.id}">
-        <div class="media">
-                <img src="${imgSrc(p)}" alt="${imgAlt(p)}"/>
-                ${saleBadge(p)}
+            <div class="media">
+                    <img src="${imgSrc(p)}" alt="${imgAlt(p)}"/>
+                    ${saleBadge(p)}
             </div>
-            <h3>${p.title}</h3>
-            ${priceHTML(p)}
+                <h3>${p.title}</h3>
+                ${priceHTML(p)}
+                ${rating ? starsHTML(rating) : ""}
         </a>
     </article>
-`;
+`};
 
 // Loader
 
