@@ -78,8 +78,14 @@ async function init() {
     const products = await fetchProducts();
 
     // Carousel
-    const latest3 = products.slice(-3);
-    slidesWrap.innerHTML = latest3.map((p, i) => slideHTML(p, i, latest3.length)).join("");
+    const wantedIds = [
+        "9be4812e-16b2-44e6-bc55-b3aef9db2b82", // pink perfume
+        "ce5b64e3-440d-46e5-952f-bfdbad8a48d2", // black digital watch
+        "f99cafd2-bd40-4694-8b33-a6052f36b435" // USB charger
+    ];
+
+    const featured = products.filter(p => wantedIds.includes(p.id));
+    slidesWrap.innerHTML = featured.map((p, i) => slideHTML(p, i, featured.length)).join("");
     
     slideShow.setAttribute("role", "region");
     slideShow.setAttribute("aria-roledescription", "carousel");
