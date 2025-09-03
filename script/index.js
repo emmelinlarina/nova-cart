@@ -14,6 +14,7 @@ const imgAlt = (p) => p?.image?.alt ?? p.title ?? "Product image"
 const price = (p) => (p.discountedPrice ?? p.price) + " $"
 
 
+
 function saleBadge(p) {
     if (typeof p.price !== 'number' || typeof p.discountedPrice !== 'number') return '';
     if (p.discountedPrice >= p.price) return '';

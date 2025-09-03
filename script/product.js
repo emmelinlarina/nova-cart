@@ -23,6 +23,7 @@ async function fetchingSingleProduct(id) {
     return json.data;
 }
 
+
 function saleBadge(p) {
     if (typeof p.price !== 'number' || typeof p.discountedPrice !== 'number') return '';
     if (p.discountedPrice >= p.price) return '';
@@ -52,11 +53,43 @@ function priceHTML(p) {
             </div>`;
 }
 
+function avgRating(p) {
+    const arr = Array.isArray(p.reviews)
+        ? p.reviews.map(r => Number(r?.rating)).filter(n => !Number.isNaN(n) && n >= 0 && n <= 5) : [];
+    if (!arr.length) return null;
+    return arr.reduce((a, b) => a + b, 0) / arr.length;
+}
+
+function starsHTML(avg, { showNumber = false} = {}) {
+    if (!avg) {
+        return `<div class="rating" role="img" aria-label="No ratings yet">
+            <span class="no-rating">No ratings</span>
+            </div>`;
+    }
+
+    const label = `${avg.toFixed(1)} out of 5 stars`;
+    let stars = '';
+    for (let i = 1; i <= 5; i++) {
+        const cls = avg >= i ? 'full' : (avg >= i - 0.5 ? 'half' : 'empty');
+        stars += `<span class="star ${cls}" aria-hidden="true"> </span>`;
+    }
+    return `<div class="rating" role="img" aria-label="${label}">
+    ${stars}${showNumber ? `<span class="rating-num">(${avg.toFixed(1)})</span>` : ''}
+    </div>`;
+    }
+   
+
+
 function renderProducts(p) {
     titleElement.textContent = p.title || 'Product';
 
     const imageUrl = p?.image?.url || 'images/fallback.png';
     const imageAlt = p?.image?.alt || p?.title || 'Product image';
+
+    // rating
+
+    const avg = avgRating(p);
+    const reviewCount = Array.isArray(p.reviews) ? p.reviews.length : 0;
 
     productContainer.innerHTML = `
 
@@ -68,6 +101,11 @@ function renderProducts(p) {
                 ${saleBadge(p)}
             </div>
 
+        ${starsHTML(avg, { showNumber: true })} 
+        ${reviewCount 
+            ? `<p class="review-count">${reviewCount} review${reviewCount === 1 ? '' : 's'}</p>`
+            : '<p class="review-count">No reviews yet</p>'}
+
             ${priceHTML(p)}
 
             <button class="btn js-add-to-cart" data-product-id="${p.id}">
@@ -77,11 +115,29 @@ function renderProducts(p) {
 
         <div class="column-1">
                 <p>"${p.description ?? ''}"</p>
-                ${Array.isArray(p.tags) && p.tags.length ? `
-                <ul class="tags">${p.tags.map(t => `<li>${t}</li>`).join('')}</ul>
-                `: ""}
+                ${Array.isArray(p.tags) && p.tags.length 
+                ? `<ul class="tags">${p.tags.map(t => `<li>${t}</li>`).join('')}</ul>
+                `: ''}
         </div>
+
+        ${reviewCount ? `
+        <section class="reviews">
+            <h3>Reviews</h3>
+            <ul class="review-list">
+                ${p.reviews.map(r => `
+                    <li class="review">
+                    <div class="review-head">
+                        ${starsHTML(Number(r?.rating) || 0)}
+                        <span class="author">${r?.username || 'Anonymous'}</span>
+                    </div>
+                    ${r?.description ? `<p class="review-body">${r.description}</p>` : ''}
+                    </li>
+                    `).join('')}
+            </ul>
+        </section>
+        ` : ''}
     `;
+
 
     productContainer.querySelector(".js-add-to-cart").addEventListener("click", () => {
         alert("Add to cart coming soon");
