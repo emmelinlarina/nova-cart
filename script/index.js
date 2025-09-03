@@ -83,13 +83,24 @@ async function init() {
     nextBtn.addEventListener("click", () => showSlide(++slideIndex));
 
     slideShow.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowLeft") { e.preventDefault(); showSlide(--slideIndex); }
-        if (e.key === "ArrowRight") { e.preventDefault(); showSlide(++slideIndex); }
-        if (e.key === " " || e.key === "Enter") {
 
-            if (document.activeElement === prevBtn) { e.preventDefault(); showSlide(--slideIndex); }
-            if (document.activeElement === nextBtn) { e.preventDefault(); showSlide(++slideIndex); }
+      const tag =(document.activeElement?.tagName || "").toLocaleLowerCase();
+      if (tag === "input" || tag === "textarea" || document.activeElement?.isContentEditable) return;
+      
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        nextBtn?.click();
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        prevBtn?.click();
+      } else if (e.key === " " || e.key === "Enter") {
+
+        if (document.activeElement && document.activeElement.click) {
+            e.preventDefault();
+            document.activeElement.click();
         }
+      }
+        
     });
 
     // slideshow timer
