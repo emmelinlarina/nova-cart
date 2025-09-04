@@ -125,9 +125,12 @@ function renderProducts(p) {
                 <button class="btn js-add-to-cart"
                     data-product-id="${p.id}"
                     aria-label="Add ${p.title} to cart">
-                    <i class="fa-solid fa-cart-shopping"></i>
+                    Buy</i>
                  </button>` 
+
                  : `<a class="btn btn-outline" href="login.html">Log in to buy</a>`}
+
+                 <button class="btn btn-outline js-share" aria-label="Copy product link">Share</button>
         </div>  
 
         ${reviewCount ? `
@@ -161,6 +164,22 @@ function renderProducts(p) {
                 alert("Please log in to add items to cart");
             });
         }
+    }
+
+    const shareBtn = productContainer.querySelector('.js-share');
+    if (shareBtn) {
+        shareBtn.addEventListener('click', async () => {
+            const url = location.href;
+            try {
+                await navigator.clipboard.writeText(url);
+                const old = shareBtn.textContent;
+                shareBtn.textContent = 'Link copied!';
+                shareBtn.setAttribute('aria-live', 'polite');
+                setTimeout(() => { shareBtn.textContent = old; }, 1500);
+            } catch {
+                window.prompt('Copy this link', url);
+            }
+        });
     }
 
 }
