@@ -1,7 +1,12 @@
+import { addToCart, updateCartQuantity } from "./cart.js";
+import { getToken } from "./utils/storage.js";
+
+const isLoggedIn = !!getToken();
 const loader = document.getElementById("page-loader");
 const productContainer = document.querySelector("#product-container");
 const titleElement = document.querySelector("title");
 const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'});
+
 
 
 function showLoader(show) {
@@ -91,6 +96,7 @@ function renderProducts(p) {
     const avg = avgRating(p);
     const reviewCount = Array.isArray(p.reviews) ? p.reviews.length : 0;
 
+
     productContainer.innerHTML = `
 
         <div class="column">
@@ -108,9 +114,13 @@ function renderProducts(p) {
 
             ${priceHTML(p)}
 
-            <button class="btn js-add-to-cart" data-product-id="${p.id}">
-                        <i class="fa-solid fa-cart-shopping"></i>
-            </button>
+            ${isLoggedIn ? `
+                <button class="btn js-add-to-cart"
+                    data-product-id="${p.id}"
+                    aria-label="Add ${p.title} to cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                 </button>` 
+                 : ``}
         </div>  
 
         <div class="column-1">
@@ -123,26 +133,39 @@ function renderProducts(p) {
         ${reviewCount ? `
         <section class="reviews">
             <h3>Reviews</h3>
-            <ul class="review-list">
-                ${p.reviews.map(r => `
-                    <li class="review">
-                    <div class="review-head">
-                        ${starsHTML(Number(r?.rating) || 0)}
-                        <span class="author">${r?.username || 'Anonymous'}</span>
-                    </div>
-                    ${r?.description ? `<p class="review-body">${r.description}</p>` : ''}
-                    </li>
+                <ul class="review-list">
+                    ${p.reviews.map(r => `
+                        <li class="review">
+                            <div class="review-head">
+                                ${starsHTML(Number(r?.rating) || 0)}
+                                <span class="author">${r?.username || 'Anonymous'}</span>
+                            </div>
+                            ${r?.description ? `<p class="review-body">${r.description}</p>` : ''}
+                        </li>
                     `).join('')}
-            </ul>
+                </ul>
         </section>
         ` : ''}
     `;
 
+    const btn = productContainer.querySelector(".js-add-to-cart");
+    if (btn) {
+        if (isLoggedIn) {
+            btn.addEventListener("click", () => {
+                addToCart(p);
+                updateCartQuantity();
+            });
+        } else {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault();
+                alert("Please log in to add items to cart");
+            });
+        }
+    }
 
-    productContainer.querySelector(".js-add-to-cart").addEventListener("click", () => {
-        alert("Add to cart coming soon");
-    });
 }
+
+
 
 async function initProductPage() {
     try {

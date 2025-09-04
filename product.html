@@ -11,12 +11,6 @@
     <meta name="description" content="NovaCart product page">
     <script src="https://kit.fontawesome.com/e0e8f3b90b.js" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="css/utils/styles.css">
-    <link rel="stylesheet" href="css/utils/components.css">
-    <link rel="stylesheet" href="css/product.css">
-    <link rel="stylesheet" href="css/utils/media.css">
-    <link rel="stylesheet" href="css/cart.css">
-
     <script src="https://kit.fontawesome.com/e0e8f3b90b.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,6 +18,11 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
 
+    <link rel="stylesheet" href="css/utils/styles.css">
+    <link rel="stylesheet" href="css/utils/components.css">
+    <link rel="stylesheet" href="css/product.css">
+    <link rel="stylesheet" href="css/utils/media.css">
+    <link rel="stylesheet" href="css/cart.css">
 
 </head>
 
@@ -32,13 +31,29 @@
     <header>
         <nav>
             <ul class="navbar">
+
                 <li class="logo"><a href="index.html"><img src="images/logo/NovaCart_brown_cropped.png"
-                            alt="A minimalistic black-and-white icon of a rocket launching, with an atom-like structure encircling it, symbolizing science, space exploration and innovation."></a>
+                            alt="NovaCart logo"></a>
                 </li>
-                <input type="checkbox" id="check">
+
+                <input type="checkbox" id="check" />
                 <span class="menu">
-                    <li><a href="#"><i class="fa-regular fa-circle-user"></i></a></li>
-                    <li><a href="#">Shop</a></li>
+
+                    <li>
+                        <a href="login.html" class="js.auth-link" aria-label="Log in">
+                            <i class="fa-regular fa-circle-user"></i>
+                            <span class="auth-text">Log in</span>
+                        </a>
+                        <button class="js-logout btn-link" hidden>Log out</button>
+                    </li>
+
+                    <li>
+                        <a href="cart.html" class="cart-link" aria-label="Open cart">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span class="js-cart-quantity" aria-live="polite">0</span>
+                        </a>
+                    </li>
+
                     <label for="check" class="close-menu"><i class="fa-solid fa-xmark"></i></label>
                 </span>
                 <label for="check" class="open-menu"><i class="fa-solid fa-bars"></i></label>
@@ -54,7 +69,7 @@
         </div>
 
         <section class="product">
-            <h2>Product</h2>
+            <h2 class="sr-only">Product</h2>
             <div id="product-container"></div>
 
         </section>

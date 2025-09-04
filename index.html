@@ -31,13 +31,27 @@
         <nav>
             <ul class="navbar">
                 <li class="logo"><a href="index.html"><img src="images/logo/NovaCart_brown_cropped.png"
-                            alt="NovaCart's logo with shooting stars around"></a>
-                    <p>CLICK. SHOP. DONE.</p>
+                            alt="NovaCart logo"></a>
                 </li>
-                <input type="checkbox" id="check">
+
+                <input type="checkbox" id="check" />
                 <span class="menu">
-                    <li><a href="login.html"><i class="fa-regular fa-circle-user"></i></a></li>
-                    <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+
+                    <li>
+                        <a href="login.html" class="js.auth-link" aria-label="Log in">
+                            <i class="fa-regular fa-circle-user"></i>
+                            <span class="auth-text">Log in</span>
+                        </a>
+                        <button class="js-logout btn-link" hidden>Log out</button>
+                    </li>
+
+                    <li>
+                        <a href="cart.html" class="cart-link" aria-label="Open cart">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span class="js-cart-quantity" aria-live="polite">0</span>
+                        </a>
+                    </li>
+
                     <label for="check" class="close-menu"><i class="fa-solid fa-xmark"></i></label>
                 </span>
                 <label for="check" class="open-menu"><i class="fa-solid fa-bars"></i></label>
