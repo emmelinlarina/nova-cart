@@ -78,11 +78,16 @@ const slideHTML = (p, i, total) => {
             ${priceHTML(p)}
             ${rating != null ? starsHTML(rating) : ""}
         </a>
+
         ${isLoggedIn ? `
             <button class="btn js-add-to-cart" 
-                data-product-id="${p.id}" = aria-label="Add ${p.title} to cart"><i class="fa-solid fa-cart-shopping"></i></button>` : ``}
+                    data-product-id="${p.id}"
+                    aria-label="Add ${p.title} to cart">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </button>` : ``}
     </div>
-`};
+    `; 
+};
 
 const cardHTML = (p) => {
     const rating = avgRating(p);
@@ -95,11 +100,9 @@ const cardHTML = (p) => {
             </div>
                 <h3>${p.title}</h3>
                 ${priceHTML(p)}
-                <button class="btn js-add-to-cart" data-product-id="${p.id}">
-                        <i class="fa-solid fa-cart-shopping"></i>
-            </button>
                 ${rating != null ? starsHTML(rating) : ""}
         </a>
+        
         ${isLoggedIn ? `
             <button class="btn js-add-to-cart"
                 data-product-id="${p.id}"

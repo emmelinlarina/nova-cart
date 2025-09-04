@@ -1,5 +1,5 @@
-import { getToken, logoutUser } from "./utils/storage";
-import { updateCartQuantity } from "./cart";
+import { getToken, logoutUser } from "./utils/storage.js";
+import { updateCartQuantity } from "./cart.js";
 
 const authLink = document.querySelector('.js-auth-link');
 const authText = document.querySelector('.auth-text');
