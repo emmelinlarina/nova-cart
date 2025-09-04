@@ -6,6 +6,7 @@ const loader = document.getElementById("page-loader");
 const productContainer = document.querySelector("#product-container");
 const titleElement = document.querySelector("title");
 const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'});
+const messageBox = document.getElementById('page-message');
 
 
 
@@ -83,7 +84,11 @@ function starsHTML(avg, { showNumber = false} = {}) {
     </div>`;
     }
    
-
+   function showMessage(text, kind = 'info') {
+    if (!messageBox) return;
+    messageBox.textContent = text;
+    messageBox.className = `message ${kind}`;
+   } 
 
 function renderProducts(p) {
     titleElement.textContent = p.title || 'Product';
@@ -125,7 +130,7 @@ function renderProducts(p) {
                 <button class="btn js-add-to-cart"
                     data-product-id="${p.id}"
                     aria-label="Add ${p.title} to cart">
-                    Buy</i>
+                    Buy
                  </button>` 
 
                  : `<a class="btn btn-outline" href="login.html">Log in to buy</a>`}
@@ -157,6 +162,8 @@ function renderProducts(p) {
             btn.addEventListener("click", () => {
                 addToCart(p);
                 updateCartQuantity();
+                showMessage(`${p.title} added to cart`, 'success');
+                setTimeout(() => showMessage('', 'info'), 1500);
             });
         } else {
             btn.addEventListener("click", (e) => {
@@ -194,6 +201,7 @@ async function initProductPage() {
     const id = getProductIdFromUrl();
     if (!id) {
       productContainer.innerHTML = '<p>Product not found</p>';
+      showMessage('Product not found', 'error');
       return;
     }
 
@@ -201,6 +209,7 @@ async function initProductPage() {
     const product = await fetchingSingleProduct(id);
     if (!product) {
         productContainer.innerHTML = "<p>Product not found</p>";
+        showMessage('Product not found', 'error');
         return;
     }
 
@@ -208,6 +217,7 @@ async function initProductPage() {
     } catch (e) {
         console.error(e);
         productContainer.innerHTML = `<p>Could not load product</p>`;
+        showMessage('Could not load product. Please try again', 'error');
     }   finally {
     showLoader(false); 
     window.scrollTo(0,0);
