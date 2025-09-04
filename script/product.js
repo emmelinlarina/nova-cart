@@ -120,7 +120,7 @@ function renderProducts(p) {
                     aria-label="Add ${p.title} to cart">
                     <i class="fa-solid fa-cart-shopping"></i>
                  </button>` 
-                 : ``}
+                 : `<a class="btn btn-outline" href="login.html">Log in to buy</a>`}
         </div>  
 
         <div class="column-1">
