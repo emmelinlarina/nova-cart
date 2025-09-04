@@ -114,6 +114,13 @@ function renderProducts(p) {
 
             ${priceHTML(p)}
 
+            
+        <div class="column-1">
+                <p>"${p.description ?? ''}"</p>
+                ${Array.isArray(p.tags) && p.tags.length 
+                ? `<ul class="tags">${p.tags.map(t => `<li>${t}</li>`).join('')}</ul>
+                `: ''}
+        </div>
             ${isLoggedIn ? `
                 <button class="btn js-add-to-cart"
                     data-product-id="${p.id}"
@@ -122,13 +129,6 @@ function renderProducts(p) {
                  </button>` 
                  : `<a class="btn btn-outline" href="login.html">Log in to buy</a>`}
         </div>  
-
-        <div class="column-1">
-                <p>"${p.description ?? ''}"</p>
-                ${Array.isArray(p.tags) && p.tags.length 
-                ? `<ul class="tags">${p.tags.map(t => `<li>${t}</li>`).join('')}</ul>
-                `: ''}
-        </div>
 
         ${reviewCount ? `
         <section class="reviews">

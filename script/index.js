@@ -12,8 +12,6 @@ const slidesWrap = document.querySelector("#slideshow .slides")
 const prevBtn = document.querySelector("#slideshow .prev")
 const nextBtn = document.querySelector("#slideshow .next")
 
-
-
 const imgSrc = (p) => p?.image?.url ?? "images/fallback.png"
 const imgAlt = (p) => p?.image?.alt ?? p.title ?? "Product image"
 const price = (p) => (p.discountedPrice ?? p.price) + " $"
@@ -80,7 +78,9 @@ const slideHTML = (p, i, total) => {
             ${priceHTML(p)}
             ${rating != null ? starsHTML(rating) : ""}
         </a>
-        ${isLoggedIn ? `<button class="btn js-add-to-cart" data-product-id="${p.id}= aria-label="Add ${p.title} to cart><i class="fa-solid fa-cart-shopping"></i></button>` : ``}
+        ${isLoggedIn ? `
+            <button class="btn js-add-to-cart" 
+                data-product-id="${p.id}" = aria-label="Add ${p.title} to cart"><i class="fa-solid fa-cart-shopping"></i></button>` : ``}
     </div>
 `};
 
@@ -100,14 +100,19 @@ const cardHTML = (p) => {
             </button>
                 ${rating != null ? starsHTML(rating) : ""}
         </a>
-        ${isLoggedIn ? `<button class="btn js-add-to-cart" data-product-id="${p.id}= aria-label="Add ${p.title} to cart><i class="fa-solid fa-cart-shopping"></i></button>` : ``}
+        ${isLoggedIn ? `
+            <button class="btn js-add-to-cart"
+                data-product-id="${p.id}"
+                aria-label="Add ${p.title} to cart">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </button>` : ``}
     </article>
     `;
 };
 
 function wireAddToCartButtons(products) {
     const byId = new Map(products.map(p => [p.id, p]));
-    document.querySelectorAll('.js-add-to-cart'),forEach(btn => {
+    document.querySelectorAll('.js-add-to-cart').forEach(btn => {
         btn.addEventListener('click', () => {
             const id = btn.dataset.productId;
             const product = byId.get(id);
@@ -213,8 +218,6 @@ async function init() {
     nextBtn.addEventListener("focus", stop);
     prevBtn.addEventListener("blur", play);
     nextBtn.addEventListener("blur", play);
-
-    slidesWrap.innerHTML = featured.map((P, i) => slideHTML(P, i, featured.length)).join("");
 
     const lastest12 = products.slice(-12).reverse();
     latestGrid.innerHTML = lastest12.map(cardHTML).join("");
