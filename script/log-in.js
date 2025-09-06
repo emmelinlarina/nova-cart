@@ -1,20 +1,41 @@
 import { saveUser } from "./utils/storage.js";
 
-// demo login
+const form = document.getElementById("login-form");
+const msg = document.getElementById("login-msg");
 
-document.getElementById('loginForm')?.addEventListener('submit', (e) => {
+function setMsg(text, kind = "info") {
+    msg.textContent = text;
+    msg.className = `form-msg ${kind}`;
+}
+
+async function login({ email, password }) {
+    const res = await fetch("https://v2.api.noroff.dev/auth/login", {
+        method: "POST", 
+        headers: { "Content-Type": "application/json" }, 
+        body: JSON.stringify({ email, password })
+    });
+    const data = await res.json();
+    if (!res.ok) {
+        const err = data?.errors?.[0]?.message || data?.message || `HTTP ${res.status}`;
+        throw new Error(err);
+    }
+    return data;
+}
+
+form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const form = e.currentTarget;
-    const email = form.elements.email.value.trim();
+    setMsg("Logged in");
+    const formData = new FormData(form);
+    const email = formData.get("email").trim();
+    const password = formData.get("password");
 
-    //user
-    const fakeUser = {
-        accessToken: 'demo-token-123', 
-        name: email.split('@')[0] || 'User',
-        email
-    };
+    try {
+        const data = await login({ email, password });
 
-    saveUser(fakeUser);
-    const from = new URLSearchParams(location.search).get('from');
-    location.href = from || 'index.html';
+        saveUser(data);
+        setMsg("Logged in! Redirecting...", "success");
+        location.href = "index.html";
+    } catch (err) {
+        setMsg(err.message || "Login failed", "error");
+    }
 });

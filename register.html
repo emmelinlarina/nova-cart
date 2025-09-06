@@ -39,7 +39,7 @@
                 <span class="menu">
 
                     <li>
-                        <a href="login.html" class="js.auth-link" aria-label="Log in">
+                        <a href="login.html" class="js-auth-link" aria-label="Log in">
                             <i class="fa-regular fa-circle-user"></i>
                             <span class="auth-text">Log in</span>
                         </a>
@@ -61,8 +61,17 @@
     </header>
 
 
-    <main>
+    <main class="auth">
 
+        <h1>Register</h1>
+        <form id="registerForm" class="auth-form">
+            <label>Name <input type="text" name="name" minlength="3" required></label>
+            <label>Email <input type="email" name="email" required></label>
+            <label>Password <input type="password" name="password" minlength="3" required></label>
+            <button class="btn" type="submit">Register</button>
+            <p class="form-msg" id="register-msg" aria-live="polite"></p>
+        </form>
+        <p>Already have an account? <a href="login.html">Log in</a></p>
 
     </main>
 

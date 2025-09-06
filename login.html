@@ -40,13 +40,12 @@
                 <span class="menu">
 
                     <li>
-                        <a href="login.html" class="js.auth-link" aria-label="Log in">
+                        <a href="login.html" class="js-auth-link" aria-label="Log in">
                             <i class="fa-regular fa-circle-user"></i>
                             <span class="auth-text">Log in</span>
                         </a>
                         <button class="js-logout btn-link" hidden>Log out</button>
                     </li>
-
                     <li>
                         <a href="cart.html" class="cart-link" aria-label="Open cart">
                             <i class="fa-solid fa-cart-shopping"></i>
@@ -63,17 +62,15 @@
 
 
     <main class="auth">
+
         <h1>Log in</h1>
-        <form id="loginForm">
+        <form id="loginForm" class="auth-form">
             <label>Email <input type="email" name="email" required></label>
             <label>Password <input type="password" name="password" required></label>
             <button class="btn" type="submit">Log in</button>
+            <p class="form-msg" id="login-msg" aria-live="polite"></p>
         </form>
         <p>Don't have an account? <a href="register.html">Register</a></p>
-
-
-
-
 
     </main>
 
