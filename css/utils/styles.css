@@ -53,3 +53,7 @@ a{text-decoration: none; color: inherit;}
     overflow: hidden;
   }
 
+  .message {margin: 12px 0; padding: 10px; border-radius: 6px; }
+  .message.info { background: #192a51;}
+  .message.success { background: #192a51;}
+  .message.error { background: #192a51;}

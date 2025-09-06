@@ -33,7 +33,7 @@ form.addEventListener("submit", async (e) => {
     try {
         const data = await register({ name, email, password });
 
-        saveUser(data);
+        saveUser(data.data);
         setMsg("Account created! Redirecting...", "success");
         location.href = "index.html";
     } catch (err) {
