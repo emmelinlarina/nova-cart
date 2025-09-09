@@ -122,3 +122,13 @@
     border-style: solid;
     border-color: transparent transparent #e74c3c transparent;
 }
+
+.form-msg.success {
+    color: white;
+    background-color: #4ABA82;
+}
+
+.form-msg.error {
+    color: white;
+    background-color: #DA5D47;
+}

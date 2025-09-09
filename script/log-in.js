@@ -24,7 +24,8 @@ async function login({ email, password }) {
 
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    setMsg("Logging in");
+    setMsg("");
+
     const formData = new FormData(form);
     const email = formData.get("email").trim();
     const password = formData.get("password");
@@ -34,8 +35,16 @@ form.addEventListener("submit", async (e) => {
 
         saveUser(data.data);
         setMsg("Logged in! Redirecting...", "success");
-        location.href = "index.html";
+
+        setTimeout(() => {
+        location.href = "index.html"; 
+        }, 1500);
+       
     } catch (err) {
         setMsg(err.message || "Login failed", "error");
     }
 });
+
+// DEMO login 
+
+document.getElementById("demo-login")

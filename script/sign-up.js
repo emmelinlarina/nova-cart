@@ -51,7 +51,8 @@ form.querySelectorAll("input").forEach(input => {
 
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    setMsg("Creating account...");
+    clearAllFieldErrors();
+    setMsg("", "info");
 
     const formData = new FormData(form);
     const name = (formData.get("name") || "").trim();
@@ -59,13 +60,16 @@ form.addEventListener("submit", async (e) => {
     const password = formData.get("password") || "";
 
     try {
-        const reponse = await register({ name, email, password });
+        const data = await register({ name, email, password });
 
-        const payload = reponse?.data ?? Response;
-        saveUser(payload);
+        saveUser(data.data);
 
         setMsg("Account created! Redirecting...", "success");
-        location.href = "index.html";
+
+        setTimeout(() => {
+            location.href = "index.html";
+        }, 1500);
+        
     } catch (err) {
         const msg = (err.message || "").toLowerCase();
 
