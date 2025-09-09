@@ -1,69 +1,118 @@
 .navbar {
-    padding: 0 50px 0 50px;
+    padding: 0 50px;
 }
 
+/* Wrapper */
 .auth {
     max-width: 680px;
     margin: 56px auto 96px;
     padding: 0 16px;
     text-align: center;
-
 }
 
+/* Title */
 .auth h1 {
-    font-weight: 800;
-    font-size: 1.2rem;
-    line-height: 1.2;
     margin: 0 0 20px;
-    
+    font-weight: 800;
+    font-size: 1.25rem;
+    line-height: 1.2;
 }
 
+/* Card */
 .auth-card {
     background: #D8EAF0;
     border-radius: 15px;
-    justify-content: center;
-    padding: 28px 24px;
-    
+    padding: 32px 24px;
+    display: grid;
+    place-items: center; 
 }
 
-form {}
 
+/* Form */
 .auth-form {
-    display: inline-flex;
-    flex-direction: column;
+    width: min(365px, 100%);
+    display: grid;
     text-align: left;
     gap: 15px;
-
-    justify-content: center;
-    flex-shrink: 0;
-
     
 }
 
 .field {
-    text-align-last: left;
+    display: grid;
+    gap: 6px;
 }
 
-
+.label {
+    font: 600 0.85rem/1.2 Poppins;
+    
+}
 
 .field input {
-    display: flex;
-    width: 253px;
+    display: block;
+    width: 100%;
+    max-width: 100%;
     height: 42px;
-    font-size: 1rem;
-    background-color: white;
     border-radius: 5px;
-
-    color: rgba(54, 46, 39, 0.60);
-
-font-family: Poppins;
-font-size: 14px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
-letter-spacing: 0.42px;
+    
+    box-sizing: border-box;
+    padding-left: 10px;
+   
+    background-color: white;
+    font-family: Poppins;
+    font-size: 0.87rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 0.42px;
 }
 
+
+
 .btn {
+    border: 0;
+    cursor: pointer;
+    font-family: Poppins;
+}
+
+.btn-primary {
+    justify-self: center;
     display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    height: 45px;
+    border-radius: 15px;
+    color: white;
+    background-color: #362E27;
+    
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.6px;
+    transition: transform .06s ease, opacity .2s ease;
+}
+
+.form-msg {
+    font-size: 0.87rem;
+    min-height: 1.3rem;
+}
+
+.error-msg {
+    margin-top: 4px;
+    font-size: 0.75rem;
+    color: #fff;
+    background-color: red;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: none;
+    position: relative;
+}
+
+.error-msg::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 12px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent transparent #e74c3c transparent;
 }
