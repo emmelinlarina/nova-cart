@@ -96,14 +96,20 @@
     min-height: 1.3rem;
 }
 
+.is-invalid {
+    outline: 2px solid #e74c3c;
+    outline-offset: 0;
+}
+
 .error-msg {
+    display: none;
     margin-top: 4px;
     font-size: 0.75rem;
     color: #fff;
     background-color: red;
     padding: 4px 8px;
     border-radius: 4px;
-    display: none;
+    
     position: relative;
 }
 
