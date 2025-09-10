@@ -27,12 +27,17 @@ Nova Cart is a modern, stylish online store that brings together everyday essent
 
 ## Admin / Test user:
 
-    You can use your own Noroff email and password for using the login feature
+    Use this dummy to login:
 
-    Example:
+    Name: Lyra
+    Email: novacart.test@stud.noroff.no
+    Password: Test1234
 
-    Email: studentname123@noroff.stud.no
-    Password: 123456
+    If you want to register a new user, you can absolutely do that as long as you:
+
+    - use @stud.noroff.no
+    - make a unique username and email with letters, numbers and _
+    - Password anything 8+ chars is fine
 
 ## Features:
 

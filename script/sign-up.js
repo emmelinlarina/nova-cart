@@ -71,6 +71,8 @@ form.addEventListener("submit", async (e) => {
         }, 1500);
         
     } catch (err) {
+        clearAllFieldErrors();
+
         const msg = (err.message || "").toLowerCase();
 
         if (msg.includes("name")) {
