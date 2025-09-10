@@ -39,40 +39,53 @@ Nova Cart is a modern, stylish online store that brings together everyday essent
     - make a unique username and email with letters, numbers and _
     - Password anything 8+ chars is fine
 
-## Features:
+## Features and User Stories:
 
 **Product Feed (index.html):**
 
-- Interactive carousel with 3 featured products (looping, prev/next controls).
-- Grid with the 12 latest products.
-- Clickable product thumbnails -> product details.
+- As a user, I want to see a banner carousel of the 3 latest products so that I can quickly discover what’s new.
+
+- As a user, I want to click a button on a carousel item to go directly to the product’s page.
+
+- As a user, I want to see at least 12 products in a grid so that I can browse through the store.
+
+- As a user, I want each product thumbnail to be clickable so that I can learn more about the product.
 
 **Product Page (product.html):**
 
-- Displays title, description, price, discounted price, rating, reviews, and tags.
-- "Buy button" only visible if logged in.
-- "Share button" copies the product URL to the clipboard.
+- As a user, I want to see the product’s title, description, price, discounted price, rating, reviews, and tags so I can decide if I want to buy it.
+
+- As a user, I want to copy/share the product URL so I can send it to friends.
+
+- As a logged-in user, I want an Add to Cart button so I can save the product for purchase.
 
 **Authentication (login.html), (register.html):**
 
-- Validated login form, saves token and user info.
-- Creates new account with validation + feedback (success/error).
+- As a user, I want to log in with my email and password so I can access my account.
+
+- As a system, I need to validate login details and save a token in the browser so the session is secure.
+
+- As a new user, I want to create an account with email and password so I can log in later.
+
+- As a system, I need to validate registration details so accounts are correctly created.
 
 **Cart (cart.html):**
 
-- Displays all products added to the cart with quantity and total price.
-- Increase/decrease product quantity, remove items, clear the cart.
-- Proceed to checkout.
+- As a user, I want to see all products in my cart and their total price so I know what I’m buying.
+
+- As a user, I want to adjust product quantities, remove items, or clear the cart so I can manage my order.
+
+- As a user, I want a button to proceed to checkout so I can finish my purchase.
 
 **Checkout (checkout.html):**
 
-- Shows the items you are buying and total price.
-- Submits to success page.
+- As a user, I want to fill out a delivery address so I can receive my order.
+
+- As a user, I want to see different payment methods (even if not functional) so the checkout process feels complete.
 
 **Success (success.html)**
 
-- Confirmation message after completing the checkout.
-- Takes you back to the home page.
+- As a user, I want to see a success message after checkout so I know my order was placed.
 
 ## User stories
 
