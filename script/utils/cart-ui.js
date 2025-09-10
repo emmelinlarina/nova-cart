@@ -14,6 +14,7 @@ const wrap = document.querySelector("main");
 function rowHTML({ p, q }) {
     const unit = p.discountedPrice || p.price;
     const line = unit * q;
+
     return `
     <article class="cart-row" data-id="${p.id}">
     <img class="cart-thumb" src="${p.image.url}" alt="${p.image.alt}">
@@ -25,9 +26,10 @@ function rowHTML({ p, q }) {
                         <span class="was">${money.format(p.price)}</span>`
                        : `<span class="now">${money.format(p.price)}</span>`
                 }
+            </div>
             <div class="cart-qty">
                 <button class="qty-dec" aria-label="Decrease quantity">-</button>
-                <input class="qty-input" type="number" min="1" value"${q}">
+                <input class="qty-input" type="number" min="1" value="${q}">
                 <button class="qty-inc" aria-label="Increase quantity">+</button>
                 <button class="row-remove btn-link" >Remove</button>
             </div>
@@ -93,7 +95,7 @@ function wire() {
     });
 
     row.querySelector(".qty-dec").addEventListener("click", () => {
-        setQuantity(id, Number(input.value || 1) +1);
+        setQuantity(id, Number(input.value || 1) -1);
         render();
     });
 
