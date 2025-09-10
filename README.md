@@ -87,18 +87,6 @@ Nova Cart is a modern, stylish online store that brings together everyday essent
 
 - As a user, I want to see a success message after checkout so I know my order was placed.
 
-## User stories
-
-- As a visitor, I want to see a product feed so I can browse available items.
-- As a visitor, I want to view detailed information about a product so I can decide if I’m interested.
-- As a visitor, I want to register for an account so I can log in and make purchases.
-- As a user, I want to log in securely so I can access my account and buy products.
-- As a user, I want to add products to a cart so I can review them before checkout.
-- As a user, I want to update or remove items in the cart so I can control what I buy.
-- As a user, I want to see the total price of my cart so I know how much I’ll pay.
-- As a user, I want to complete a checkout form so I can “finalize” my order.
-- As a user, I want to see a success confirmation page so I know the purchase went through
-
 ## Technologies
 
 - HTML
