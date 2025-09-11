@@ -14,9 +14,11 @@
     <link rel="stylesheet" href="css/utils/styles.css">
     <link rel="stylesheet" href="css/utils/components.css">
     <link rel="stylesheet" href="css/utils/media.css">
+    <link rel="stylesheet" href="css/cart.css">
     <link rel="stylesheet" href="css/checkout.css">
 
     <script src="https://kit.fontawesome.com/e0e8f3b90b.js" crossorigin="anonymous"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -61,9 +63,67 @@
     </header>
 
 
-    <main>
+    <main class="checkout-grid">
 
+        <section class="shop js-shop">
+            <h1>Your cart</h1>
 
+        </section>
+
+        <aside class="right-bar js-right-bar">
+
+            <form id="checkout-form" class="checkout-form" novalidate>
+                <h2>Delivery</h2>
+
+                <label class="field">
+                    <span class="label">Full name</span>
+                    <input type="text" name="fullName" required />
+                    <span class="error-msg" aria-live="polite"></span>
+                </label>
+
+                <label class="field">
+                    <span class="label">Email</span>
+                    <input type="text" name="email" required />
+                    <span class="error-msg" aria-live="polite"></span>
+                </label>
+
+                <label class="field">
+                    <span class="label">Address</span>
+                    <input type="text" name="address" required />
+                    <span class="error-msg" aria-live="polite"></span>
+                </label>
+
+                <div class="grid-2">
+                    <label class="field">
+                        <span class="label">City</span>
+                        <input type="text" name="city" required />
+                        <span class="error-msg" aria-live="polite"></span>
+                    </label>
+
+                    <label class="field">
+                        <span class="label">Postal code</span>
+                        <input type="text" name="postal" required />
+                        <span class="error-msg" aria-live="polite"></span>
+                    </label>
+                </div>
+
+                <label class="field">
+                    <span class="label">Country</span>
+                    <input type="text" name="country" required />
+                    <span class="error-msg" aria-live="polite"></span>
+                </label>
+
+                <h2>Payment</h2>
+                <fieldset class="pay-methods">
+                    <label> <input type="radio" name="payment" value="card" checked>Card</label>
+                    <label> <input type="radio" name="payment" value="vipps" checked>Vipps (demo)</label>
+                    <label> <input type="radio" name="payment" value="paypal" checked>Paypal (demo)</label>
+                </fieldset>
+
+                <button id="pay-btn" class="btn btn-primary" type="submit">Pay now</button>
+                <p id="checkout-msg" class="form-msg" aria-live="polite"></p>
+            </form>
+        </aside>
     </main>
 
 
@@ -104,7 +164,6 @@
         </div>
     </footer>
     <script type="module" src="script/checkout.js"></script>
-    <script type="module" src="script/product.js"></script>
     <script type="module" src="script/header.js"></script>
 </body>
 
