@@ -1,11 +1,4 @@
-import {
-    getCart, 
-    setQuantity,
-    removeOne,
-    clearCart, 
-    computeTotals,
-    updateCartQuantity,
-} from "../cart.js";
+import { getCart, setQuantity, removeOne, clearCart, computeTotals, updateCartQuantity,} from "../cart.js";
 
 const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD"});
 

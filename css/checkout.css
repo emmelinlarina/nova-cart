@@ -2,3 +2,57 @@
 
 .logo img {visibility: visible; }
 
+.checkout-grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 1.2fr 1fr;
+    padding: 24px 16px;
+}
+@media (max-width: 900px) {
+    .checkout-grid { grid-template-columns: 1fr; }
+}
+
+.checkout-form {
+    margin-top: 16px;
+    display: grid;
+    gap: 14px;
+}
+
+.field input {
+    height: 42px;
+    padding: 0 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.error-msg {
+    min-height: 1.1rem;
+    font-size: 0.8rem;
+    color: #b32020;
+    display: none;
+}
+
+.is-invalid { 
+    border-color: #b32020;
+}
+
+.grid-2 {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.pay-methods { 
+    display: flex;
+    gap: 12px;
+}
+
+.btn-primary {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 180px; height: 45px; border-radius: 15px;
+    background: #362E27; color: #fff; border: 0; font-weight: 700;
+} 
+
+.form-msg.info { color: #555;}
+.form-msg.success { color: #1a7f37;}
+.form-msg.error { color: #b32020;}
