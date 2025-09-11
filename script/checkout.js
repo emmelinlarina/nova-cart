@@ -6,7 +6,6 @@ const shopWrap = document.querySelector(".js-shop");
 const rightBar = document.querySelector(".js-right-bar");
 const form = document.querySelector("#checkout-form");
 const formMsg = document.querySelector("#checkout-msg");
-const totalsBox = document.querySelector("#totals");
 
 try {
     const savedEmail = localStorage.getItem("email");
@@ -16,13 +15,25 @@ try {
 } catch {}
 
 function itemHTML({ p, q }) {
+    const hasDiscount = p.discountedPrice && p.discountedPrice < p.price;
     const unit = p.discountedPrice || p.price || 0;
+    const line = unit * q;
+
+
     return `
     <div class="box js-cart-item-container-${p.id}">
     <div class="content">
         <img src="${p.image.url}" alt="${p.image.alt}">
         <h3>${p.title}</h3>
-        <h4>${money.format(unit)}</h4>
+        
+        <div class="price">
+            ${
+                hasDiscount
+                ? `<span class="now">${money.format(p.discountedPrice)}</span>
+                    <span class="was">${money.format(p.price)}</span>`
+                : `<span class="now">${money.format(p.price)}</span>`
+            }
+        </div>
 
     <div class="qty">
         <button class="qty-dec" data-id="${p.id}" aria-label="Decrease">-</button>
@@ -40,46 +51,47 @@ function itemHTML({ p, q }) {
     `;
 }
 
+function renderTotals() {
+    const t = computeTotals();
+    const set = (sel, val) => {
+        const el = rightBar.querySelector(sel);
+        if (el) el.textContent = money.format(val);
+    };
+    set(".js-subtotal", t.original);
+    set(".js-savings", t.savings);
+    set(".js-total", t.pay);
+}
+
 function render() {
     const cart = getCart();
 
     if (!cart.length) {
         shopWrap.innerHTML = `
         <h1>Your Cart</h1>
-        <div class="empty-cart-message">
+        <section class="empty-cart-message">
             <h2>Empty cart!</h2>
             <a class="btn" href="index.html">Continue shopping</a>
-        </div>
+        </section>
         `;
+        renderTotals();
         updateCartQuantity();
         return;
     }
 
     const rows = cart.map(itemHTML).join("");
-    const totals = computeTotals();
+    shopWrap.innerHTML = `<h1>Your cart</h1>${rows}`;
 
-    shopWrap.innerHTML = `
-    <h1>Your Cart</h1>
-    ${rows}
-    `;
+    wire();
+    renderTotals();
+    updateCartQuantity();
 
-    rightBar.querySelector(".checkout-form") || (rightBar.innerHTML = `
-        <p><span>Savings</span> <span>${money.format(totals.original)}</span></p>
-        <hr>
-        <p><span>Savings</span>  <span>${money.format(totals.savings)}</span></p>
-        ${rightBar.innerHTML} 
-        `);
-
-        wire();
-        updateCartQuantity();
 }
 
 function wire() {
 
-    document.querySelectorAll(".js-delete-link").forEach((link) => {
-        link.addEventListener("click", () => {
-            const id = link.dataset.productId;
-            setQuantity(id, 0);
+    document.querySelectorAll(".js-delete-link").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            setQuantity(btn.dataset.productId, 0);
             render();
         });
     });
@@ -89,10 +101,8 @@ function wire() {
     document.querySelectorAll(".qty-inc").forEach((btn) => {
         btn.addEventListener("click", () => {
             const id = btn.dataset.id;
-            const parent = btn.closest(".content");
-            const val = parent.querySelector(".qty-val");
-            const next = Number(val.textContent || 1) + 1;
-            setQuantity(id, next);
+            const val = btn.closest(".content").querySelector(".qty-val");
+            setQuantity(id, Number(val.textContent || 1) + 1);
             render();
         });
     });
@@ -100,12 +110,15 @@ function wire() {
     document.querySelectorAll(".qty-dec").forEach((btn) => {
         btn.addEventListener("click", () => {
             const id = btn.dataset.id;
-            const parent = btn.closest(".content");
-            const val = parent.querySelector(".qty-val");
-            const next = Math.max(1, Number(val.textContent || 1) - 1);
-            setQuantity(id, next);
+            const val = btn.closest(".content").querySelector(".qty-val");
+            setQuantity(id, Math.max(1, Number(val.textContent || 1) - 1));
             render();
         });
+    });
+
+    rightBar.querySelector(".js-clear")?.addEventListener("click", () => {
+        clearCart();
+        render();
     });
 }
 
