@@ -162,7 +162,7 @@ form.addEventListener("submit", (e) => {
     let ok = true;
 
     if (!fullName) { ok = false; fieldError(form.fullName, "Please enter your full name"); }
-    if (!email || !/^\S+@\S+\.\S+$/.test(email)) { ok = false; fieldError(form.email, "Please enter email"); }
+    if (!email) { ok = false; fieldError(form.email, "Please enter email"); }
     if (!address) { ok = false; fieldError(form.address, "Please enter your address"); }
     if (!city) { ok = false; fieldError(form.city, "Please enter your city"); }
     if (!postal) { ok = false; fieldError(form.postal, "Please enter your postal code"); }
