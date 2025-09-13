@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="css/utils/styles.css">
     <link rel="stylesheet" href="css/utils/components.css">
     <link rel="stylesheet" href="css/utils/media.css">
-    <link rel="stylesheet" href="css/cart.css">
+    <link rel="stylesheet" href="css/success.css">
 
     <script src="https://kit.fontawesome.com/e0e8f3b90b.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,9 +61,23 @@
     </header>
 
 
-    <main>
+    <main class="success">
+        <section class="success/card">
+            <div class="icon">ok</div>
+            <h1>Order Confirmed</h1>
+            <p class="greeting js-greeting"></p>
 
+            <div class="order">
+                <div><span>Order #</span><span class="js-order-id"></span></div>
+                <div><span>Total paid</span><span class="js-total"></span></div>
+                <div><span>Receipt sent to</span><span class="js-email"></span></div>
+            </div>
 
+            <div class="actions">
+                <a class="btn" href="index.html">Continue shopping</a>
+                <a class="btn btn-outline" href="index.html">Browse products</a>
+            </div>
+        </section>
     </main>
 
 

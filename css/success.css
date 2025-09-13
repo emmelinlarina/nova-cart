@@ -1,0 +1,69 @@
+.logo img {visibility: visible; }
+
+.success {
+    max-width: 720px;
+    margin: 72px auto 96px;
+    padding: 0 16px;
+}
+
+.success-card {
+    background: #D8EAF0;
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: center;
+}
+
+.success-card .icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 12px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: #fff;
+    background: #2fb36f;
+}
+
+.success-card h1 {
+    margin: 8px 0 6px;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.success-card .greeting {
+    margin: 0 0 18px;
+    opacity: .85;
+}
+
+.success-card .order {
+    margin: 12px auto 22px;
+    width: min(420px, 100%);
+    text-align-last: left;
+    display: grid;
+    gap: 10px;
+}
+
+.success-card .order > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    background: #fff;
+    border-radius: 8px;
+    padding: 10px 12px;
+}
+
+.success-card .actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid #362e27;
+    color: #362e27;
+}
+
+.btn-outline:hover { opacity: .9; }

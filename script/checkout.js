@@ -85,6 +85,8 @@ function render() {
     renderTotals();
     updateCartQuantity();
 
+   
+
 }
 
 function wire() {
