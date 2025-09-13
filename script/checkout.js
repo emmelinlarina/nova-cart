@@ -174,6 +174,17 @@ form.addEventListener("submit", (e) => {
     formMsg.className = "form-msg info"
 
     setTimeout(() => {
+
+        const t = computeTotals();
+        
+        sessionStorage.setItem("nc_last_order",
+            JSON.stringify({
+            total: t.pay || 0, 
+            count: t.count || 0, 
+            email: email || localStorage.getItem("email") || ""
+        })
+    );
+
         clearCart();
         updateCartQuantity();
         location.href = "success.html";
