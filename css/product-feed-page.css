@@ -3,6 +3,7 @@
 .logo img {visibility: visible; }
 .num { font-variant-numeric: tabular-nums;}
 
+
 /* ---- Card ---- */
 
 .media {
@@ -11,6 +12,7 @@
     align-items: center;
     text-align: left;
     gap: 5px;
+    margin-bottom: 50px;
 }
 
 .thumb {
@@ -37,7 +39,7 @@
     border-radius: 12.5px 12.5px 5px 5px;
     background: #3A7CA5;
     color: #FAFAFA;
-    font-weight: 700;
+    font-weight: 600;
     z-index: 1;
 }
 
@@ -50,8 +52,6 @@
 /* placeholder for no stars */
 
 .stars { min-height: 1.2rem; display: flex; align-items: center; }
-
-/* shared btn look */
 
 .btn {border: none; background-color: #FAFAFA; font-size: 1.2rem; }
 
@@ -109,9 +109,7 @@
     margin-bottom: 100px;
     text-align: center;
 }
-@media (min-width: 768px) {
-    .latest-products { grid-template-columns: repeat(3, minmax(0,1fr)) ;}
-}
+
 
 .latest-products .media img {
     width: 168px;
@@ -122,7 +120,11 @@
 .latest-products .media > .price, 
 .latest-products .media > .stars, 
 .latest-products .media > .btn {
-    width: 168px;
+    width: 100%;
+    max-width: 250px;
+    margin-left: 0;
+    text-align: left;
+    padding-left: 40px;
 }
 
 .latest-products h3 {
@@ -169,10 +171,6 @@
 .price .save { display: none; }
 
 
-
-
-
-
 /* info section */
 
 .info {
@@ -198,6 +196,7 @@
     line-height: 25px; 
     letter-spacing: 0.54px;
     margin: 25px 0 30px;
+    padding-left: 45px;
 }
 
 .info h3 {
@@ -205,4 +204,100 @@
     font-size: 16px;
     font-weight: 700;
     letter-spacing: 0.64px;
+    padding-left: 45px;
 }
+
+/* ------- Responsive rules -------- */
+
+/* Tablet */
+
+@media (min-width: 768px) {
+    .latest-products {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .latest-products .media img {
+        width: 200px;
+        height: 230px;
+    }
+
+    .latest-products h3 {
+        font-size: 1.05rem;
+    }
+
+    .slideshow img {
+        max-width: 340px;
+        max-height: 400px;
+    }
+
+     .slideshow {
+        margin-top: 60px;
+    }
+}
+
+/* Small Desktop */ 
+
+@media (min-width: 1200px) {
+    
+    
+    .latest-products {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .latest-products .media img {
+        width: 220px;
+        height: 260px;
+        
+    }
+
+    .latest-products .media > h3,
+    .latest-products .media > .price, 
+    .latest-products .media > .stars, 
+    .latest-products .media > .btn {
+        padding-left: 20px;
+    }
+
+    .latest-products h3 {
+        font-size: 1.2rem;
+    }
+
+    .slideshow {
+        margin-top: 60px;
+    }
+
+    .slideshow img {
+        max-width: 380px;
+        max-height: 450px;
+    }
+
+    .info h3 {
+        font-size: 1.2rem;
+    }
+
+    .info p {
+        font-size: 1.3rem;
+    }
+}
+
+@media (min-width: 1600px) {
+
+    .latest-products .media img {
+        width: 250px;
+        height: 300px;
+    }
+
+    .slideshow img {
+        max-width: 440px;
+        max-height: 540px;
+    }
+}
+
+
+@media (min-width: 2560px) {
+
+     .latest-products {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+}
+

@@ -44,12 +44,14 @@
 
 @media (min-width: 769px) and (max-width: 2560px) { 
 
-    .logo img {width: 170px;}}
+    .logo img {width: 170px;}
+}
+
 
 
 /* --- FOOTER Desktop --- */
 
-@media (min-width: 1000px) and (max-width: 2560px) {
+@media (min-width: 1200px) and (max-width: 2560px) {
     
     footer {
         padding: 40px 50px 25px; font-size: 0.7rem;}
