@@ -5,8 +5,6 @@
 .text-left { text-align: left;}
 .mt-4{ margin-top: 4px ;}
 
-.poppins{ font-family: Poppins;}
-.roboto { font-family: Roboto;}
 .num { font-variant-numeric: tabular-nums;}
 
 /* ---- SLIDESHOW ---- */
@@ -27,12 +25,32 @@
 
 /* ---- Card ---- */
 
+.media {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    gap: 5px;
+}
+
+.media img {
+    margin: 0 auto;
+    display: block;
+}
+
+.media h3, .media .price, .media .stars, .media .btn {
+    align-self: flex-start;
+    padding-left: 45px;
+    margin: 6px 0 0 0;
+    
+}
+
 .slideshow .card {
     overflow: hidden;
     grid-template-rows: 220px;
 }
 
-.slideshow .media, .media {
+.slideshow{
     position: relative;
     overflow: hidden;
 }
@@ -46,12 +64,6 @@
     border-radius: 15px;
 }
 
-.slideshow .card h3,
-.slideshow .card .price,
-.slideshow .card .stars{
-    padding: 0 10px;
-    margin: 6px 0 0 0;
-}
 
 /*  Controls  */
 
@@ -92,15 +104,6 @@
 }
 
 
-
-.latest-products h3, 
-.latest-products .price, 
-.latest-products .stars{
-
-    padding-left: 30px;
-    text-align: left;
-}
-
 .latest-products h3 {
     font-family: Roboto;
     font-size: 1rem;
@@ -126,9 +129,13 @@
     flex-shrink: 0;
 }
 
+.product-card .stars {
+    min-height: 1.2rem;
+    display: flex;
+    align-items: center;
+}
 
 /* ---- PRICES ---- */ 
-
 
 .price {
     display: flex;
@@ -137,18 +144,15 @@
     flex-wrap: wrap;
     margin-top: 4px;
     padding-top: 4px;
-    font-variant-numeric: tabular-nums;
     font-family: Poppins;
-    font-style: normal;
     line-height: 20px;
     letter-spacing: 0.42px;
-    
 }
 
 .price .now {
     font-weight: 700;
     font-size: 0.8rem;
-    color: #111;
+    color: #111110;
 }
 
 .price .was {
@@ -158,9 +162,24 @@
     text-decoration-thickness: 2px;
 }
 
-.price .save {
-    display: none;
+.price .save { display: none; }
+
+/* ---- Badge Sale % ---- */
+
+.badge-sale {
+    position: absolute;
+    top: 0px; right: 54px;
+    z-index: 2;
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12.5px 12.5px 5px 5px;
+    text-align: center;
+    justify-content: center;
+    background: #3A7CA5;
+    color: #FAFAFA;
 }
+
+/* Badge Sale Carousel */
 
 .slideshow .card .badge-sale {
     right: 0px;
@@ -168,65 +187,40 @@
     border-radius: 12.5px;
 }
 
-.badge-sale {
-    position: absolute;
-    top: 0px;
-    right: 54px;
-    z-index: 2;
-
-    display: inline-block;
-    padding: 2px 10px;
-    border-radius: 12.5px 12.5px 5px 5px;
-    text-align: center;
-    justify-content: center;
-   
-    background: #3A7CA5;
-    color: #FAFAFA;
-}
-
-.stars, .btn {
-    display: grid;
-    font-size: 1.2rem;
-    padding-top: 2px;
-}
+/* ---- Buttons and icons ----  */
 
 .btn {
-    margin-left: 30px;
     border: none;
-    padding-top: 6px;
     background-color: #fff;
 }
 
-i {
-    background: transparent;
+.stars, .btn {
+    font-size: 1.2rem;
 }
+
+/* info section */
 
 .info {
     display: flex;
     flex-direction: column;
     text-align: left;
-
 }
 
 .info h2 {
     text-align: center;
     font-family: Poppins;
-    font-size: 24px;
-    font-style: normal;
+    font-size: 1.5rem;
     font-weight: 700;
-    line-height: normal;
-    letter-spacing: 0.72px;
     border-radius: 15px;
     background: #D9D9D9;
     margin-top: 52px;
-    padding: 10px 0 10px 0;
+    letter-spacing: 0.72px;
 }
 .info p {
     font-family: Roboto;
-    font-size: 18px;
-    font-style: normal;
+    font-size: 1.125rem;
     font-weight: 500;
-    line-height: 25px; /* 138.889% */
+    line-height: 25px; 
     letter-spacing: 0.54px;
     margin: 25px 0 30px;
 }

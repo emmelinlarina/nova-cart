@@ -64,6 +64,10 @@ function starsHTML(rating) {
     `;
 }
 
+function placeholderStarsHTML() {
+    return `<span class="stars" aria-hidden="true"></span>`;
+}
+
 const slideHTML = (p, i, total) => {
     const rating = avgRating(p);
 
@@ -76,7 +80,7 @@ const slideHTML = (p, i, total) => {
             </div>
             <h3>${p.title}</h3>
             ${priceHTML(p)}
-            ${rating != null ? starsHTML(rating) : ""}
+            ${rating != null ? starsHTML(rating) : placeholderStarsHTML()}
         </a>
 
         ${isLoggedIn ? `
@@ -97,18 +101,21 @@ const cardHTML = (p) => {
             <div class="media">
                     <img src="${imgSrc(p)}" alt="${imgAlt(p)}"/>
                     ${saleBadge(p)}
-            </div>
+            
                 <h3>${p.title}</h3>
                 ${priceHTML(p)}
-                ${rating != null ? starsHTML(rating) : ""}
-        </a>
-        
-        ${isLoggedIn ? `
+                ${rating != null ? starsHTML(rating) : placeholderStarsHTML()}
+
+                ${isLoggedIn ? `
             <button class="btn js-add-to-cart"
                 data-product-id="${p.id}"
                 aria-label="Add ${p.title} to cart">
                 <i class="fa-solid fa-cart-shopping"></i>
             </button>` : ``}
+            </div>
+        </a>
+        
+        
     </article>
     `;
 };
