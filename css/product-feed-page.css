@@ -7,22 +7,6 @@
 
 .num { font-variant-numeric: tabular-nums;}
 
-/* ---- SLIDESHOW ---- */
-
-.slideshow {
-    max-width: 294px;
-    margin: 0 auto;
-    position: relative;
-}
-
-.slides {
-    max-width: 294px;
-    margin: 0 auto 16px;
-    position: relative;
-}
-
-.slideshow .mySlide { display: none; }
-
 /* ---- Card ---- */
 
 .media {
@@ -36,21 +20,34 @@
 .media img {
     margin: 0 auto;
     display: block;
+    border-radius: 15px;
+    object-fit: cover;
 }
 
 .media h3, .media .price, .media .stars, .media .btn {
-    align-self: flex-start;
-    padding-left: 45px;
-    margin: 6px 0 0 0;
-    
+    padding: 0;
+    margin: 6px auto 0;
+    text-align: left;
 }
 
-.slideshow .card {
-    overflow: hidden;
-    grid-template-rows: 220px;
+/* placeholder for no stars */
+
+.stars { min-height: 1.2rem; display: flex; align-items: center;}
+
+/* shared btn look */
+
+.btn {
+    border: none;
+    background-color: #FAFAFA;
+    font-size: 1.2rem;
 }
 
-.slideshow{
+
+/* ---- SLIDESHOW ---- */
+
+.slideshow {
+    max-width: 294px;
+    margin: 0 auto;
     position: relative;
     overflow: hidden;
 }
@@ -60,13 +57,27 @@
     max-width: 294px;
     max-height: 350px;
     height: auto;
-    object-fit: cover;
-    border-radius: 15px;
 }
 
+.slideshow .card > h3,
+.slideshow .card > .price, 
+.slideshow .card > .stars, 
+.slideshow .card > .btn {
+    max-width: 294px;
+    width: 100%;
+}
+
+.slideshow .mySlide { display: none; }
+
+
+
+.slides {
+    max-width: 294px;
+    margin: 0 auto 16px;
+    position: relative;
+}
 
 /*  Controls  */
-
 .slideshow .controls {
     display: flex;
     justify-content: center;
@@ -79,18 +90,22 @@
     border: 0 ;
     cursor: pointer;
     border-radius: 100px;
-    font-size: 18px;
+    font-size: 1.125rem;
     background: #D8EAF0;
 }
+
+
+.slideshow .btn { display: none; }
+
+.stars, .btn {
+    font-size: 1.25rem;
+}
+
 
 #slideshow .controls button:focus-visible {
     outline: 2px solid #3A7CA5;
     outline-offset: 2px;
 }
-
-/* Hide "Add to cart" button on slides only */
-
-.slideshow .btn { display: none; }
 
 /* ------ Latest products grid ------ */
 
@@ -103,6 +118,17 @@
     text-align: center;
 }
 
+.latest-products .media img {
+    width: 168px;
+    height: 195px;
+}
+
+.latest-products .media > h3,
+.latest-products .media > .price, 
+.latest-products .media > .stars, 
+.latest-products .media > .btn {
+    width: 168px;
+}
 
 .latest-products h3 {
     font-family: Roboto;
@@ -118,21 +144,6 @@
     font-weight: 700;
     line-height: 20px; 
     letter-spacing: 0.42px;
-}
-
-
-.latest-products .product-card img {
-    width: 168px;
-    height: 195px;
-    object-fit: cover;
-    border-radius: 15px;
-    flex-shrink: 0;
-}
-
-.product-card .stars {
-    min-height: 1.2rem;
-    display: flex;
-    align-items: center;
 }
 
 /* ---- PRICES ---- */ 
@@ -154,15 +165,14 @@
     font-size: 0.8rem;
     color: #111110;
 }
-
 .price .was {
     font-size: .8rem;
     color: #343434; 
     text-decoration: line-through;
     text-decoration-thickness: 2px;
 }
-
 .price .save { display: none; }
+
 
 /* ---- Badge Sale % ---- */
 
@@ -187,16 +197,6 @@
     border-radius: 12.5px;
 }
 
-/* ---- Buttons and icons ----  */
-
-.btn {
-    border: none;
-    background-color: #fff;
-}
-
-.stars, .btn {
-    font-size: 1.2rem;
-}
 
 /* info section */
 
@@ -228,9 +228,6 @@
 .info h3 {
     font-family: Poppins;
     font-size: 16px;
-    font-style: normal;
     font-weight: 700;
-    line-height: normal;
     letter-spacing: 0.64px;
-    padding-left: 40px;
 }
