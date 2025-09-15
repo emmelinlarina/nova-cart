@@ -10,18 +10,28 @@
 /* ---- Card ---- */
 
 .media {
-    display: flex;
+    display: grid;
     flex-direction: column;
     align-items: center;
+    justify-items: center;
+    row-gap: 6px;
     text-align: left;
     gap: 5px;
 }
 
 .media img {
-    margin: 0 auto;
+    grid-area: 1 / 1;
+    margin: 0;
     display: block;
     border-radius: 15px;
     object-fit: cover;
+}
+
+.media .badge-sale {
+    
+    justify-items: center;
+    margin: 6px;
+    z-index: 2;
 }
 
 .media h3, .media .price, .media .stars, .media .btn {
@@ -107,6 +117,7 @@
     outline-offset: 2px;
 }
 
+
 /* ------ Latest products grid ------ */
 
 .latest-products {
@@ -176,26 +187,22 @@
 
 /* ---- Badge Sale % ---- */
 
+.thumb {
+    position: relative;
+    display: inline-block;
+}
+
 .badge-sale {
     position: absolute;
-    top: 0px; right: 54px;
-    z-index: 2;
-    display: inline-block;
+    top: 8px;
+    right: 8px;
     padding: 2px 10px;
     border-radius: 12.5px 12.5px 5px 5px;
-    text-align: center;
-    justify-content: center;
     background: #3A7CA5;
     color: #FAFAFA;
+    z-index: 1;
 }
 
-/* Badge Sale Carousel */
-
-.slideshow .card .badge-sale {
-    right: 0px;
-    padding: 2px 25px;
-    border-radius: 12.5px;
-}
 
 
 /* info section */

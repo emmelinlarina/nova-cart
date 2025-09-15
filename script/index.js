@@ -75,14 +75,16 @@ const slideHTML = (p, i, total) => {
     <div class="mySlide" role="group" aria-label="Slide ${i + 1} of ${total}" aria-hidden="true">
         <a class="card" href="product.html?id=${p.id}">
             <div class="media">
+            <div class="thumb">
                 <img src="${imgSrc(p)}" alt="${imgAlt(p)}"/>
                 ${saleBadge(p)}
             </div>
+            
             <h3>${p.title}</h3>
             ${priceHTML(p)}
             ${rating != null ? starsHTML(rating) : placeholderStarsHTML()}
         </a>
-
+</div>
         ${isLoggedIn ? `
             <button class="btn js-add-to-cart" 
                     data-product-id="${p.id}"
@@ -99,8 +101,10 @@ const cardHTML = (p) => {
      <article class="product-card">
         <a class="card-link" href="product.html?id=${p.id}">
             <div class="media">
+            <div class="thumb">
                     <img src="${imgSrc(p)}" alt="${imgAlt(p)}"/>
                     ${saleBadge(p)}
+            </div>
             
                 <h3>${p.title}</h3>
                 ${priceHTML(p)}
