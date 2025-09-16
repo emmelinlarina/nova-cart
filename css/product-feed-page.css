@@ -277,7 +277,7 @@
     width: 80px; height: 68px;
     font-size: 2rem;
     }
-    
+
     .slideshow .thumb { width: 280; aspect-ratio: 730 / 549; }
     .slideshow .thumb img { width: 100%; height: 100%; object-fit: cover;}
     .slideshow .badge-sale { padding: 8px 22px; font-size: 1.8rem; font-weight: 500; }
@@ -297,6 +297,13 @@
     .latest-products .media > .btn { max-width: 280px; }
 
     .latest-products .media h3 { font-size: 1.5rem; }
+
+    .latest-products .media img {
+        width: auto;
+        max-width: 300px;
+        height: auto;
+    }
+
     .media { gap: 10px; } 
     .price .now, .price .was{ font-size: 1.3rem; }
     .stars { font-size: 1.5rem; }
@@ -327,7 +334,7 @@
     }
 
     .slideshow .thumb { width: 100%; height: 800px; }
-    .slideshow .thumb img { width: 100%;height: 100%;object-fit: cover; }
+    .slideshow .thumb img { width: 100%; height: 100%; object-fit: cover; }
     .slideshow .badge-sale { padding: 12px 26px; font-size: 2.2rem; font-weight: 500; }
 
     .card h3 { font-size: 2.4rem; margin-bottom: 15px; }
@@ -339,6 +346,13 @@
     .latest-products .media img { max-width: 270px; }
 
     .latest-products .media > h3,
+
+    .latest-products .media img {
+        width: auto;
+        max-width: 335px;
+        height: auto;
+    }
+
     .latest-products .media > .price, 
     .latest-products .media > .stars, 
     .latest-products .media > .btn { padding-left: 0px; font-size: 1.7rem; line-height: 35px; }
