@@ -1,3 +1,5 @@
+
+
 .navbar {
     padding: 0 50px;
 }
@@ -131,4 +133,8 @@
 .form-msg.error {
     color: white;
     background-color: #DA5D47;
+}
+
+@media (min-width: 768px) {
+    .logo img {visibility: visible; }
 }

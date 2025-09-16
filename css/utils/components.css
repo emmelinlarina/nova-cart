@@ -51,6 +51,10 @@ padding: 10px;
     transition: 0.15s ease-in-out;
 }
 
+.btn-link:hover {
+    cursor: pointer;
+}
+
 
 
 /* -----  HAMBURGER MENU ----- */
