@@ -1,13 +1,23 @@
 .logo {display: block; }
 .mobile-logo { display: none;}
 
-.mobile-logo img {
-    height: 108px;
-    width: 108px;
+
+.navbar {
+    padding: 0 50px;
 }
+
+header {
+    margin-bottom: 30px;
+}
+
 
 @media (max-width: 768px) {
     .logo {display: none;}
-    .mobile-logo { display: block;}
+    .mobile-logo { 
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 30%;
+    }
     .mobile-logo img { width: 120px; height: auto;}
 }

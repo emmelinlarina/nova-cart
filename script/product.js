@@ -105,13 +105,13 @@ function renderProducts(p) {
     productContainer.innerHTML = `
 
         <div class="column">
-            <h1>${(p.title || '').toUpperCase()}</h1>
+            
 
             <div class="media">
                 <img src="${imageUrl}" alt="${imageAlt}">
                 ${saleBadge(p)}
             </div>
-
+<h1>${(p.title || '').toUpperCase()}</h1>
         ${starsHTML(avg, { showNumber: true })} 
         ${reviewCount 
             ? `<p class="review-count">${reviewCount} review${reviewCount === 1 ? '' : 's'}</p>`

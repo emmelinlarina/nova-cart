@@ -76,7 +76,13 @@ padding: 10px;
 .logo a {display: inline-block; line-height: 0;}
 .logo img {width: 178px; margin-top: 10px; visibility: hidden; }
 
+.mobile-logo {
+    display: none;
+    margin-right: auto;
 
+    width: 108px;
+    height: 108px;
+}
 
 
 /* ----- GLOBAL FOOTER ----- */
