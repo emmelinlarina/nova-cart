@@ -83,14 +83,15 @@ const slideHTML = (p, i, total) => {
             <h3>${p.title}</h3>
             ${priceHTML(p)}
             ${rating != null ? starsHTML(rating) : placeholderStarsHTML()}
-        </a>
-</div>
-        ${isLoggedIn ? `
+            ${isLoggedIn ? `
             <button class="btn js-add-to-cart" 
                     data-product-id="${p.id}"
                     aria-label="Add ${p.title} to cart">
                 <i class="fa-solid fa-cart-shopping"></i>
             </button>` : ``}
+        </a>
+        
+        </div>
     </div>
     `; 
 };
@@ -109,17 +110,16 @@ const cardHTML = (p) => {
                 <h3>${p.title}</h3>
                 ${priceHTML(p)}
                 ${rating != null ? starsHTML(rating) : placeholderStarsHTML()}
-
+                
                 ${isLoggedIn ? `
             <button class="btn js-add-to-cart"
                 data-product-id="${p.id}"
                 aria-label="Add ${p.title} to cart">
                 <i class="fa-solid fa-cart-shopping"></i>
-            </button>` : ``}
-            </div>
+             </button>` : ``}
         </a>
         
-        
+            </div>
     </article>
     `;
 };
@@ -127,7 +127,9 @@ const cardHTML = (p) => {
 function wireAddToCartButtons(products) {
     const byId = new Map(products.map(p => [p.id, p]));
     document.querySelectorAll('.js-add-to-cart').forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
             const id = btn.dataset.productId;
             const product = byId.get(id);
             if (!product) return;
