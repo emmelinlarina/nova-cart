@@ -20,10 +20,12 @@
         transition: all 0.2s ease-in-out;
     }
 
+    
+
     #check:checked ~ .menu {right: 0;}
 
     .menu li {margin-top: 40px;}
-    .menu li a {padding: 10px; font-size: 1.5rem;}
+    .menu li a {padding: 10px; font-size: 2rem;}
 
     .open-menu , .close-menu {display: block;}
     
@@ -45,6 +47,8 @@
 @media (min-width: 769px) and (max-width: 2560px) { 
 
     .logo img {width: 170px;}
+
+    
 }
 
 
@@ -59,6 +63,8 @@
     .col, .col h5, .col ul li  {font-size: 0.75rem;}
     .col h3 {font-size: 0.85rem;}
     form input {width: 90%;}
+
+    
 
  }
 

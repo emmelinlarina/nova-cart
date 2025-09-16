@@ -7,7 +7,7 @@
     display: flex; justify-content: space-between; align-items: center;
     position: relative;
     background-color: #D8EAF0;
-    padding: 0 94px 0 94px;
+    padding: 0 40px 0 94px;
     height: 94px;
     color: #111110;
     font-weight: 500;
@@ -22,15 +22,21 @@
 }
 
 .menu {
-    display: flex; gap: 25px;
+    display: flex; gap: 40px;
     margin: 0; padding: 0;
+    align-items: center;
 }
 
-.menu li {font-size: 1.8rem;}
+.menu li, .menu .btn-link {font-size: 1.8rem;}
 .menu a {
 display: inline-block;
 text-transform: uppercase;
 padding: 10px;
+}
+
+.menu .btn-link {
+    background-color: transparent;
+    border: none;
 }
 
 /* decoration nav */
@@ -44,6 +50,8 @@ padding: 10px;
     height: 1px;
     transition: 0.15s ease-in-out;
 }
+
+
 
 /* -----  HAMBURGER MENU ----- */
 
