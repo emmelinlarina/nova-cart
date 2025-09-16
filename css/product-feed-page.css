@@ -140,6 +140,15 @@
     padding-left: 15px;
 }
 
+.latest-products .media h3 {
+    line-height: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: calc(1rem * 2);
+}
+
 .latest-products h3 {
     font-family: Roboto;
     font-size: 1rem;
@@ -155,6 +164,8 @@
     line-height: 20px; 
     letter-spacing: 0.42px;
 }
+
+
 
 
 
