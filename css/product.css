@@ -1,7 +1,13 @@
-#product-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+.logo {display: block; }
+.mobile-logo { display: none;}
+
+.mobile-logo img {
+    height: 108px;
+    width: 108px;
 }
 
+@media (max-width: 768px) {
+    .logo {display: none;}
+    .mobile-logo { display: block;}
+    .mobile-logo img { width: 120px; height: auto;}
+}
