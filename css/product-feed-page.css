@@ -279,105 +279,75 @@
     }
 
     .slideshow .controls button {
-        width: 80px; height: 68px;
-        font-size: 2rem;
+        width: 65px; height: 52px;
+        font-size: 1.5rem;
     }
 
     .slideshow .thumb { width: 280; aspect-ratio: 730 / 549; }
     .slideshow .thumb img { width: 100%; height: 100%; object-fit: cover;}
     .slideshow .badge-sale { padding: 8px 22px; font-size: 1.8rem; font-weight: 500; }
 
-    .card h3 { font-size: 2rem; margin-bottom: 15px; }
-    .card .now, .card .stars, .card .was { font-size: 1.5rem; } 
 
-    .latest-products, .info {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    .latest-products .media > h3,
-    .latest-products .media > .price, 
-    .latest-products .media > .stars, 
-    .latest-products .media > .btn { max-width: 280px; }
-
-    .latest-products .media h3 { font-size: 1.5rem; }
-
-    .latest-products .media img {
-        width: auto;
-        max-width: 300px;
-        height: auto;
-    }
-
-    .media { gap: 10px; } 
-    .price .now, .price .was{ font-size: 1.3rem; }
-    .stars { font-size: 1.5rem; }
-    .btn { font-size: 1.6rem; }
-    .latest-products h3 { padding-top: 10px; } 
-
-    /* title clamp */
-    .latest-products .media h3 {
-        line-height: 1.4;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        min-height: calc(1.4rem * 3);
-    }
-
-    
-
-    .info h3 { font-size: 1.3rem; }
-    .info p { font-size: 1.5rem; line-height: 30px; }
 }
 
 @media (min-width: 1600px) {
 
     .slideshow, .slideshow .slides {
-        width: 885px; max-width: 885px;
+        width: 600px; max-width: 549px;
         margin-left: auto; margin-right: auto;
+        margin-top: 20px;
     }
 
-    .slideshow .thumb { width: 100%; height: 800px; }
+    .slideshow .thumb { width: 100%; height: 730px; }
     .slideshow .thumb img { width: 100%; height: 100%; object-fit: cover; }
-    .slideshow .badge-sale { padding: 12px 26px; font-size: 2.2rem; font-weight: 500; }
+    .slideshow .badge-sale { padding: 12px 20px; font-size: 1.8rem; font-weight: 500; }
 
-    .card h3 { font-size: 2.4rem; margin-bottom: 15px; }
-    .card .now, .card .stars, .card .was { font-size: 1.6rem; } 
+    .card h3 { font-size: 1.4rem; margin-bottom: 15px; }
+    .card .now, .card .stars, .card .was { font-size: 1rem; } 
 
-    .latest-products { gap: 101px; }
-    .latest-products, .info{ max-width: 1200px; margin: 0 auto; }
+    .latest-products { gap: 80px; }
+    .latest-products, .info{ max-width: 1000px; margin: 0 auto; }
 
     .latest-products .media img { max-width: 270px; }
 
     .btn { font-size: 2rem; }
-
+    
+    
     .latest-products .media img {
         width: auto;
-        max-width: 335px;
-        height: auto;
+        max-width: 264px;
+        height: 308px;
     }
 
     .latest-products .media > .price, 
     .latest-products .media > .stars, 
-    .latest-products .media > .btn { padding-left: 0px; font-size: 1.7rem; line-height: 35px; }
+    .latest-products .media > .btn { padding-left: 0px; font-size: 2rem; line-height: 35px; }
+
+    
 
     /* title clamp */
 
     .latest-products .media h3 {
+
+        font-size: 1.15rem;
+
         line-height: 1.4;
         display: -webkit-box;
-        -webkit-line-clamp: 4;
+        -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
         overflow: hidden;
-        min-height: calc(1.4rem * 4);
+        min-height: calc(1.4rem * 1);
     }
 
 
     .slideshow .mySlide, .slideshow .card {
         width: 100%;
         height: auto;
-        
+    }
+
+    .info h2 {
+        font-size: 1.5em;
+        padding: 5px 0 5px 0;
     }
     
 }
@@ -401,8 +371,8 @@
 
     .btn { font-size: 2.2rem; }
 
-    .card h3 { font-size: 2.5rem; margin-bottom: 18px; }
-    .card .now, .card .stars, .card .was { font-size: 2rem; } 
+    .card h3 { font-size: 2rem; margin-bottom: 18px; }
+    .card .now, .card .stars, .card .was { font-size: 1.5rem; } 
 
 
     .latest-products .media img { width: 320px; height: 380px; }
