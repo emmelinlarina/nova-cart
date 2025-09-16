@@ -27,7 +27,7 @@
     align-items: center;
 }
 
-.menu li, .menu .btn-link {font-size: 1.8rem;}
+.menu li, .menu .btn-link {font-size: 1.5rem;}
 .menu a {
 display: inline-block;
 text-transform: uppercase;
