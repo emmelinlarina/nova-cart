@@ -52,9 +52,8 @@
 /* placeholder for no stars */
 
 .stars { min-height: 1.2rem; display: flex; align-items: center; }
-
-.btn {border: none; background-color: #FAFAFA; font-size: 1.2rem; }
-
+.btn { border: none; background-color: #FAFAFA; font-size: 1.2rem; }
+.btn:hover{ color: #883729; cursor: pointer; }
 
 /* ---- SLIDESHOW ---- */
 
@@ -64,19 +63,21 @@
     position: relative;
     overflow: hidden;
 }
+
 .slides {
     max-width: 294px;
     margin: 0 auto 16px;
     position: relative;
 }
+
 .slideshow .mySlide { display: none; }
 .slideshow .btn { display: none; }
 
+/* Mobile Carousel */
 .slideshow img {
     width: 294px;
     height: 350px;
     object-fit: cover;
-    
 }
 
 /*  Controls  */
@@ -95,18 +96,8 @@
     background: #D8EAF0;
 }
 
-.stars  {
-    font-size: .9rem;
-}
+.stars  { font-size: .9rem; }
 
-.btn {
-    font-size: 1.2rem;
-}
-
-.btn:hover{
-    color: #883729;
-    cursor: pointer;
-}
 
 /* ------ Latest products grid ------ */
 
@@ -123,7 +114,7 @@
 
 .latest-products .media img {
     width: 100%;
-    
+    max-width: 168px;
     aspect-ratio: 168 / 235;
     height: auto;
     object-fit: cover;
@@ -135,10 +126,11 @@
 .latest-products .media > .btn {
     width: 100%;
     max-width: 250px;
-    margin-left: 0;
     text-align: left;
     padding-left: 15px;
 }
+
+/* Title clamp */
 
 .latest-products .media h3 {
     line-height: 1;
@@ -165,10 +157,6 @@
     letter-spacing: 0.42px;
 }
 
-
-
-
-
 /* ---- PRICES ---- */ 
 
 .price {
@@ -183,17 +171,8 @@
     letter-spacing: 0.42px;
 }
 
-.price .now {
-    font-weight: 700;
-    font-size: 0.8rem;
-    color: #111110;
-}
-.price .was {
-    font-size: .8rem;
-    color: #343434; 
-    text-decoration: line-through;
-    text-decoration-thickness: 2px;
-}
+.price .now {font-weight: 700; font-size: 0.8rem; color: #111110; }
+.price .was { font-size: .8rem; color: #343434;  text-decoration: line-through; text-decoration-thickness: 2px; }
 .price .save { display: none; }
 
 
@@ -234,26 +213,21 @@
     margin-bottom: 50px;
 }
 
-/* ------- Responsive rules -------- */
+/* ========= Responsive rules ========= */
 
 
+/* Bigger Mobile  */
 
 @media (min-width: 500px) {
     
-    .latest-products .media img {
-        width: 100%;
-        max-width: 260px;
-        height: 300px;
-    }
-
-    .latest-products h3 {
-        font-size: 1.05rem;
-    }
+    .latest-products .media img { max-width: 260px; }
+    .latest-products h3 { font-size: 1.05rem; }
 }
 
 /* Tablet */
 
 @media (min-width: 768px) {
+
     .latest-products, .info {
         grid-template-columns: repeat(3, minmax(0, 1fr));
         max-width: 900px;
@@ -261,38 +235,21 @@
     }
 
 
-    .latest-products h3 {
-        font-size: 1.2rem;
-    }
+    .latest-products h3 { font-size: 1.2rem; }
 
-    .latest-products .media img {
-        width: 240px;
-        height: auto;
-    }
+    .latest-products .media img { width: 240px; }
 
-    .slideshow,
-    .slideshow .slides {
-        width: 500px;
-        max-width: 500px;
+    .slideshow, .slideshow .slides {
+        width: 550px;
+        max-width: 550px;
         margin-left: auto;
         margin-right: auto;
-        
     }
 
-    .slideshow .thumb {
-        width: 100%;
-        height: auto;
-    }
+    .slideshow .thumb { width: 100%; aspect-ratio: 500 / 390; }
+    .slideshow .thumb img { width: 100%; height: 100%; object-fit: cover; }
 
-    .slideshow .thumb img  {
-        
-        width: 320px;
-        height: 390px;
-    }
-
-     .slideshow {
-        margin-top: 100px;
-    }
+    .slideshow { margin-top: 100px; }
     
     .slideshow .badge-sale {
         padding: 4px 14px;
@@ -300,80 +257,33 @@
         font-weight: 500;
     }
 
-    .card h3 {
-        font-size: 1.4rem;
-        bottom: 15px;
-    }
-
-    .card .now, .card .stars, .card .was {
-        font-size: 1.1rem;
-    } 
-
-    .stars {
-        font-size: 1.2rem;
-    }
+    .card h3 { font-size: 1.4rem; bottom: 15px; }
+    .card .now, .card .stars, .card .was { font-size: 1.1rem; } 
+    .stars { font-size: 1.2rem; }
 }
 
 /* Small Desktop */ 
 
 @media (min-width: 1200px) {
     
-    .slideshow,
-    .slideshow .slides {
-        width: 730px;
-        max-width: 730px;
+    .slideshow, .slideshow .slides {
+        width: 600px;
+        max-width: 600px;
         margin-left: auto;
         margin-right: auto;
-        
     }
 
-    .slideshow .thumb {
-        width: 280;
-        aspect-ratio: 168 / 254;
+    .slideshow .controls button {
+    width: 80px; height: 68px;
+    font-size: 2rem;
     }
+    
+    .slideshow .thumb { width: 280; aspect-ratio: 730 / 549; }
+    .slideshow .thumb img { width: 100%; height: 100%; object-fit: cover;}
+    .slideshow .badge-sale { padding: 8px 22px; font-size: 1.8rem; font-weight: 500; }
 
-    .slideshow .thumb img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-
-    }
-
-    .slideshow img {
-        max-width: none;
-        min-height: none;
-        width: 100%;
-        height: 100%;
-    }
-
-    .slideshow .mySlide, .slideshow .card {
-        width: 100%;
-        height: auto;
-        
-    }
-
-    .slideshow img {
-      
-        max-width: none;
-        max-height: none;
-        
-    }
-
-    .slideshow .badge-sale {
-        padding: 8px 22px;
-        font-size: 1.8rem;
-        font-weight: 500;
-    }
-
-    .card h3 {
-        font-size: 2rem;
-        margin-bottom: 15px;
-    }
-
-
-    .card .now, .card .stars, .card .was {
-        font-size: 1.5rem;
-    } 
+    .card h3 { font-size: 2rem; margin-bottom: 15px; }
+    .card .now, .card .stars, .card .was { font-size: 1.5rem; } 
 
     .latest-products, .info {
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -381,225 +291,101 @@
         margin: 0 auto;
     }
 
-        .latest-products .media img {
-        width: 264px;
-        height: auto;
-    }
-
     .latest-products .media > h3,
     .latest-products .media > .price, 
     .latest-products .media > .stars, 
-    .latest-products .media > .btn {
-       max-width: 280px;
-    }
+    .latest-products .media > .btn { max-width: 280px; }
 
+    .latest-products .media h3 { font-size: 1.5rem; }
+    .media { gap: 10px; } 
+    .price .now, .price .was{ font-size: 1.3rem; }
+    .stars { font-size: 1.5rem; }
+    .btn { font-size: 1.6rem; }
+    .latest-products h3 { padding-top: 10px; } 
 
-    .latest-products .media h3
-     {
-        font-size: 1.5rem;
-    }
-
-    .media {
-        gap: 10px;
-    }
-
-
-    .price .now, .price .was{
-        font-size: 1.3rem; 
-    }
-
-    .stars {
-        font-size: 1.5rem;
-    }
-
-    .btn {
-        font-size: 1.6rem;
-    }
-
-    .latest-products h3 {
-        padding-top: 10px;
-    }
-
+    /* title clamp */
     .latest-products .media h3 {
-    line-height: 1.4;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    min-height: calc(1.4rem * 3);
-}
-
-    .info h3 {
-        font-size: 1.3rem;
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        min-height: calc(1.4rem * 3);
     }
 
-    .info p {
-        font-size: 1.5rem;
-        line-height: 30px;
-    }
+    
+
+    .info h3 { font-size: 1.3rem; }
+    .info p { font-size: 1.5rem; line-height: 30px; }
 }
 
 @media (min-width: 1600px) {
 
-    .slideshow,
-    .slideshow .slides {
-        width: 885px;
-        max-width: 885px;
-        margin-left: auto;
-        margin-right: auto;
-        
+    .slideshow, .slideshow .slides {
+        width: 885px; max-width: 885px;
+        margin-left: auto; margin-right: auto;
     }
 
-    .slideshow .thumb {
-        width: 100%;
-        height: 800px;
+    .slideshow .thumb { width: 100%; height: 800px; }
+    .slideshow .thumb img { width: 100%;height: 100%;object-fit: cover; }
+    .slideshow .badge-sale { padding: 12px 26px; font-size: 2.2rem; font-weight: 500; }
+
+    .card h3 { font-size: 2.4rem; margin-bottom: 15px; }
+    .card .now, .card .stars, .card .was { font-size: 1.6rem; } 
+
+    .latest-products { gap: 101px; }
+    .latest-products, .info{ max-width: 1200px; margin: 0 auto; }
+
+    .latest-products .media img { max-width: 270px; }
+
+    .latest-products .media > h3,
+    .latest-products .media > .price, 
+    .latest-products .media > .stars, 
+    .latest-products .media > .btn { padding-left: 0px; font-size: 1.7rem; line-height: 35px; }
+
+    /* title clamp */
+
+    .latest-products .media h3 {
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        min-height: calc(1.4rem * 4);
     }
 
-    .slideshow .thumb img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-
-    }
-
-    .slideshow img {
-        max-width: none;
-        min-height: none;
-        width: 100%;
-        height: 100%;
-    }
 
     .slideshow .mySlide, .slideshow .card {
         width: 100%;
         height: auto;
         
     }
-
-    .slideshow img {
-      
-        max-width: none;
-        max-height: none;
-        
-    }
-
-        .slideshow .badge-sale {
-        padding: 12px 26px;
-        font-size: 2.2rem;
-        font-weight: 500;
-    }
-
-    .card h3 {
-        font-size: 2.4rem;
-        margin-bottom: 15px;
-    }
-
-    .card .now, .card .stars, .card .was {
-        font-size: 1.6rem;
-    } 
-
-    .latest-products {
-        gap: 101px;
-    }
-
-    .latest-products, .info{
-        max-width: 1200px;
-        margin: 0 auto;
-
-    }
-
-    .latest-products .media img {
-        max-width: 270px;
-        max-height: 371px;
-    }
-
-    .latest-products .media > h3,
-    .latest-products .media > .price, 
-    .latest-products .media > .stars, 
-    .latest-products .media > .btn {
-        padding-left: 0px;
-        font-size: 1.7rem;
-        line-height: 35px;
-    }
-
-        .latest-products .media h3 {
-    line-height: 1.4;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    min-height: calc(1.4rem * 4);
-}
-
+    
 }
 
 
 @media (min-width: 2560px) {
 
-        .slideshow,
-    .slideshow .slides {
-        width: 985px;
-        max-width: 985px;
-        margin-left: auto;
-        margin-right: auto;
-        
+    .slideshow, .slideshow .slides {
+        width: 985px; max-width: 985px;
+        margin-left: auto; margin-right: auto;
     }
 
-    .slideshow .thumb {
-        width: 100%;
-        height: 900px;
+    .slideshow .controls button {
+    width: 80px; height: 68px;
+    font-size: 2rem;
     }
 
-    .slideshow .thumb img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+    .slideshow .thumb { width: 100%; aspect-ratio: 985 / 900; }
+    .slideshow .thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .slideshow .badge-sale { padding: 14px 28px; font-size: 2.4rem; font-weight: 500; }
 
-    }
+    .card h3 { font-size: 2.5rem; margin-bottom: 18px; }
+    .card .now, .card .stars, .card .was { font-size: 2rem; } 
 
-    .slideshow img {
-        max-width: none;
-        min-height: none;
-        width: 100%;
-        height: 100%;
-    }
 
-    .slideshow .mySlide, .slideshow .card {
-        width: 100%;
-        height: auto;
-        
-    }
-
-    .slideshow img {
-      
-        max-width: none;
-        max-height: none;
-        
-    }
-
-    .slideshow .badge-sale {
-        padding: 14px 28px;
-        font-size: 2.4rem;
-        font-weight: 500;
-    }
-
-       .card h3 {
-        font-size: 2.5rem;
-        margin-bottom: 18px;
-    }
-
-    .card .now, .card .stars, .card .was {
-        font-size: 2rem;
-    } 
-
-    .latest-products .media img {
-        width: 320px;
-        height: 380px;
-    }
-
-     .latest-products, .info {
-        max-width: 1600px;
-        margin: 0 auto;
-    }
+    .latest-products .media img { width: 320px; height: 380px; }
+    .latest-products, .info { max-width: 1600px; margin: 0 auto; }
     
 
 }
