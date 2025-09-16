@@ -225,7 +225,7 @@
 
 /* ------- Responsive rules -------- */
 
-/* Tablet */
+
 
 @media (min-width: 500px) {
     
@@ -239,6 +239,8 @@
         font-size: 1.05rem;
     }
 }
+
+/* Tablet */
 
 @media (min-width: 768px) {
     .latest-products, .info {
@@ -276,8 +278,13 @@
         margin-top: 100px;
     }
     
+    .slideshow .badge-sale {
+        padding: 4px 14px;
+        font-size: 1.3rem;
+        font-weight: 500;
+    }
 
-      .card h3 {
+    .card h3 {
         font-size: 1.4rem;
         bottom: 15px;
     }
@@ -336,6 +343,12 @@
         
     }
 
+    .slideshow .badge-sale {
+        padding: 8px 22px;
+        font-size: 1.8rem;
+        font-weight: 500;
+    }
+
     .card h3 {
         font-size: 2rem;
         margin-bottom: 15px;
@@ -358,11 +371,21 @@
     }
 
 
-    .latest-products .media > h3,
-    .latest-products .media > .price, 
-    .latest-products .media > .stars, 
-    .latest-products .media > .btn {
-        padding-left: 0px;
+    .latest-products .media h3
+     {
+        font-size: 1.5rem;
+    }
+
+    .media {
+        gap: 10px;
+    }
+
+
+    .price .now, .price .was{
+        font-size: 1.3rem; 
+    }
+
+    .stars {
         font-size: 1.5rem;
     }
 
@@ -421,6 +444,12 @@
         max-width: none;
         max-height: none;
         
+    }
+
+        .slideshow .badge-sale {
+        padding: 12px 26px;
+        font-size: 2.2rem;
+        font-weight: 500;
     }
 
     .card h3 {
@@ -500,6 +529,12 @@
         max-width: none;
         max-height: none;
         
+    }
+
+    .slideshow .badge-sale {
+        padding: 14px 28px;
+        font-size: 2.4rem;
+        font-weight: 500;
     }
 
        .card h3 {
