@@ -12,12 +12,119 @@ header {
 
 
 @media (max-width: 768px) {
+
     .logo {display: none;}
+
     .mobile-logo { 
         display: block;
         position: absolute;
         left: 0;
         top: 30%;
     }
+
     .mobile-logo img { width: 120px; height: auto;}
+}
+
+/* Container */
+
+#product-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Inside the container */
+
+.product .column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.product .media {
+    position: relative;
+    width: 390px;
+    height: 380px;
+    max-width: 100%;
+}
+
+/* Picture */
+
+.product .media img {
+    width: 390px;
+    height: 380px;
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+}
+
+/* Sales Badge */
+
+.product .media .badge-sale {
+    position: absolute;
+    top: 10px; right: 10px;
+    padding: 6px 12px;
+    border-radius: 14px 14px 6px 6px;
+    background: #3A7CA5;
+    color: #FAFAFA;
+    font-weight: 500;
+}
+
+/* Product Title */
+
+.product h1, p, .price, .tags, .rating-num, .btn, h3, .author, btn {
+    padding-left: 16px;
+}
+
+.product h1 {
+    font-family: Poppins, Roboto;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 35px;
+    letter-spacing: 0.96px;
+    display: flex;
+    width: 162px;
+    height: 100px;
+    align-items: center;
+    margin: 8px 0 0 ;
+    text-transform: none;
+}
+
+/* Reviews */
+
+.product .rating { display: flex; align-items: center; }
+.product .review-count { font-size: 0.9rem;}
+
+/* Price */
+
+.product .price {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    gap: 20px;
+    margin: 6px 0 4px ;
+    font-family: Roboto;
+    letter-spacing: 0.6px;
+    line-height: 20px;
+}
+
+.product .price .now {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+.product .price .was {
+    font-size: .9rem;
+    font-weight: 500;
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+}
+.product .price .save {
+    font-size: 0.857rem;
+    font-weight: 600;
+}
+
+.product .column-1 p {
+    font-family: Poppins;
+    font-size: 1rem;
 }

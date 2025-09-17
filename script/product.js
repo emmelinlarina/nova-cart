@@ -111,21 +111,22 @@ function renderProducts(p) {
                 <img src="${imageUrl}" alt="${imageAlt}">
                 ${saleBadge(p)}
             </div>
-<h1>${(p.title || '').toUpperCase()}</h1>
-        ${starsHTML(avg, { showNumber: true })} 
-        ${reviewCount 
-            ? `<p class="review-count">${reviewCount} review${reviewCount === 1 ? '' : 's'}</p>`
-            : '<p class="review-count">No reviews yet</p>'}
-
-            ${priceHTML(p)}
-
+        <h1>${(p.title || '').toUpperCase()}</h1>
             
+
+        ${priceHTML(p)}
+
         <div class="column-1">
                 <p>"${p.description ?? ''}"</p>
                 ${Array.isArray(p.tags) && p.tags.length 
                 ? `<ul class="tags">${p.tags.map(t => `<li>${t}</li>`).join('')}</ul>
                 `: ''}
         </div>
+
+
+            
+            
+        
             ${isLoggedIn ? `
                 <button class="btn js-add-to-cart"
                     data-product-id="${p.id}"
@@ -141,6 +142,11 @@ function renderProducts(p) {
         ${reviewCount ? `
         <section class="reviews">
             <h3>Reviews</h3>
+                ${starsHTML(avg, { showNumber: true })} 
+                            ${reviewCount 
+                                ? `<p class="review-count">${reviewCount} review${reviewCount === 1 ? '' : 's'}</p>`
+                                : '<p class="review-count">No reviews yet</p>'}
+
                 <ul class="review-list">
                     ${p.reviews.map(r => `
                         <li class="review">
