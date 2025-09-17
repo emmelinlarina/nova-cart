@@ -144,13 +144,19 @@ header {
     margin: 8px 0 10px ;
 }
 
+
+/* ----- Buttons ----- */
+
+/* tags */
+
 .product .tags {
-    display: flex; flex-wrap: wrap; gap: 6px;
+    display: flex; flex-wrap: wrap; gap: 8px;
     margin: 14px 0 0;
     margin-bottom: 20px;
 }
 
 .product .tags li {
+    padding: 4px 12px;
     background-color: #EFEFEF;
     color: #111110;
     border-radius: 999px;
@@ -158,18 +164,15 @@ header {
     font-weight: 400;
 }
 
-/* ----- Buttons ----- */
 
 /* Share */
-
-
 
 .product .btn.js-share {
     display: inline-flex;
     align-items: center;
-    padding: 3px 12px;
+    padding: 4px 12px;
     margin-bottom: 35px;
-    border-radius: 8px;
+    border-radius: 12.5px;
     border: 2px;
     font-family: Poppins;
     font-size: 1rem;
@@ -215,11 +218,101 @@ header {
 
 .message { margin: 12px 0; padding: 10px; border-radius: 6px;}
 
-.reviews {
+
+/* Reviews */
+
+
+.product .reviews {
     margin-top: 20px;
+    padding-top: 8px;
+    border-top: 1px solid #EFEFEF;
+    gap: 5px;
 }
 
+.product .reviews h3 {
+    font-family: Poppins, Roboto;
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin: 4px 0 10px;
+}
 
+.product .reviews > .rating {
+    margin: 6px 0 2px;
+}
+
+.product .reviews .review-count {
+    color: #362E27;
+    font-weight: 600;
+    font-size: .95rem;
+    margin: 0 0 14px;
+}
+
+/* List */
+
+
+.product .reviews .review {
+    bottom: 1px solid ;
+    border-radius: 12px;
+    padding: 12px 2px 14px;
+}
+
+.product .reviews .review-head {
+    font-weight: 600;
+}
+
+.product .reviews .author {
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: .3px;
+    color: #362E27;
+}
+
+.product .reviews .review-body {
+    font-family: Roboto;
+    font-size: .95rem;
+    line-height: 2;
+}
+
+/* stars */
+
+.product .rating .star {
+    position: relative;
+    display: inline-block;
+    width: 1.1rem;
+    height: 1.1rem;
+    line-height: 1;
+}
+
+.product .rating .star::before {
+    content: "★";
+    font-size: 1.1rem;
+}
+
+/* Full star */
+
+.product .rating .star.full::before {
+    color: #F8C362;
+}
+
+.product .rating .star.half::before {
+    color: transparent;
+    background: linear-gradient(90deg, #F4B400 50%, #EFEFEF 50%);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.product .rating .star.empty::before {
+    color: #EFEFEF;
+}
+
+.product .rating .rating-num {
+    margin-left: 6px;
+    font-size: 0.95rem;
+    color: #362E27;
+    font-weight: 600;
+}
 
 @media (max-width: 768px) {
 
