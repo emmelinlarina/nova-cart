@@ -178,7 +178,7 @@ function renderProducts(p) {
             btn.addEventListener("click", () => {
                 addToCart(p);
                 updateCartQuantity();
-                showMessage(inlineMsg, `${p.title} added to cart`, 'success');
+                showMessage(inlineMsg, `Added to cart`, 'success');
                 setTimeout(() => showMessage('', 'info'), 1500);
             });
         } else {

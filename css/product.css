@@ -193,7 +193,7 @@ header {
     color: #FAFAFA;
     letter-spacing: 2px;
     padding: 0 16px;
-    margin: 0 auto 45px;
+    margin: 0 auto 10px;
     border: none;
     border-radius: 15px;
     font-family: Poppins;
@@ -329,19 +329,39 @@ header {
     font-weight: 600;
 }
 
-#page-message {
-    display: inline-flex;
-    margin-top: 10px;
-    text-align: center;
-    background-color: red;
-    color: #362E27;
-    left: 50%;
-    top: 40%;
-    border-radius: 12px;
-    font-family: Poppins;
-    font-weight: 600;
-    font-size: 1rem;
+/* Success Messages */
 
+.js-inline-message {
+    margin-top: 5px;
+    text-align: center;
+    margin: 0 auto;
+    font-family: Poppins;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 12px;
+    padding: 8px 8px;
+    display: inline-flex;
+    min-width: 150px;
+    transition: opacity 0.3 ease;
+}
+
+/* Green Succes */
+
+.js-inline-message.success {
+    background: #4ABA82;
+    color: #FAFAFA;
+}
+
+/* Red Error */
+
+.js-inline-message.error {
+    background-color: #DA5D47;
+    color: #FAFAFA;
+}
+
+.js-inline-message.info {
+    background-color: #3A7CA5;
+    color: #FAFAFA;
 }
 
 /* ---- MEDIA QUIERIES ---- */
@@ -412,6 +432,10 @@ header {
         width: 300px;
         height: 70px;
         border-radius: 20px;
+    }
+
+    .js-inline-message {
+        font-size: 1rem;
     }
 }
 
