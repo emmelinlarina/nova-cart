@@ -83,10 +83,14 @@ function starsHTML(avg, { showNumber = false} = {}) {
     </div>`;
     }
    
-   function showMessage(text, kind = 'info') {
-    if (!messageBox) return;
-    messageBox.textContent = text;
-    messageBox.className = `message ${kind}`;
+   function showMessage(el, text, kind = 'info') {
+    if (!el) return;
+    el.textContent = text;
+    el.className = `js-inline-message ${kind}`;
+    setTimeout(() => { 
+        el.textContent = ''; 
+        el.className = 'js-inline-message';
+    }, 1500);
    } 
 
 function renderProducts(p) {
@@ -113,8 +117,6 @@ function renderProducts(p) {
         <h1>${(p.title || '').toUpperCase()}</h1>
             
 
-        
-
         <div class="column-1">
                 <p>"${p.description ?? ''}"</p>
                 ${Array.isArray(p.tags) && p.tags.length 
@@ -131,19 +133,18 @@ function renderProducts(p) {
         </div>
 
         
-            
-            
-        
             ${isLoggedIn ? `
                 <button class="btn js-add-to-cart"
                     data-product-id="${p.id}"
                     aria-label="Add ${p.title} to cart">
                     Buy
-                 </button>` 
+                 </button>
+                 
+                 <div class ="js-inline-message" aria-live="polite"></div>
+                 ` 
 
                  : `<a class="btn btn-outline" href="login.html">Log in to buy</a>`}
 
-                 
         </div>  
 
         ${reviewCount ? `
@@ -170,18 +171,20 @@ function renderProducts(p) {
     `;
 
     const btn = productContainer.querySelector(".js-add-to-cart");
+    const inlineMsg = productContainer.querySelector(".js-inline-message");
+    
     if (btn) {
         if (isLoggedIn) {
             btn.addEventListener("click", () => {
                 addToCart(p);
                 updateCartQuantity();
-                showMessage(`${p.title} added to cart`, 'success');
+                showMessage(inlineMsg, `${p.title} added to cart`, 'success');
                 setTimeout(() => showMessage('', 'info'), 1500);
             });
         } else {
             btn.addEventListener("click", (e) => {
                 e.preventDefault();
-                alert("Please log in to add items to cart");
+                showMessage(inlineMsg, "Please log in to add items to cart");
             });
         }
     }

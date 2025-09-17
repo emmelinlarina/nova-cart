@@ -16,7 +16,7 @@ header {
 /* Container */
 
 #product-container {
-    max-width: 730px;
+    max-width: 500px;
     margin: 0 auto;
     width: 100%;
 }
@@ -51,7 +51,7 @@ header {
 
 .product .media img {
     width: 390px;
-    height: 380px;
+    height: 390px;
     max-width: 100%;
     object-fit: cover;
     border-radius: 12px;
@@ -80,12 +80,12 @@ header {
 
 .product h1 {
     font-family: Poppins, Roboto;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    line-height: 35px;
+    line-height: 28px;
     letter-spacing: 0.96px;
     display: flex;
-    width: 300px;
+    
     height: auto;
     align-items: center;
     margin: 8px 0 0 ;
@@ -183,15 +183,26 @@ header {
 /* Buy */
 
 .product .btn.js-add-to-cart {
+    display: inline-flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
     width: 256px;
     height: 45px;
     background: #883729;
     color: #FAFAFA;
-    letter-spacing: 0.6px;
-    margin-bottom: 45px;
+    letter-spacing: 2px;
+    padding: 0 16px;
+    margin: 0 auto 45px;
+    border: none;
+    border-radius: 15px;
+    font-family: Poppins;
+    font-size: 1.25rem;
+    font-weight: 700;
 }
 
-.product .btn.js-add-to-cart:hover { filter: brightness(1.1);}
+
+.product .btn.js-add-to-cart:hover { filter: brightness(1.1); cursor: pointer;}
 
 /* Login to buy */
 
@@ -223,7 +234,8 @@ header {
 
 
 .product .reviews {
-    margin-top: 20px;
+    margin-top: 160px;
+    margin-bottom: 80px;
     padding-top: 8px;
     border-top: 1px solid #EFEFEF;
     gap: 5px;
@@ -234,7 +246,7 @@ header {
     font-size: 1.125rem;
     font-weight: 700;
     letter-spacing: 3px;
-    margin: 4px 0 10px;
+    margin: 4px 0 0;
 }
 
 .product .reviews > .rating {
@@ -246,6 +258,8 @@ header {
     font-weight: 600;
     font-size: .95rem;
     margin: 0 0 14px;
+    padding: 0 0 10px;
+    border-bottom: 1px solid #EFEFEF;
 }
 
 /* List */
@@ -255,6 +269,7 @@ header {
     bottom: 1px solid ;
     border-radius: 12px;
     padding: 12px 2px 14px;
+    
 }
 
 .product .reviews .review-head {
@@ -314,6 +329,43 @@ header {
     font-weight: 600;
 }
 
+#page-message {
+    display: inline-flex;
+    margin-top: 10px;
+    text-align: center;
+    background-color: red;
+    color: #362E27;
+    left: 50%;
+    top: 40%;
+    border-radius: 12px;
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 1rem;
+
+}
+
+/* ---- MEDIA QUIERIES ---- */
+
+/* Tablet */
+
+@media (min-width: 768px) {
+    .product h1 {
+        line-height: 25px;
+    }
+
+    .product .media {
+        width: 500px;
+        height: 400px;
+    }
+
+    .product .media img {
+        width: 500px;
+        height: 400px;
+    }
+
+}
+
+
 @media (max-width: 768px) {
 
     .logo {display: none;}
@@ -326,4 +378,47 @@ header {
     }
 
     .mobile-logo img { width: 120px; height: auto;}
+
+    }
+
+/* Desktop */
+
+@media (min-width: 1200px) {
+    #product-container {
+        max-width: 730px;
+    }
+
+     .product .media {
+        width: 730px;
+        height: 502px;
+    }
+
+    .product .media img {
+        width: 730px;
+        height: 502px;
+    }
+
+    .product h1 {
+        font-size: 2rem;
+        margin-top: 24px;
+    }
+
+    .product .reviews {
+        margin-top: 300px;
+    }
+
+    .product .btn.js-add-to-cart {
+        font-size: 1.5rem;
+        width: 300px;
+        height: 70px;
+        border-radius: 20px;
+    }
+}
+
+@media (min-width: 1600px) {
+
+   .product .reviews {
+        margin-top: 180px;
+    }
+
 }
