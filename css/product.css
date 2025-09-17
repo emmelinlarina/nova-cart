@@ -72,7 +72,7 @@ header {
 
 /* Product Title */
 
-.product h1, .product p, .product .price, .product .tags, .product .rating, .product .btn, .product h3, .product .author {
+.product h1, .product p, .product .price, .product .tags, .product .rating, .product h3, .product .author {
     max-width: 730px;
     width: 100%;
     margin: 0 auto;
@@ -86,11 +86,13 @@ header {
     letter-spacing: 0.96px;
     display: flex;
     width: 300px;
-    height: 100px;
+    height: auto;
     align-items: center;
     margin: 8px 0 0 ;
     text-transform: none;
 }
+
+/* Product Description */
 
 /* Reviews */
 
@@ -104,7 +106,7 @@ header {
     flex-direction: column;
     align-items: baseline;
     gap: 12px;
-    margin: 6px 0 4px ;
+    margin: 14px 0 14px ;
     font-family: Roboto;
     letter-spacing: 0.6px;
     line-height: 20px;
@@ -126,6 +128,13 @@ header {
     font-weight: 600;
 }
 
+.product .column-1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+
 .product .column-1 p {
     font-family: Poppins;
     font-size: 1rem;
@@ -145,21 +154,21 @@ header {
     background-color: #EFEFEF;
     color: #111110;
     border-radius: 999px;
-    padding: 4px 10px;
     font-size: 0.85rem;
     font-weight: 400;
 }
 
-/* Buttons */
+/* ----- Buttons ----- */
 
 /* Share */
 
-.product .btn {
+
+
+.product .btn.js-share {
     display: inline-flex;
-    align-items: start; 
-    height: 45px;
-    min-width: 160px;
-    padding: 0 16px;
+    align-items: center;
+    padding: 3px 12px;
+    margin-bottom: 35px;
     border-radius: 8px;
     border: 2px;
     font-family: Poppins;
@@ -176,6 +185,7 @@ header {
     background: #883729;
     color: #FAFAFA;
     letter-spacing: 0.6px;
+    margin-bottom: 45px;
 }
 
 .product .btn.js-add-to-cart:hover { filter: brightness(1.1);}
@@ -183,9 +193,22 @@ header {
 /* Login to buy */
 
 .product .btn.btn-outline {
-    background-color: transparent;
-    color: #3A7CA5;
-    
+    background-color: #F8C362;
+    color: #362E27;
+}
+
+.product .btn.btn-outline[href="login.html"] {
+    display: flex;
+    width: 256px;
+    height: 45px;
+    margin: 0 auto 45px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    background-color: #D8EAF0;
+    color: #362E27;
+    font-weight: 700;
 }
 
 .product .btn.btn-outline:hover{ background: #E6F1F7; }

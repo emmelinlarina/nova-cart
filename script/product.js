@@ -49,7 +49,6 @@ function priceHTML(p) {
             <div class="price">
                 <span class="now">${money.format(p.discountedPrice)}</span>
                 <span class="was" aria-label="was price">${money.format(p.price)}</span>
-                <span class="save">Save ${money.format(save)}</span>
             </div>`;
         }
 
@@ -114,16 +113,24 @@ function renderProducts(p) {
         <h1>${(p.title || '').toUpperCase()}</h1>
             
 
-        ${priceHTML(p)}
+        
 
         <div class="column-1">
                 <p>"${p.description ?? ''}"</p>
                 ${Array.isArray(p.tags) && p.tags.length 
-                ? `<ul class="tags">${p.tags.map(t => `<li>${t}</li>`).join('')}</ul>
+                ? `
+
+                ${priceHTML(p)}
+
+                <ul class="tags">${p.tags.map(t => `<li>${t}</li>`).join('')}
+                
+                </ul>
                 `: ''}
+
+                <button class="btn btn-outline js-share" aria-label="Copy product link">Share</button>
         </div>
 
-
+        
             
             
         
@@ -136,7 +143,7 @@ function renderProducts(p) {
 
                  : `<a class="btn btn-outline" href="login.html">Log in to buy</a>`}
 
-                 <button class="btn btn-outline js-share" aria-label="Copy product link">Share</button>
+                 
         </div>  
 
         ${reviewCount ? `
