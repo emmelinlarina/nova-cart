@@ -67,7 +67,11 @@
 
 
     <main class="auth">
-        <h1>Log in</h1>
+
+        <div class="auth-brand">
+            <img src="images/logo/NovaCart_Ring.png" alt="NovaCart Logo" class="auth-logo">
+            <h1 class="auth-heading">Welcome Back!</h1>
+        </div>
 
         <section class="auth-card">
             <form id="login-form" class="auth-form" novalidate>
@@ -82,13 +86,13 @@
                 </label>
 
                 <button class="btn btn-primary" type="submit">Log in</button>
-                <p class="form-msg" id="login-msg" aria-live="polite"></p>
             </form>
         </section>
 
+        <p class="form-msg" id="login-msg" aria-live="polite"></p>
         <p class="auth-switch">
             Don't have an account?
-            <a href="register.html">Register</a>
+            <a href="register.html">Register here</a>
         </p>
     </main>
 
