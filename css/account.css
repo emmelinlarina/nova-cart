@@ -185,6 +185,39 @@ form {
     background-color: #DA5D47;
 }
 
+/* Toggle Password */
+
+.password-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-field input {
+    width: 100%;
+    padding-right: 44px;
+    box-sizing: border-box;
+}
+
+.toggle-pw {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 8px;
+    color: #A09C97;
+    font-size: .87rem;
+}
+
+.toggle-pw:hover {
+    cursor: pointer;
+    color: #343434;
+}
+
+/* ---- MEDIA QUERIES ---- */
+
+/* Tablet */
+
 @media (min-width: 769px) {
     .logo img {visibility: visible; }
 
@@ -194,6 +227,8 @@ form {
     
     }
 }
+
+/* Desktop */
 
 @media (min-width: 1024px) {
 

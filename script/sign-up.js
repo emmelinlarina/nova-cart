@@ -1,4 +1,5 @@
 import { saveUser } from "./utils/storage.js";
+import { initPasswordToggleScoped } from "./log-in.js";
 
 const form = document.getElementById("register-form");
 const msg = document.getElementById("register-msg");
@@ -87,3 +88,5 @@ form.addEventListener("submit", async (e) => {
         }
     }
 });
+
+initPasswordToggleScoped('.password-field');
