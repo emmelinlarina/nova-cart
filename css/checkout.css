@@ -32,7 +32,6 @@
     display: grid;
     grid-template-columns: 100px 1fr auto;
     grid-template-rows: auto auto auto;
-    column-gap: 43px;
     row-gap: 8px;
     min-height: 140px;
     
