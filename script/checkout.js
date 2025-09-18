@@ -67,7 +67,6 @@ function render() {
 
     if (!cart.length) {
         shopWrap.innerHTML = `
-        <h1>Your Cart</h1>
         <section class="empty-cart-message">
             <h2>Empty cart!</h2>
             <a class="btn" href="index.html">Continue shopping</a>
@@ -79,7 +78,7 @@ function render() {
     }
 
     const rows = cart.map(itemHTML).join("");
-    shopWrap.innerHTML = `<h1>Your cart</h1>${rows}`;
+    shopWrap.innerHTML = `<h1>Your Cart</h1>${rows}`;
 
     wire();
     renderTotals();

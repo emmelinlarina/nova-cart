@@ -12,8 +12,8 @@ function rowHTML({ p, q }) {
     <article class="cart-row" data-id="${p.id}">
     <img class="cart-thumb" src="${p.image.url}" alt="${p.image.alt}">
         <div class="cart-info">
-            <h3>${p.title}</h3>
             <div class="cart-price">
+            <h3>${p.title}</h3>
                 ${p.discountedPrice && p.discountedPrice < p.price
                     ? `<span class="now">${money.format(p.discountedPrice)}</span>
                         <span class="was">${money.format(p.price)}</span>`

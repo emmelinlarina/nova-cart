@@ -2,28 +2,132 @@
 
 .logo img {visibility: visible; }
 
+
 .checkout-grid {
+    width: 100%;
+    max-width: 506px;
+    margin: 0 auto;
+    padding: 16px;
     display: grid;
-    gap: 24px;
-    grid-template-columns: 1.2fr 1fr;
-    padding: 24px 16px;
-}
-@media (max-width: 900px) {
-    .checkout-grid { grid-template-columns: 1fr; }
+    gap: 16px;
 }
 
+.shop, .order-summary, .checkout-form {
+    
+    padding: 16px;
+}
+
+.shop > h1 {
+    font-size: 1.5rem;
+    margin: 0 0 10px;
+}
+
+.content {
+    min-height: 300px;
+    background-color: #D8EAF0; border-radius: 15px;
+    padding: 20px;
+}
+
+.shop .box .content {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    grid-template-rows: auto auto auto;
+    column-gap: 43px;
+    row-gap: 8px;
+    min-height: 140px;
+    
+}
+.shop .box + .box {margin-top: 12px;}
+
+.shop .box img {
+    grid-row: 1 / span 4;
+    width: 100px; height: 100px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.shop .box h3 {
+    grid-column: 2;
+    margin: 0 0 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.shop .box .price {
+    grid-column: 2;
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    font-size: 0.85rem;
+}
+
+.shop .box .price, .shop .box h3, .btn2 { padding-left: 20px;}
+
+.shop .box .price .now { font-weight: 700; }
+.shop .box .price .was { text-decoration: line-through;}
+
+.shop .box .qty {
+    grid-column: 2;
+    justify-self: end;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 0.95rem; font-family: Poppins;
+}
+
+.shop .box .qty button {
+    background-color: transparent;
+    width: 28px; height: 28px;
+    border: none; border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.87rem;
+    
+}
+
+.qty-val {
+    min-width: 26px; height: 26px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.87rem;
+    background-color: #FAFAFA;
+    border-radius: 6px;
+}
+
+.shop .box .btn-area {
+    grid-column: 2;
+    margin-top: 6px;
+}
+
+.shop .box .btn2 {
+    display: inline-flex; gap: 6px; align-items: center;
+    font-size: 0.87rem; font-weight: 600;
+}
+
+.order-summary h2 { margin: 0 0 8px;}
+.order-summary p {
+    display: flex; justify-content: space-between; margin: 6px 0;
+}
+
+.order-summary .total { font-weight: 800; }
+
+
+
 .checkout-form {
-    margin-top: 16px;
+    margin-top: 0;
     display: grid;
     gap: 14px;
 }
 
-.field input {
-    height: 42px;
-    padding: 0 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+.field .label {
+    display: block;
+    margin-bottom: 6px;
 }
+
+.field input {
+    width: 100%;
+    height: 42px; padding: 0 10px;
+}
+
+
 
 .error-msg {
     min-height: 1.1rem;
