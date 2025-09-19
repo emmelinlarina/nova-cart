@@ -49,6 +49,7 @@ function itemHTML({ p, q }) {
     </div>
     </div>
     `;
+    
 }
 
 function renderTotals() {
@@ -72,6 +73,9 @@ function render() {
             <a class="btn" href="index.html">Continue shopping</a>
         </section>
         `;
+
+        document.querySelector(".cart-actions")?.remove();
+
         renderTotals();
         updateCartQuantity();
         return;
@@ -117,9 +121,11 @@ function wire() {
         });
     });
 
-    rightBar.querySelector(".js-clear")?.addEventListener("click", () => {
-        clearCart();
-        render();
+    document.querySelectorAll(".js-clear").forEach(btn => {
+        btn.addEventListener("click", () => {
+            clearCart();
+            render();
+        });
     });
 }
 

@@ -14,7 +14,7 @@
 
 .shop, .order-summary, .checkout-form {
     
-    padding: 16px;
+    padding: 20px;
 }
 
 .shop > h1 {
@@ -103,7 +103,7 @@
 .shop .box .btn-area {
     grid-column: 2;
     justify-self: end;
-    
+    cursor: pointer;
     margin-top: 6px;
 }
 
@@ -113,16 +113,37 @@
     
 }
 
+/* ---- Order summary ---- */
 
-
-.order-summary h2 { margin: 0 0 8px;}
-.order-summary p {
-    display: flex; justify-content: space-between; margin: 6px 0;
+.order-summary {
+    display: grid;
 }
+
+.checkout-grid h2 { margin: 0 0 10px; padding-left: 10px;}
+.order-summary p { display: flex; justify-content: space-between; margin: 8px 0; }
 
 .order-summary .total { font-weight: 800; }
 
+.order-summary p {
+    padding-left: 4px;
+}
 
+.cart-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -40px;
+    padding-right: 30px;
+
+}
+
+.cart-actions .btn {
+    color: #362E27;
+    border: none;
+    background-color: transparent;
+    font-family: poppins;
+    font-weight: 500;
+    cursor: pointer;
+}
 
 .checkout-form {
     margin-top: 0;
