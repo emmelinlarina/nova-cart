@@ -93,57 +93,54 @@
 
             <div id="totals"></div>
 
+
             <form id="checkout-form" class="checkout-form" novalidate>
                 <h2>Delivery</h2>
 
                 <label class="field">
-                    <span class="label">Full name</span>
-                    <input type="text" name="fullName" required />
+                    <input type="text" name="fullName" placeholder="Full name" required />
                     <span class="error-msg" aria-live="polite"></span>
                 </label>
 
                 <label class="field">
-                    <span class="label">Email</span>
-                    <input type="text" name="email" required />
+                    <input type="text" name="email" placeholder="Email" required />
                     <span class="error-msg" aria-live="polite"></span>
                 </label>
 
                 <label class="field">
-                    <span class="label">Address</span>
-                    <input type="text" name="address" required />
+                    <input type="text" name="address" placeholder="Address" required />
                     <span class="error-msg" aria-live="polite"></span>
                 </label>
 
                 <div class="grid-2">
                     <label class="field">
-                        <span class="label">City</span>
-                        <input type="text" name="city" required />
+                        <input type="text" name="city" placeholder="City" required />
                         <span class="error-msg" aria-live="polite"></span>
                     </label>
 
                     <label class="field">
-                        <span class="label">Postal code</span>
-                        <input type="text" name="postal" required />
+                        <input type="text" name="postal" placeholder="Postal code" required />
                         <span class="error-msg" aria-live="polite"></span>
                     </label>
                 </div>
 
                 <label class="field">
-                    <span class="label">Country</span>
-                    <input type="text" name="country" required />
+                    <input type="text" name="country" placeholder="Country" required />
                     <span class="error-msg" aria-live="polite"></span>
                 </label>
 
                 <h2>Payment</h2>
                 <fieldset class="pay-methods">
                     <label> <input type="radio" name="payment" value="card" checked>Card</label>
-                    <label> <input type="radio" name="payment" value="vipps" checked>Vipps (demo)</label>
-                    <label> <input type="radio" name="payment" value="paypal" checked>Paypal (demo)</label>
+                    <label> <input type="radio" name="payment" value="vipps" checked>Vipps </label>
+                    <label> <input type="radio" name="payment" value="paypal" checked>Paypal </label>
                 </fieldset>
 
-                <button id="pay-btn" class="btn btn-primary" type="submit">Pay now</button>
-                <p id="checkout-msg" class="form-msg" aria-live="polite"></p>
+
             </form>
+            <button id="pay-btn" class="btn btn-primary" type="submit">Pay</button>
+            <p id="checkout-msg" class="form-msg" aria-live="polite"></p>
+
         </aside>
     </main>
 

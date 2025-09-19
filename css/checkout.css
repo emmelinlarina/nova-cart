@@ -160,8 +160,10 @@
 }
 
 .field input {
+    font-family: Roboto;
+    font-size: .87rem;
     width: 100%;
-    height: 42px; padding: 0 10px;
+    height: 50px; padding: 0 10px;
 }
 
 
@@ -179,7 +181,7 @@
 .checkout-form {
     background-color: #EFEFEF;
     display: grid;
-    gap: 14px;
+    gap: 25px;
     max-width: 506px;
     width: 100%;
     margin: 0 auto;
@@ -211,14 +213,22 @@
 
 .pay-methods { 
     display: flex;
+    justify-content: center;
     gap: 12px;
+    border: none;
 }
 
 .btn-primary {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 180px; height: 45px; border-radius: 15px;
-    background: #362E27; color: #fff; border: 0; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin: 60px auto; padding: 10px 30px 10px 30px;
+    
+    width: 196px; height: 45px; border-radius: 15px; font-size: 1.5rem;
+    background: #883729; color: #fff; border: 0; font-weight: 700;
 } 
+
+.btn-primary:hover {
+    filter: brightness(1.1); cursor: pointer;
+}
 
 .form-msg.info { color: #555;}
 .form-msg.success { color: #1a7f37;}
