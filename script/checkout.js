@@ -162,13 +162,13 @@ form.addEventListener("submit", (e) => {
     const fd = new FormData(form);
     const val = (name) => (fd.get(name) ?? "").toString().trim();
 
-    const fullName = fd.get("fullName").trim();
-    const email = fd.get("email").trim();
-    const address = fd.get("address").trim();
-    const city = fd.get("city").trim();
-    const postal = fd.get("postal").trim();
-    const country = fd.get("country").trim();
-    const payment = fd.get("payment").trim();
+    const fullName = val("fullName").trim();
+    const email = val("email").trim();
+    const address = val("address").trim();
+    const city = val("city").trim();
+    const postal = val("postal").trim();
+    const country = val("country").trim();
+    const payment = val("payment").trim();
 
     let ok = true;
 
