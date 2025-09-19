@@ -82,7 +82,11 @@ function render() {
     }
 
     const rows = cart.map(itemHTML).join("");
-    shopWrap.innerHTML = `<h1>Your Cart</h1>${rows}`;
+    shopWrap.innerHTML = `
+    <img src="images/logo/NovaCart_brown_cropped.png" alt="Novacart logo" class="cart-logo">
+    <h1>Your Cart</h1>${rows}` 
+    ;
+    
 
     wire();
     renderTotals();
