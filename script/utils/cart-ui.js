@@ -44,17 +44,18 @@ const shellHTML = () => `
 
         <div class="cart-actions" style="display:none">
             <button type="button" class="btn btn-outline js-clear">Clear cart</button>
-            <a class="btn" href="checkout.html">Checkout</a>
         </div>
 
 
         <aside class="right-bar js-right-bar">
+        
             <h2>Summary</h2>
             <section class="order-summary">
                 <p><span>Subtotal</span><span class="js-subtotal">$0.00</span></p>
                 <p><span>Savings</span><span class="js-savings">$0.00</span></p>
                 <p class="total"><span>Total</span><span class="js-total">$0.00</span></p>
             </section>
+            <a class="btn checkout-btn" href="checkout.html">Continue to Checkout</a>
         </aside>
     </div>                           
 `;

@@ -234,6 +234,31 @@
     filter: brightness(1.1); cursor: pointer;
 }
 
+/* Continue to checkout btn */
+
+.checkout-btn {
+    display: flex; align-items: center; justify-content: center;
+    margin: 61px auto; 
+    padding: 25px;
+
+    width: 100%;
+    max-width: 253px;
+    height: 69px;
+    border-radius: 15px;
+
+    background-color: #224665;
+    color: #FFFFFF;
+    
+    text-align: center;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 25px; 
+    
+
+}
+
 .form-msg {
     margin: 16px auto;
     font-size: 0.95em;
