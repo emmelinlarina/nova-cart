@@ -33,8 +33,9 @@ const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD
 
     const user = localStorage.getItem("user");
     const g = document.querySelector(".js-greeting");
-    if (g && user) g.textContent = `Thank you for your order, ${user}!`;
-    
+    if (g) {
+        g.textContent = user ? `Thank you for your order, ${user}!` : `Thank you for your order!`;
+    }
 
     updateCartQuantity?.();
 
