@@ -4,6 +4,8 @@ const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD
 
 const wrap = document.querySelector("main");
 
+document.body.classList.add("cart-page");
+
 const itemHTML = ({ p, q }) => {
     const hasDiscount = p.discountedPrice && p.discountedPrice < p.price;
     return `

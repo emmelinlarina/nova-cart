@@ -2,4 +2,6 @@
 
 .logo img {visibility: visible; }
 
-
+.cart-page .content, .cart-page .order-summary {
+    background-color: #D8EAF0;
+}
