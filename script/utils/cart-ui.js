@@ -1,112 +1,150 @@
-import { getCart, setQuantity, removeOne, clearCart, computeTotals, updateCartQuantity,} from "../cart.js";
+import { getCart, setQuantity, clearCart, computeTotals, updateCartQuantity,} from "../cart.js";
 
 const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD"});
 
 const wrap = document.querySelector("main");
 
-function rowHTML({ p, q }) {
-    const unit = p.discountedPrice || p.price;
-    const line = unit * q;
-
+const itemHTML = ({ p, q }) => {
+    const hasDiscount = p.discountedPrice && p.discountedPrice < p.price;
     return `
-    <article class="cart-row" data-id="${p.id}">
-    <img class="cart-thumb" src="${p.image.url}" alt="${p.image.alt}">
-        <div class="cart-info">
-            <div class="cart-price">
+
+    <div class="box js-cart-item-container-${p.id}">
+        <div class="content">
+            <img src="${p.image.url}" alt="${p.image.alt}">
             <h3>${p.title}</h3>
-                ${p.discountedPrice && p.discountedPrice < p.price
+
+            <div class="price">
+                ${
+                    hasDiscount
                     ? `<span class="now">${money.format(p.discountedPrice)}</span>
                         <span class="was">${money.format(p.price)}</span>`
                        : `<span class="now">${money.format(p.price)}</span>`
                 }
             </div>
-            <div class="cart-qty">
-                <button class="qty-dec" aria-label="Decrease quantity">-</button>
-                <input class="qty-input" type="number" min="1" value="${q}">
-                <button class="qty-inc" aria-label="Increase quantity">+</button>
-                <button class="row-remove btn-link" >Remove</button>
+
+            <div class="qty">
+                <button class="qty-dec" data-id="${p.id}" aria-label="Decrease">-</button>
+                <span class="qty-val">${q}</span>
+                <button class="qty-inc" data-id="${p.id}" aria-label="Increase">+</button>
             </div>
+
+            <p class="btn-area">
+                <span class="btn2 js-delete-link" data-product-id="${p.id}">
+                    <i class="fa-solid fa-trash"></i> Remove
+                </span>
+             </p>
         </div>
-        <div class="cart-line">${money.format(line)}</div>
-    </article>
+    </div>
     `;
-}
+};
 
-function totalsHTML(t) {
-    return `
-        <section class="cart-totals">
-            <div><span>Subtotal</span><span>${money.format(t.original)}</span></div>
-            <div><span>Savings</span><span>${money.format(t.savings)}</span></div>
-            <div class="cart-actions">
-                <button class="btn btn-outline js-clear">Clear cart</button>
-                <a class="btn" href="checkout.html">Checkout</a>
-            </div>
-        </section>
-    `;
-}
+const shellHTML = () => `
+    <div class="checkout-grid">
+        <section class="shop js-shop"></section>
 
-function emptyHTML() {
-    return `
-    <section class="cart-empty">
-        <p>Your cart is empty</p>
-        <a class="btn" href="index.html">Continue Shopping</a>
+        <div class="cart-actions" style="display:none">
+            <button type="button" class="btn btn-outline js-clear">Clear cart</button>
+            <a class="btn" href="checkout.html">Checkout</a>
+        </div>
+
+
+        <aside class="right-bar js-right-bar">
+            <h2>Summary</h2>
+            <section class="order-summary">
+                <p><span>Subtotal</span><span class="js-subtotal">$0.00</span></p>
+                <p><span>Savings</span><span class="js-savings">$0.00</span></p>
+                <p class="total"><span>Total</span><span class="js-total">$0.00</span></p>
+            </section>
+        </aside>
+    </div>                           
+`;
+
+const emptyHTML = () => `
+    <section class="empty-cart-message">
+        <h2>Empty Cart!</h2>
+        <a class="btn href="index.html">Continue Shopping</a>
     </section>
-    `;
+`;
+
+function renderTotals() {
+    const t = computeTotals();
+    const rb = document.querySelector(".js-right-bar");
+    if (!rb) return;
+    const set = (sel, v) => {
+        const el = rb.querySelector(sel);
+        if (el) el.textContent = money.format(v);
+    };
+
+    set(".js-subtotal", t.original);
+    set(".js-savings", t.savings);
+    set(".js-total", t.pay);
 }
 
-function render() {
+
+function wire() {
+
+    document.querySelectorAll(".js-delete-link").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            setQuantity(btn.dataset.productId, 0);
+            render();
+        });
+    });
+
+    // controls 
+
+    document.querySelectorAll(".qty-inc").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const id = btn.dataset.id;
+            const val = btn.closest(".content").querySelector(".qty-val");
+            const next = Number(val.textContent || 1) + 1;
+            setQuantity(id, next);
+            render();
+        });
+    });
+
+    document.querySelectorAll(".qty-dec").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const id = btn.dataset.id;
+            const val = btn.closest(".content").querySelector(".qty-val");
+            const next = Number(val.textContent || 1) - 1;
+            setQuantity(id, next);
+            render();
+        });
+    });
+
+    document.querySelector(".js-clear")?.addEventListener("click", () => {
+        clearCart();
+        render();
+    });
+}
+
+export function render() {
+    if (document.querySelector(".checkout-grid")) {
+        wrap.innerHTML = shellHTML();
+    }
+
+    const shop = document.querySelector(".js-shop");
+    const actions = document.querySelector(".cart-actions");
     const items = getCart();
+
     if (!items.length) {
-        wrap.innerHTML = emptyHTML();
+        shop.innerHTML = emptyHTML();
+        actions.style.display = "none";
+        renderTotals();
         updateCartQuantity();
         return;
     }
 
-    const rows = items.map(rowHTML).join("");
-    const totals = computeTotals();
-
-    wrap.innerHTML = `
-    <section class="cart">
-        <h1>Your cart</h1>
-        <div class="cart-list">${rows}</div>
-        ${totalsHTML(totals)}
-    </section>
+    actions.style.display = "flex";
+    shop.innerHTML = `
+        <img src="images/logo/NovaCart_brown_cropped.png" alt="NovaCart logo" class="cart-logo">
+        <h1>Your Cart</h1>
+        ${items.map(itemHTML).join("")}
     `;
 
     wire();
+    renderTotals();
     updateCartQuantity();
-}
-
-function wire() {
-    wrap.querySelectorAll(".cart-row").forEach((row) => {
-        const id = row.dataset.id;
-        const input = row.querySelector(".qty-input");
-
-    row.querySelector(".qty-inc").addEventListener("click", () => {
-        setQuantity(id, Number(input.value || 1) +1);
-        render();
-    });
-
-    row.querySelector(".qty-dec").addEventListener("click", () => {
-        setQuantity(id, Number(input.value || 1) -1);
-        render();
-    });
-
-    input.addEventListener("change", () => {
-        setQuantity(id, Math.max(1, Number(input.value || 1)));
-        render();
-    });
-
-    row.querySelector(".row-remove").addEventListener("click", () => {
-        setQuantity(id, 0);
-        render();
-    });
-});
-
-wrap.querySelector(".js-clear")?.addEventListener("click", () => {
-    clearCart();
-    render();
-    });
 }
 
 render();
