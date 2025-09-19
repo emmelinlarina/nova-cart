@@ -7,14 +7,13 @@
     width: 100%;
     max-width: 506px;
     margin: 0 auto;
-    padding: 16px;
     display: grid;
     gap: 16px;
 }
 
 .shop, .order-summary, .checkout-form {
     
-    padding: 20px;
+    padding: 10px;
 }
 
 .shop > h1 {
@@ -23,8 +22,8 @@
 }
 
 .content {
-    min-height: 300px;
-    background-color: #D8EAF0; border-radius: 15px;
+
+    background-color: #EFEFEF; border-radius: 15px;
     padding: 20px;
 }
 
@@ -115,14 +114,23 @@
 
 /* ---- Order summary ---- */
 
+.right-bar {
+    width: 100%;
+    max-width: 506px;
+    margin: 0 auto;
+}
+
 .order-summary {
     display: grid;
+    width: 100%;
+    max-width: 506px;
+    display: grid; background-color: #EFEFEF; border-radius: 15px;
+    margin: 0 auto;
+    
 }
 
 .checkout-grid h2 { margin: 0 0 10px; padding-left: 10px;}
 .order-summary p { display: flex; justify-content: space-between; margin: 8px 0; }
-
-.order-summary .total { font-weight: 800; }
 
 .order-summary p {
     padding-left: 4px;
@@ -131,9 +139,9 @@
 .cart-actions {
     display: flex;
     justify-content: flex-end;
-    margin-top: -40px;
+    margin-top: -20px;
     padding-right: 30px;
-
+    max-width: 320 px;
 }
 
 .cart-actions .btn {
@@ -145,11 +153,6 @@
     cursor: pointer;
 }
 
-.checkout-form {
-    margin-top: 0;
-    display: grid;
-    gap: 14px;
-}
 
 .field .label {
     display: block;
@@ -161,18 +164,33 @@
     height: 42px; padding: 0 10px;
 }
 
-.order-summary {
-    background-color: #D8EAF0; border-radius: 15px;
+
+
+.order-summary .total {
+    display: flex;
+    justify-content: space-between;
+    background-color: #FAFAFA; border-radius: 8px;
+    font-weight: 700;
+    padding: 10px;
 }
 
-.total {
-    background-color: #FAFAFACC; border-radius: 8px;
-    min-width: 256px;
-    min-height: 46px;
-    align-items: center;
-    padding: 0 10px 0 10px;
+/* Delivery / Payment */
+
+.checkout-form {
+    background-color: #EFEFEF;
+    display: grid;
+    gap: 14px;
+    max-width: 506px;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 50px;
+    border-radius: 15px;
 }
 
+.field input {
+    background-color:#FAFAFA ;
+    border-radius: 5px;
+}
 
 .error-msg {
     min-height: 1.1rem;
