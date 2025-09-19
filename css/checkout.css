@@ -192,18 +192,20 @@
 }
 
 .field input {
+    border: 2px solid #FAFAFA;
     background-color:#FAFAFA ;
     border-radius: 5px;
 }
 
 .error-msg {
     min-height: 1.1rem;
-    font-size: 0.8rem;
+    font-size: 0.87rem;
+    font-weight: 500;
     color: #DA5D47;
     display: none;
 }
 
-.is-invalid { 
+.field input.is-invalid { 
     border-color: #DA5D47;
 }
 
@@ -232,9 +234,21 @@
     filter: brightness(1.1); cursor: pointer;
 }
 
+.form-msg {
+    margin: 16px auto;
+    font-size: 0.95em;
+    font-weight: 700;
+    text-align: center;
+    display: inline-block;
+
+}
 .form-msg.info { color: #3A7CA5;}
 .form-msg.success { color: #4ABA82;}
 .form-msg.error { color: #DA5D47;}
+
+.field input:-webkit-autofill, .field input:-webkit-autofill:hover, .field input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px #FAFAFA inset !important;
+}
 
 @media (min-width: 768px) {
 

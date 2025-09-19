@@ -160,6 +160,8 @@ form.addEventListener("submit", (e) => {
     clearFieldErrors();
 
     const fd = new FormData(form);
+    const val = (name) => (fd.get(name) ?? "").toString().trim();
+
     const fullName = fd.get("fullName").trim();
     const email = fd.get("email").trim();
     const address = fd.get("address").trim();
@@ -179,25 +181,36 @@ form.addEventListener("submit", (e) => {
 
     if (!ok) return;
 
-    formMsg.textContent = "Processing payment"
+    const payBtn = document.querySelector("#pay-btn");
+    payBtn?.setAttribute("disabled", "true");
+    payBtn?.classList.add("is-loading");
+
+    formMsg.textContent = "Processing payment..."
     formMsg.className = "form-msg info"
 
-    setTimeout(() => {
+    form.querySelectorAll("input, button, fieldset").forEach(el => {
+        if (el.id !== "pay-btn") el.setAttribute("disabled", "true");
+    });
 
-        const t = computeTotals();
+    setTimeout(() => {
+    const t = computeTotals();
+
+        formMsg.textContent = "Success! Redirecting...";
+        formMsg.className = "form-msg success";
         
         sessionStorage.setItem("nc_last_order",
             JSON.stringify({
             total: t.pay || 0, 
             count: t.count || 0, 
             email: email || localStorage.getItem("email") || ""
-        })
-    );
+        }));
 
         clearCart();
         updateCartQuantity();
-        location.href = "success.html";
-    }, 800);
+
+        setTimeout(() => {
+             location.href = "success.html";
+        }, 400); }, 900);
 });
 
 render();
