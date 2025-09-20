@@ -114,6 +114,25 @@
     
 }
 
+/* Empty cart */
+
+.empty-cart-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 60px 0 50px;
+    gap: 40px;
+}
+
+.empty-cart-message .btn {
+    background-color: #224665;
+    padding: 12px;
+    color: #FFFFFF;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
 /* ---- Order summary ---- */
 
 .right-bar {

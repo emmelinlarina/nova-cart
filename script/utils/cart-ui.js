@@ -65,7 +65,7 @@ const shellHTML = () => `
 const emptyHTML = () => `
     <section class="empty-cart-message">
         <h2>Empty Cart!</h2>
-        <a class="btn href="index.html">Continue Shopping</a>
+        <a class="btn" href="index.html">Continue Shopping</a>
     </section>
 `;
 
@@ -128,17 +128,24 @@ export function render() {
 
     const shop = document.querySelector(".js-shop");
     const actions = document.querySelector(".cart-actions");
+    const rightBar = document.querySelector(".js-right-bar");
+    const checkoutBtn = document.querySelector(".checkout-btn");
     const items = getCart();
 
     if (!items.length) {
         shop.innerHTML = emptyHTML();
-        actions.style.display = "none";
+        if (actions) actions.style.display = "none";
+        if (rightBar) rightBar.style.display = "none";
+        if (checkoutBtn) checkoutBtn.style.display = "none";
         renderTotals();
         updateCartQuantity();
         return;
     }
 
-    actions.style.display = "flex";
+    if (actions) actions.style.display = "flex";
+    if (rightBar) rightBar.style.display = "";
+    if (checkoutBtn) checkoutBtn.style.display = "";
+
     shop.innerHTML = `
         <img src="images/logo/NovaCart_brown_cropped.png" alt="NovaCart logo" class="cart-logo">
         <h1>Your Cart</h1>
