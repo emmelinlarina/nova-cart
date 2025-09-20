@@ -2,10 +2,114 @@ import {getCart, setQuantity, computeTotals, clearCart, updateCartQuantity} from
 
 const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD"});
 
-const shopWrap = document.querySelector(".js-shop");
-const rightBar = document.querySelector(".js-right-bar");
-const form = document.querySelector("#checkout-form");
-const formMsg = document.querySelector("#checkout-msg");
+const q = (id) => document.getElementById(id);
+function getApp() {
+    let el = document.getElementById("app");
+    if (!el) {
+        el = document.createElement("main");
+        el.id = "app";
+        document.body.insertBefore(el, document.getElementById("site-footer") || null);
+    }
+    return el;
+}
+
+function renderCheckoutShell() {
+    const app = getApp();
+    app.innerHTML = `
+    <main class="checkout-grid">
+
+        <div id="page-loader" class="page-loader" style="display:none">
+            <div class="spinner"></div>
+        </div>
+
+        <section class="shop js-shop">
+
+        </section>
+
+        <div class="cart-actions">
+            <button type="button" class="btn btn-outline js-clear">Clear cart</button>
+        </div>
+
+
+        <aside class="right-bar js-right-bar">
+            <h2>Summary</h2>
+            <section class="order-summary">
+
+                <p><span>Subtotal</span><span class="js-subtotal">$0.00</span></p>
+                <p><span>Savings</span><span class="js-savings">$0.00</span></p>
+
+                <p class="total"><span>Total</span><span class="js-total">$0.00</span></p>
+
+
+            </section>
+
+            <div id="totals"></div>
+
+
+            <form id="checkout-form" class="checkout-form" novalidate>
+                <h2>Delivery</h2>
+
+                <label class="field">
+                    <input type="text" id="fullName" name="fullName" placeholder="Full name" autocomplete="name"
+                        required />
+                    <span class="error-msg" aria-live="polite"></span>
+                </label>
+
+                <label class="field">
+                    <input type="text" id="email" name="email" placeholder="Email" autocomplete="email" required />
+                    <span class="error-msg" aria-live="polite"></span>
+                </label>
+
+                <label class="field">
+                    <input type="text" id="address" name="address" placeholder="Address" autocomplete="street-address"
+                        required />
+                    <span class="error-msg" aria-live="polite"></span>
+                </label>
+
+                <div class="grid-2">
+                    <label class="field">
+                        <input type="text" id="city" name="city" placeholder="City" autocomplete="address-level2"
+                            required />
+                        <span class="error-msg" aria-live="polite"></span>
+                    </label>
+
+                    <label class="field">
+                        <input type="text" id="postal" name="postal" placeholder="Postal code"
+                            autocomplete="postal-code" required />
+                        <span class="error-msg" aria-live="polite"></span>
+                    </label>
+                </div>
+
+                <label class="field">
+                    <input type="text" id="country" name="country" placeholder="Country" autocomplete="country-name"
+                        required />
+                    <span class="error-msg" aria-live="polite"></span>
+                </label>
+
+                <h2>Payment</h2>
+                <fieldset class="pay-methods">
+                    <label> <input type="radio" id="card" name="payment" value="card" checked>Card</label>
+                    <label> <input type="radio" id="vipps" name="payment" value="vipps" checked>Vipps </label>
+                    <label> <input type="radio" id="paypal" name="payment" value="paypal" checked>Paypal </label>
+                </fieldset>
+
+
+            </form>
+            <p id="checkout-msg" class="form-msg" aria-live="polite"></p>
+            <button id="pay-btn" class="btn btn-primary" type="submit" form="checkout-form">Pay</button>
+
+
+        </aside>
+    </main>
+    `;
+}
+
+renderCheckoutShell();
+const app = getApp();
+const shopWrap = app.querySelector(".js-shop");
+const rightBar = app.querySelector(".js-right-bar");
+const form = app.querySelector("#checkout-form");
+const formMsg = app.querySelector("#checkout-msg");
 
 try {
     const savedEmail = localStorage.getItem("email");
@@ -13,6 +117,7 @@ try {
         form.querySelector('input[name="email"]').value = savedEmail;
     } 
 } catch {}
+
 
 function itemHTML({ p, q }) {
     const hasDiscount = p.discountedPrice && p.discountedPrice < p.price;
@@ -22,34 +127,33 @@ function itemHTML({ p, q }) {
 
     return `
     <div class="box js-cart-item-container-${p.id}">
-    <div class="content">
-        <img src="${p.image.url}" alt="${p.image.alt}">
-        <h3>${p.title}</h3>
-        
-        <div class="price">
-            ${
-                hasDiscount
-                ? `<span class="now">${money.format(p.discountedPrice)}</span>
-                    <span class="was">${money.format(p.price)}</span>`
-                : `<span class="now">${money.format(p.price)}</span>`
-            }
+        <div class="content">
+                <img src="${p.image.url}" alt="${p.image.alt}">
+                <h3>${p.title}</h3>
+                
+                <div class="price">
+                    ${
+                        hasDiscount
+                        ? `<span class="now">${money.format(p.discountedPrice)}</span>
+                            <span class="was">${money.format(p.price)}</span>`
+                        : `<span class="now">${money.format(p.price)}</span>`
+                    }
+                </div>
+
+            <div class="qty">
+                <button class="qty-dec" data-id="${p.id}" aria-label="Decrease">-</button>
+                <span class="qty-val">${q}</span>
+                <button class="qty-inc" data-id="${p.id}" aria-label="Increase">+</button>
+            </div>
+
+            <p class="btn-area">
+                <span class="btn2 js-delete-link" data-product-id="${p.id}">
+                    <i class="fa-solid fa-trash"></i> Remove
+                </span>
+            </p>
         </div>
-
-    <div class="qty">
-        <button class="qty-dec" data-id="${p.id}" aria-label="Decrease">-</button>
-        <span class="qty-val">${q}</span>
-        <button class="qty-inc" data-id="${p.id}" aria-label="Increase">+</button>
-    </div>
-
-    <p class="btn-area">
-        <span class="btn2 js-delete-link" data-product-id="${p.id}">
-            <i class="fa-solid fa-trash"></i> Remove
-        </span>
-    </p>
-    </div>
     </div>
     `;
-    
 }
 
 function renderTotals() {
@@ -81,18 +185,15 @@ function render() {
         return;
     }
 
-    const rows = cart.map(itemHTML).join("");
+const rows = cart.map(itemHTML).join("");
     shopWrap.innerHTML = `
     <img src="images/logo/NovaCart_brown_cropped.png" alt="Novacart logo" class="cart-logo">
     <h1>Checkout</h1>${rows}` 
     ;
-    
 
     wire();
     renderTotals();
     updateCartQuantity();
-
-   
 
 }
 
