@@ -32,10 +32,14 @@ const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD
 
 
     const user = localStorage.getItem("user");
-    const g = document.querySelector(".js-greeting");
-    if (g) {
-        g.textContent = user ? `Thank you for your order, ${user}!` : `Thank you for your order!`;
+    const title = document.querySelector(".success-card h1");
+    
+    if (title) {
+        title.textContent = user ? `Thank you, ${user}!` : "Thank you!"
     }
+
+    const g = document.querySelector(".js-greeting");
+    if (g) g.textContent = "";
 
     updateCartQuantity?.();
 
