@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="css/utils/media.css">
     <link rel="stylesheet" href="css/account.css">
 
-    <script src="https://kit.fontawesome.com/e0e8f3b90b.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -30,46 +29,7 @@
 
     <header id="site-header"></header>
 
-
-    <main class="auth">
-
-        <div class="auth-brand">
-            <img src="images/logo/NovaCart_Ring.png" alt="NovaCart Logo" class="auth-logo">
-            <h1 class="auth-heading">Register Account</h1>
-        </div>
-
-        <section class="auth-card">
-            <form id="register-form" class="auth-form" novalidate>
-                <label class="field">
-                    <input type="text" name="name" placeholder="Name" minlength="3" required>
-                    <span class="error-msg" id="err-name" aria-live="polite"></span>
-                </label>
-
-                <label class="field">
-                    <input type="email" name="email" placeholder="Email" required>
-                    <span class="error-msg" id="err-email" aria-live="polite"></span>
-                </label>
-
-                <label class="field password-field">
-                    <input type="password" name="password" id="register-password" placeholder="Password" minlength="3"
-                        required>
-                    <button type="button" class="toggle-pw" aria-label="Show Password" aria-pressed="false"
-                        title="Show Password"> <i class="fa-solid fa-eye"></i> </button>
-                    <span class="error-msg" id="err-password" aria-live="polite"></span>
-                </label>
-
-                <button class="btn btn-primary" type="submit">Sign up</button>
-                <p class="form-msg" id="register-msg" aria-live="polite"></p>
-            </form>
-        </section>
-
-        <p class="auth-switch">
-            Already have an account?
-            <a href="login.html">Log in</a>
-        </p>
-
-    </main>
-
+    <main id="app"></main>
 
     <footer id="site-footer"></footer>
 

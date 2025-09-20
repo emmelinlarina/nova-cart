@@ -1,28 +1,38 @@
 import { saveUser } from "./utils/storage.js";
 import { initPasswordToggleScoped } from "./log-in.js";
 
-const form = document.getElementById("register-form");
-const msg = document.getElementById("register-msg");
+const q = (id) => document.getElementById(id);
 
-function clearAllFieldErrors() {
-    form.querySelectorAll(".error-msg").forEach(el => { el.textContent = ""; el.style.display = "none"; });
-    form.querySelectorAll("input").forEach(i => i.classList.remove("is-invalid"));
-}
-
-function setFieldError(name, text) {
-    const input = form.querySelector(`input[name="${name}"]`);
-    const errEl = input?.nextElementSibling;
-    if (input) input.classList.add("is-invalid");
-    if (errEl && errEl.classList.contains("error-msg")) {
-        errEl.textContent = text;
-        errEl.style.display = "block";
+function getApp() {
+    let el = document.getElementById("app");
+    if (!el) {
+        el = document.createElement("main");
+        el.id = "app";
+        document.body.insertBefore(el, document.getElementById("site-footer") || null);
     }
+    return el;
 }
 
 function setMsg(text, kind = "info") {
+    const msg = q("register-msg");
     if (!msg) return;
     msg.textContent = text;
     msg.className = `form-msg ${kind}`;
+}
+
+function showLoader(show) {
+    let loader = q("page-loader");
+    if (!loader) {
+    loader = document.createElement("div");
+    loader.id = "page-loader";
+    loader.className = "page-loader";
+    loader.style.display = "none"
+    loader.innerHTML = `<div class="spinner"></div>`;
+    getApp().prepend(loader);
+    }
+
+    loader.style.display = show ? 'grid' : 'none';
+    document.body.classList.toggle("loading", show)
 }
 
 async function register({ name, email, password }) {
@@ -39,10 +49,88 @@ async function register({ name, email, password }) {
     return data;
 }
 
-form.querySelectorAll("input").forEach(input => {
+
+function renderRegisterShell() {
+    const app = getApp();
+    app.innerHTML = `
+
+    <div id="page-loader" class="page-loader" style="display:none">
+        <div class="spinner"></div>
+    </div>
+
+    <main class="auth auth-1">
+        <div class="auth-brand">
+            <img src="images/logo/NovaCart_Ring.png" alt="NovaCart Logo" class="auth-logo">
+            <h1 class="auth-heading">Register Account</h1>
+        </div>
+
+        <section class="auth-card">
+            <form id="register-form" class="auth-form" novalidate>
+                <label class="field">
+                    <input type="text" name="name" placeholder="Name" minlength="3" required>
+                    <span class="error-msg" id="err-name" aria-live="polite"></span>
+                </label>
+
+                <label class="field">
+                    <input type="email" name="email" placeholder="Email" required>
+                    <span class="error-msg" id="err-email" aria-live="polite"></span>
+                </label>
+
+                <label class="field password-field">
+                    
+                    <input type="password" name="password" id="register-password" placeholder="Password" minlength="3"
+                        required>
+                    <button type="button" class="toggle-pw" aria-label="Show Password" aria-pressed="false"
+                        title="Show Password"> <i class="fa-solid fa-eye"></i> </button>
+                </label>
+
+                <span class="error-msg" id="err-password" aria-live="polite"></span>
+                <button class="btn btn-primary" type="submit">Sign up</button>
+                <p class="form-msg" id="register-msg" aria-live="polite"></p>
+            </form>
+        </section>
+
+        <p class="auth-switch">
+            Already have an account?
+            <a href="login.html">Log in</a>
+        </p>
+    </main>
+    `;
+}
+
+function clearAllFieldErrors(form) {
+    form.querySelectorAll(".error-msg").forEach(el => { 
+        el.textContent = "";
+        el.style.display = "none"; 
+    });
+    form.querySelectorAll("input").forEach(i => i.classList.remove("is-invalid"));
+}
+
+function setFieldError(form, name, text) {
+    const input = form.querySelector(`input[name="${name}"]`);
+
+    let errEl = input?.closest(".field")?.querySelector(".error-msg");
+    if (!errEl && input) {
+        errEl = document.createElement("span");
+        errEl.className = "error-msg";
+        errEl.setAttribute("aria-live", "polite");
+        input.insertAdjacentElement("afterend", errEl);
+    }
+    if (input) input.classList.add("is-invalid");
+    if (errEl) {
+        errEl.textContent = text;
+        errEl.style.display = "block";
+    }
+}
+
+function wireForm() {
+    const form = q("register-form");
+    if (!form) return;
+
+    form.querySelectorAll("input").forEach((input) => {
     input.addEventListener("input", () => {
         input.classList.remove("is-invalid");
-        const errEl = input.nextElementSibling;
+        const errEl = input.closest(".field")?.querySelector(".error-msg") || input.nextElementSibling;
         if (errEl && errEl.classList.contains("error-msg")) {
             errEl.textContent = "";
             errEl.style.display = "none";
@@ -50,43 +138,71 @@ form.querySelectorAll("input").forEach(input => {
     });
 });
 
+initPasswordToggleScoped('.password-field');
+
+const submitBtn = q("register-submit");
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    clearAllFieldErrors();
-    setMsg("", "info");
+    clearAllFieldErrors(form);
+    setMsg("");
+    showLoader(true);
+    if (submitBtn) submitBtn.disabled = true;
+    form.querySelectorAll("input, button").forEach((el) => el.setAttribute("disabled", "true"));
 
     const formData = new FormData(form);
     const name = (formData.get("name") || "").trim();
     const email = (formData.get("email")|| "").trim();
     const password = formData.get("password") || "";
 
+    let clientHasErrors = false;
+    if (name.length < 3) {
+        setFieldError(form, "name", "Name must be at least 3 characters");
+        clientHasErrors = true;
+    }
+    if (email.includes("@")) {
+        setFieldError(form, "email", "Please enter valid email");
+        clientHasErrors = true;
+    }
+    if (name.length < 3) {
+        setFieldError(form, "name", "Name must be at least 3 characters");
+        clientHasErrors = true;
+    }
+    if (password.length < 3) {
+        setFieldError(form, "password", "Password must be at least 3 characters");
+        clientHasErrors = true;
+    }
+    if (clientHasErrors) {
+        setMsg("Please fix the hightlighted fields", "error");
+        if (submitBtn) submitBtn.disabled = false;
+        form.querySelectorAll("input, button").forEach((el) => el.removeAttribute("disabled"));
+        showLoader(false);
+        return;
+    }
+
     try {
         const data = await register({ name, email, password });
-
         saveUser(data.data);
-
         setMsg("Account created! Redirecting...", "success");
-
         setTimeout(() => {
             location.href = "index.html";
         }, 1500);
-        
     } catch (err) {
-        clearAllFieldErrors();
-
-        const msg = (err.message || "").toLowerCase();
-
-        if (msg.includes("name")) {
-          setFieldError("name", err.message);
-        } else if (msg.includes("email")) {
-            setFieldError("email", err.message); 
-        } else if (msg.includes("password")) {
-            setFieldError("password", err.message);
-        } else {
-
-            setFieldError("password", err.message || "Registration failed");
+        const m = String(err?.message || "").toLowerCase();
+        if (m. includes("name")) setFieldError(form, "name", err.message);
+        else if (m. includes("email")) setFieldError(form, "email", err.message);
+        else if (m. includes("password")) setFieldError(form, "password", err.message);
+        else setMsg(err.message || "Registration Failed", "error");
+    } finally {
+        if (submitBtn) submitBtn.disabled = false;
+        form.querySelectorAll("input, button").forEach((el) => el.removeAttribute("disabled"));
+        showLoader(false);
         }
-    }
-});
+    });
 
-initPasswordToggleScoped('.password-field');
+}
+
+
+(function init() {
+    renderRegisterShell();
+    wireForm();
+})();

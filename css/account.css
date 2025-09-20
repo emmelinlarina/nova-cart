@@ -76,7 +76,7 @@ form {
     width: min(265px, 100%);
     display: grid;
     text-align: left;
-    gap: 22px;
+    gap: 10px;
     
 }
 
@@ -94,7 +94,7 @@ form {
     display: block;
     width: 100%;
     max-width: 100%;
-    height: 35px;
+    height: 42px;
     border-radius: 8px;
     
     box-sizing: border-box;
@@ -153,14 +153,12 @@ form {
     outline-offset: 0;
 }
 
-.error-msg {
+/* .error-msg {
     display: none;
-    margin-top: 4px;
     font-size: 0.75rem;
     color: #fff;
     background-color: #e74c3c ;
-    padding: 4px 8px;
-    border-radius: 4px;
+    border-radius: 6px;
     
     position: relative;
 }
@@ -185,12 +183,32 @@ form {
     background-color: #DA5D47;
 }
 
+/**/
+
+.auth .field { gap: 6px; }
+
+.auth .error-msg {
+    font-weight: 500;
+    min-height: 40px;
+    color: #ffffff;
+    background-color: #DA5D47;
+    display: block;
+    font-size: 0.70rem;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.auth .error-msg:empty {
+    background-color: transparent;
+}
+
 /* Toggle Password */
 
 .password-field {
-    position: relative;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    position: relative;
 }
 
 .password-field input {
@@ -207,6 +225,7 @@ form {
     right: 8px;
     color: #A09C97;
     font-size: .87rem;
+    margin-top: 2.5px;
 }
 
 .toggle-pw:hover {
@@ -223,7 +242,7 @@ form {
 
     .auth-form {
     width: min(300px, 100%);
-    gap: 25px;
+    gap: 15px;
     
     }
 }
@@ -252,7 +271,7 @@ form {
 
     .auth-form {
     width: min(420px, 100%);
-    gap: 27.5px;
+    gap: 20px;
     }
 
     .field input {
