@@ -5,11 +5,9 @@
 
     <title>Product Feed Page</title>
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-16x16.png">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="NovaCart product feed page">
-    <script src="https://kit.fontawesome.com/e0e8f3b90b.js" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="css/utils/styles.css">
     <link rel="stylesheet" href="css/utils/components.css">
@@ -22,118 +20,18 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
-
 </head>
 
 <body>
+    <header id="site-header"></header>
 
-    <header>
-        <nav>
-            <ul class="navbar">
-                <li class="logo"><a href="index.html"><img src="images/logo/NovaCart_brown_cropped.png"
-                            alt="NovaCart logo"></a>
-                </li>
+    <main id="app"></main>
 
-                <input type="checkbox" id="check" />
-                <span class="menu">
-
-                    <li>
-                        <a href="login.html" class="js-auth-link" aria-label="Log in">
-                            <i class="fa-regular fa-circle-user"></i>
-                            <span class="auth-text">Log in</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="cart.html" class="cart-link" aria-label="Open cart">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            <span class="js-cart-quantity" aria-live="polite">0</span>
-                        </a>
-                    </li>
-                    <li class="logout-li">
-                        <button class="js-logout btn-link" hidden><i class="fa-solid fa-arrow-right-from-bracket"
-                                style="color: #000000;"></i></button>
-                    </li>
-                    <label for="check" class="close-menu"><i class="fa-solid fa-xmark"></i></label>
-                </span>
-                <label for="check" class="open-menu"><i class="fa-solid fa-bars"></i></label>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-
-        <div id="page-loader">
-            <div class="spinner"></div>
-        </div>
-
-        <section class="slideshow" id="slideshow" role="region" aria-label="Featured products">
-
-            <div class="slides" aria-live="polite"></div>
-
-            <div class="controls">
-                <button class="prev" aria-label="Previous"><i class="fa-solid fa-arrow-left"></i></button>
-                <button class="next" aria-label="Next"><i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-        </section>
-
-
-        <section>
-            <div class="info">
-                <h2>Latest Products</h2>
-                <p>Browse our newest items <br> and top deals</p>
-                <h3>CATEGORY 1</h3>
-            </div>
-
-
-        </section>
-
-        <section class="latest-products">
-            <div class="grid"></div>
-        </section>
-
-
-    </main>
-
-
-    <footer>
-        <div class="row">
-            <div class="col">
-                <img src="images/logo/NovaCart_logo_cropped.png" alt="novacart logo">
-            </div>
-            <div class="col">
-                <h3><i class="fa-solid fa-map-pin"></i> Visit us</h3>
-                <p>789 Shopping Avenue, Suite 101</p>
-                <p>Selling City, SC 56789</p>
-                <p class="email-id">contact@novacart.com</p>
-                <h5>Phone: (987) 654-3210</h5>
-            </div>
-            <div class="col">
-                <h3><i class="fa-solid fa-question"></i> Help and FAQ</h3>
-                <ul>
-                    <li><a href="about.html">Shipping & Returns </a></li>
-                    <li><a href="contact.html">Contact us</a></li>
-                    <li><a href="products.html">Products</a></li>
-                    <li><a href="">FAQ</a></li>
-                </ul>
-            </div>
-            <div class="col">
-                <h3><i class="fa-solid fa-envelope"></i> Newsletter</h3>
-                <form>
-                    <input type="email" id="newsletter-email" name="newsletterEmail" placeholder="Enter your email here"
-                        autocomplete="email" required>
-                    <button type="submit"><i class="fa-solid fa-arrow-right" style="color: #ffffff;"></i></button>
-                </form>
-                <div class="social-icons">
-                    <i class="fa-brands fa-discord"></i>
-                    <i class="fa-brands fa-instagram"></i>
-                    <i class="fa-brands fa-facebook"></i>
-                    <i class="fa-brands fa-x-twitter"></i>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <footer id="site-footer"></footer>
 
     <script type="module" src="script/api/products.js"></script>
+    <script type="module" src="script/utils/site.js"></script>
+    <script type="module" src="script/utils/layout.js"></script>
     <script type="module" src="script/index.js"></script>
     <script type="module" src="script/header.js"></script>
 </body>

@@ -3,18 +3,12 @@ import { getToken } from "./utils/storage.js";
 import { fetchProducts } from "./api/products.js";
 
 const isLoggedIn = !!getToken();
-const loader = document.getElementById("page-loader");
-const latestGrid = document.querySelector(".latest-products")
 const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'});
 
-const slideShow = document.getElementById("slideshow");
-const slidesWrap = document.querySelector("#slideshow .slides")
-const prevBtn = document.querySelector("#slideshow .prev")
-const nextBtn = document.querySelector("#slideshow .next")
+const app = document.getElementById("app");
 
 const imgSrc = (p) => p?.image?.url ?? "images/fallback.png"
 const imgAlt = (p) => p?.image?.alt ?? p.title ?? "Product image"
-const price = (p) => (p.discountedPrice ?? p.price) + " $"
 
 
 function saleBadge(p) {
@@ -72,28 +66,27 @@ const slideHTML = (p, i, total) => {
     const rating = avgRating(p);
 
     return `
-    <div class="mySlide" role="group" aria-label="Slide ${i + 1} of ${total}" aria-hidden="true">
-        <a class="card" href="product.html?id=${p.id}">
-            <div class="media">
-            <div class="thumb">
-                <img src="${imgSrc(p)}" alt="${imgAlt(p)}"/>
-                ${saleBadge(p)}
-            </div>
-            
-            <h3>${p.title}</h3>
-            ${priceHTML(p)}
-            ${rating != null ? starsHTML(rating) : placeholderStarsHTML()}
-            ${isLoggedIn ? `
-            <button class="btn js-add-to-cart" 
-                    data-product-id="${p.id}"
-                    aria-label="Add ${p.title} to cart">
-                <i class="fa-solid fa-cart-shopping"></i>
-            </button>` : ``}
+        <div class="mySlide" role="group" aria-label="Slide ${i + 1} of ${total}" aria-hidden="true">
+            <a class="card" href="product.html?id=${p.id}">
+                <div class="media">
+                    <div class="thumb">
+                        <img src="${imgSrc(p)}" alt="${imgAlt(p)}"/>
+                        ${saleBadge(p)}
+                    </div>            
+                <h3>${p.title}</h3>
+                ${priceHTML(p)}
+                ${rating != null ? starsHTML(rating) : placeholderStarsHTML()}
+                                ${isLoggedIn ? `
+                <button class="btn js-add-to-cart" 
+                        data-product-id="${p.id}"
+                        aria-label="Add ${p.title} to cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </button>` : ``}
         </a>
         
+            </div>
         </div>
-    </div>
-    `; 
+        `; 
 };
 
 const cardHTML = (p) => {
@@ -102,21 +95,20 @@ const cardHTML = (p) => {
      <article class="product-card">
         <a class="card-link" href="product.html?id=${p.id}">
             <div class="media">
-            <div class="thumb">
+                <div class="thumb">
                     <img src="${imgSrc(p)}" alt="${imgAlt(p)}"/>
                     ${saleBadge(p)}
-            </div>
-            
+                </div>               
                 <h3>${p.title}</h3>
                 ${priceHTML(p)}
                 ${rating != null ? starsHTML(rating) : placeholderStarsHTML()}
                 
-                ${isLoggedIn ? `
+            ${isLoggedIn ? `
             <button class="btn js-add-to-cart"
                 data-product-id="${p.id}"
                 aria-label="Add ${p.title} to cart">
                 <i class="fa-solid fa-cart-shopping"></i>
-             </button>` : ``}
+            </button>` : ``}
         </a>
         
             </div>
@@ -139,12 +131,59 @@ function wireAddToCartButtons(products) {
     });
 }
 
+function getApp() {
+    let el = document.getElementById("app");
+    if (!el) {
+        el = document.createElement("main");
+        el.id = "app";
+
+        document.body.insertBefore(el, document.getElementById("site-footer") || null);
+    }
+    return el;
+}
+
+function renderHomeShell() {
+    app.innerHTML = `
+        <div id="page-loader" class="page-loader" style="display:none">
+            <div class="spinner"></div>
+        </div>
+
+        <section class="slideshow" id="slideshow" role="region" aria-label="Featured products">
+            <div class="slides" aria-live="polite"></div>
+            <div class="controls">
+                <button class="prev" aria-label="Previous"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="next" aria-label="Next"><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </section>
+
+        <section class="home-info">
+            <div class="info">
+                <h2>Latest Products</h2>
+                <p>Browse our newest items <br> and top deals</p>
+                <h3>CATEGORY 1</h3>
+            </div>
+        </section>
+
+        <section class="latest-products">
+            <div class="grid"></div>
+        </section>
+    `;
+}
+
 // Loader
 
 async function init() {
+    renderHomeShell();
+
+    const loader = document.getElementById("page-loader");
+    const slideShow = document.getElementById("slideshow");
+    const slidesWrap = slideShow.querySelector(".slides");
+    const prevBtn = slideShow.querySelector(".prev");
+    const nextBtn = slideShow.querySelector(".next");
+    const latestGrid = document.querySelector(".latest-products .grid");
+
     try { 
     loader.style.display = "grid";
-
     const products = await fetchProducts();
 
     // Carousel
@@ -244,9 +283,11 @@ async function init() {
     }
 
 
- }  catch (error) {
-    console.error("Init error", error);
-    latestGrid.innerHTML = `<p>Could not load products</p>`;
+ }  catch (err) {
+    console.error("Init error", err);
+    const latestGrid = document.querySelector(".latest-products .grid");
+
+    if (latestGrid) latestGrid.innerHTML = `<p>Could not load products</p>`;
  } finally {
     loader.style.display = "none";
  }

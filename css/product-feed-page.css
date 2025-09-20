@@ -101,7 +101,7 @@
 
 /* ------ Latest products grid ------ */
 
-.latest-products {
+.latest-products .grid{
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 20px;
@@ -109,6 +109,8 @@
     margin-bottom: 100px;
     text-align: center;
 }
+
+
 
 /* ---- Images ---- */
 
