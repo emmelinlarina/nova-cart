@@ -1,14 +1,64 @@
 import { computeTotals, updateCartQuantity } from "./cart.js";
 
+const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD"});
+
+const q = (id) => document.getElementById(id);
+
+function getApp() {
+    let el = document.getElementById("app");
+    if (!el) {
+        el = document.createElement("main");
+        el.id = "app";
+        document.body.insertBefore(el, document.getElementById("site-footer") || null);
+    }
+    return el;
+}
+
 function makeOrderId() {
     const t = Date.now().toString(36).toUpperCase();
     const r = Math.floor(Math.random() * 46655).toString(36).toUpperCase();
     return `NC-${t}-${r}`;
 }
 
-const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD"});
+function getUserDisplayName() {
+    try {
+        const raw = localStorage.getItem("user");
+        if (!raw) return "";
+        const parsed = JSON.parse(raw);
+        return parsed?.name || parsed?.email || "";
+    } catch {
+        return localStorage.getItem("user") || "";
+    }
+}
 
-(function init() {
+function renderSuccessShell() {
+    const app = getApp();
+    app.innerHTML = `
+    <main class="success">
+        <section class="success-card">
+            <img src="images/logo/NovaCart_brown_cropped.png" alt="NovaCart logo" class="cart-logo">
+            <div class="icon"><i class="fa-solid fa-circle-check"></i></div>
+            <h1>Thank You</h1>
+            <h2>Your payment was successful</h2>
+            <p class="greeting js-greeting"></p>
+
+            <div class="order">
+                <p>Order:<span class="js-order-id"></span></p>
+                <p>Total paid:<span class="js-total"></span></p>
+                <p>Items:<span class="js-count"></span></p>
+                <p>Receipt sent to:</p> <span class="js-email"></span>
+            </div>
+
+            <div class="actions">
+                <a class="btn btn-outline" href="index.html">Home page</a>
+            </div>
+        </section>
+    </main>
+    `;
+}
+
+
+function hydrate() {
 
     let snap = {};
     try {
@@ -42,5 +92,9 @@ const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD
     if (g) g.textContent = "";
 
     updateCartQuantity?.();
+}
 
+(function init() {
+    renderSuccessShell();
+    hydrate();
 })();
