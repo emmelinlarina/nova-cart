@@ -48,3 +48,116 @@ export function starsHTML(rating, { showNumber = false } = {}) {
         </span>
     `;
 }
+
+export function reviewSectionHTML(p) {
+    const count = Array.isArray(p.reviews) ? p.reviews.length : 0;
+    if (!count) return "";
+
+    const avg = avgRating(p) ?? 0;
+
+    return `
+        <section class="reviews">
+            <h3>Reviews</h3>
+            ${starsHTML(avg, { showNumber: true })}
+            <p class="review-count">${count} review${count === 1 ? "" : "s"}</p>
+            <ul class="review-list>
+                ${
+                    p.reviews.map(r => {
+                        const rVal = Number(r?.rating) || 0;
+                        const body = r?.description ? `<p class="review-body">${r.description}</p>` : "";
+                        const user = r?.username || "Anynomous";
+                        return `
+                        <li class="review">
+                            <div class="review-head">
+                                ${starsHTML(rVal)}
+                                <span class="author">${user}</span>
+                            </div>
+                            ${body}
+                        </li>`;
+                    }).join("")
+                }
+            </ul>
+        </section>
+    `;
+}
+
+
+export const slideHTML = (p, i, total, { imgSrc, imgAlt, saleBadge, priceHTML, starsHTML, isLoggedIn }) => {
+    const rating = avgRating(p);
+    return `
+        <div class="mySlide" role="group" aria-label="Slide ${i + 1} of ${total}" aria-hidden="true">
+            <a class="card" href="product.html?id=${p.id}">
+                <div class="media">
+                    <div class="thumb">
+                        <img src="${imgSrc(p)}" alt="${imgAlt(p)}"/>
+                        ${saleBadge(p)}
+                    </div>            
+                <h3>${p.title}</h3>
+                ${priceHTML(p)}
+                ${starsHTML(rating)}
+                ${isLoggedIn ? `
+                <button class="btn js-add-to-cart" 
+                        data-product-id="${p.id}"
+                        aria-label="Add ${p.title} to cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </button>` : ``}
+                </div>
+            </a>
+        </div>
+        `; 
+};
+
+export const productCardHTML = (p, { imgSrc, imgAlt, saleBadge, priceHTML, starsHTML, isLoggedIn}) => {
+    const rating = avgRating(p);
+    return `
+     <article class="product-card">
+        <a class="card-link" href="product.html?id=${p.id}">
+            <div class="media">
+                <div class="thumb">
+                    <img src="${imgSrc(p)}" alt="${imgAlt(p)}"/>
+                    ${saleBadge(p)}
+                </div>               
+                <h3>${p.title}</h3>
+                ${priceHTML(p)}
+                ${starsHTML(rating)}
+                ${isLoggedIn ? `
+                    <button class="btn js-add-to-cart"
+                        data-product-id="${p.id}"
+                        aria-label="Add ${p.title} to cart">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </button>` : ``}
+                </div>    
+        </a>
+    </article>
+    `;
+};
+
+export function cartItemHTML({ p, q }) {
+    const hasDiscount = p.discountedPrice && p.discountedPrice < p.price;
+    return `
+    <div class="box js-cart-item-container-${p.id}">
+        <div class="content">
+            <img src="${p.image.url}" alt="${p.image.alt}">
+            <h3>${p.title}</h3>
+            <div class="price">
+                ${
+                    hasDiscount
+                    ? `<span class="now">${money.format(p.discountedPrice)}</span>
+                        <span class="was">${money.format(p.price)}</span>`
+                    : `<span class="now">${money.format(p.price)}</span>`
+                }
+            </div>
+            <div class="qty">
+                <button class="qty-dec" data-id="${p.id}" aria-label="Decrease">-</button>
+                <span class="qty-val">${q}</span>
+                <button class="qty-inc" data-id="${p.id}" aria-label="Increase">+</button>
+            </div>
+            <p class="btn-area">
+                <span class="btn2 js-delete-link" data-product-id="${p.id}">
+                    <i class="fa-solid fa-trash"></i> Remove
+                </span>
+            </p>
+        </div>
+    </div>
+    `;
+}

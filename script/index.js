@@ -1,120 +1,10 @@
 import { addToCart, updateCartQuantity } from "./cart.js"
 import { getToken } from "./utils/storage.js";
 import { fetchProducts } from "./api/products.js";
+import { imgSrc, imgAlt, saleBadge, priceHTML, avgRating, starsHTML } from "./utils/templates.js";
 
 const isLoggedIn = !!getToken();
-const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'});
-
 const app = document.getElementById("app");
-
-const imgSrc = (p) => p?.image?.url ?? "images/fallback.png"
-const imgAlt = (p) => p?.image?.alt ?? p.title ?? "Product image"
-
-
-function saleBadge(p) {
-    if (typeof p.price !== 'number' || typeof p.discountedPrice !== 'number') return '';
-    if (p.discountedPrice >= p.price) return '';
-    const pct = Math.round((1 - (p.discountedPrice / p.price)) * 100);
-    return `<span class="badge-sale" aria-label="Save ${pct}%">-${pct}%</span>`;
-}
-
-function priceHTML(p) {
-    const hasDiscount =
-        typeof p.discountedPrice === 'number' && 
-        typeof p.price === 'number' &&
-        p.discountedPrice < p.price;
-
-        if (hasDiscount) {
-            const save = p.price - p.discountedPrice;
-            return `
-            <div class="price">
-                <span class="now">${money.format(p.discountedPrice)}</span>
-                <span class="was" aria-label="was price">${money.format(p.price)}</span>
-                <span class="save">Save ${money.format(save)}</span>
-            </div>`;
-        }
-
-        return `
-        <div class="price">
-            <span class="now">${money.format(p.price ?? 0)}</span>
-            </div>`;
-}
-
-function avgRating(p) {
-    const  list = Array.isArray(p.reviews) ? p.reviews : [];
-    if (!list.length) return null;
-    const sum = list.reduce((a, r) => a + (Number(r?.rating) || 0),0);
-    return sum / list.length;
-}
-
-function starsHTML(rating) {
-    const r = Math.max(0, Math.min(5, Number(rating) || 0));
-    const full = Math.floor(r);
-    const empty = 5 - full;
-    return `
-        <span class="stars" aria-label="Rated ${rating.toFixed(1)} out of 5">
-            ${'★'.repeat(full)}${'☆'.repeat(empty)}
-        </span>
-    `;
-}
-
-function placeholderStarsHTML() {
-    return `<span class="stars" aria-hidden="true"></span>`;
-}
-
-const slideHTML = (p, i, total) => {
-    const rating = avgRating(p);
-
-    return `
-        <div class="mySlide" role="group" aria-label="Slide ${i + 1} of ${total}" aria-hidden="true">
-            <a class="card" href="product.html?id=${p.id}">
-                <div class="media">
-                    <div class="thumb">
-                        <img src="${imgSrc(p)}" alt="${imgAlt(p)}"/>
-                        ${saleBadge(p)}
-                    </div>            
-                <h3>${p.title}</h3>
-                ${priceHTML(p)}
-                ${rating != null ? starsHTML(rating) : placeholderStarsHTML()}
-                                ${isLoggedIn ? `
-                <button class="btn js-add-to-cart" 
-                        data-product-id="${p.id}"
-                        aria-label="Add ${p.title} to cart">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                </button>` : ``}
-        </a>
-        
-            </div>
-        </div>
-        `; 
-};
-
-const cardHTML = (p) => {
-    const rating = avgRating(p);
-    return `
-     <article class="product-card">
-        <a class="card-link" href="product.html?id=${p.id}">
-            <div class="media">
-                <div class="thumb">
-                    <img src="${imgSrc(p)}" alt="${imgAlt(p)}"/>
-                    ${saleBadge(p)}
-                </div>               
-                <h3>${p.title}</h3>
-                ${priceHTML(p)}
-                ${rating != null ? starsHTML(rating) : placeholderStarsHTML()}
-                
-            ${isLoggedIn ? `
-            <button class="btn js-add-to-cart"
-                data-product-id="${p.id}"
-                aria-label="Add ${p.title} to cart">
-                <i class="fa-solid fa-cart-shopping"></i>
-            </button>` : ``}
-        </a>
-        
-            </div>
-    </article>
-    `;
-};
 
 function wireAddToCartButtons(products) {
     const byId = new Map(products.map(p => [p.id, p]));
@@ -129,17 +19,6 @@ function wireAddToCartButtons(products) {
             updateCartQuantity();
         });
     });
-}
-
-function getApp() {
-    let el = document.getElementById("app");
-    if (!el) {
-        el = document.createElement("main");
-        el.id = "app";
-
-        document.body.insertBefore(el, document.getElementById("site-footer") || null);
-    }
-    return el;
 }
 
 function renderHomeShell() {

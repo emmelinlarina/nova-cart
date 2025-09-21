@@ -1,19 +1,9 @@
 import { addToCart, updateCartQuantity } from "./cart.js";
 import { getToken } from "./utils/storage.js";
+import { getApp } from "./utils/dom.js";
+import { imgSrc, imgAlt, saleBadge, priceHTML, reviewSectionHTML } from "./utils/templates.js";
 
 const isLoggedIn = !!getToken();
-const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'});
-
-function getApp() {
-    let el = document.getElementById("app");
-    if (!el) {
-        el = document.createElement("main");
-        el.id = "app";
-
-        document.body.insertBefore(el, document.getElementById("site-footer") || null);
-    }
-    return el;
-}
 
 function renderProductShell() {
     const app = getApp();
@@ -31,9 +21,8 @@ function renderProductShell() {
     `;
 }
 
-function q(id) {
-    return document.getElementById(id);
-}
+const q = (id) => document.getElementById(id);
+
 
 function showLoader(show) {
     const loader = q("page-loader");
@@ -65,73 +54,13 @@ async function fetchingSingleProduct(id) {
     const json = await response.json();
     return json.data;
 }
-
-
-function saleBadge(p) {
-    if (typeof p.price !== 'number' || typeof p.discountedPrice !== 'number') return '';
-    if (p.discountedPrice >= p.price) return '';
-    const pct = Math.round((1 - (p.discountedPrice / p.price)) * 100);
-    return `<span class="badge-sale" aria-label="Save ${pct}%">-${pct}%</span>`;
-}
-
-function priceHTML(p) {
-    const hasDiscount =
-        typeof p.discountedPrice === "number" && 
-        typeof p.price === "number" &&
-        p.discountedPrice < p.price;
-
-        if (hasDiscount) {
-            return `
-            <div class="price">
-                <span class="now">${money.format(p.discountedPrice)}</span>
-                <span class="was" aria-label="was price">${money.format(p.price)}</span>
-            </div>`;
-        }
-
-        return `
-        <div class="price">
-            <span class="now">${money.format(p.price ?? 0)}</span>
-            </div>`;
-}
-
-function avgRating(p) {
-    const arr = Array.isArray(p.reviews)
-        ? p.reviews.map(r => Number(r?.rating)).filter(n => !Number.isNaN(n) && n >= 0 && n <= 5) : [];
-    if (!arr.length) return null;
-    return arr.reduce((a, b) => a + b, 0) / arr.length;
-}
-
-function starsHTML(avg, { showNumber = false} = {}) {
-    if (!avg) {
-        return `<div class="rating" role="img" aria-label="No ratings yet">
-            <span class="no-rating">No ratings</span>
-            </div>`;
-    }
-
-    const label = `${avg.toFixed(1)} out of 5 stars`;
-    let stars = '';
-    for (let i = 1; i <= 5; i++) {
-        const cls = avg >= i ? 'full' : (avg >= i - 0.5 ? 'half' : 'empty');
-        stars += `<span class="star ${cls}" aria-hidden="true"> </span>`;
-    }
-    return `<div class="rating" role="img" aria-label="${label}">
-    ${stars}${showNumber ? `<span class="rating-num">(${avg.toFixed(1)})</span>` : ''}
-    </div>`;
-    }
    
-   
-
 function renderProducts(p) {
     document.title = p.title || 'Product';
-
-    const imageUrl = p?.image?.url || 'images/fallback.png';
-    const imageAlt = p?.image?.alt || p?.title || 'Product image';
     const container = q("product-container");
 
-    // rating
-
-    const avg = avgRating(p);
-    const reviewCount = Array.isArray(p.reviews) ? p.reviews.length : 0;
+    const imageUrl = imgSrc(p);
+    const imageAlt = imgAlt(p);
 
 
     container.innerHTML = `
@@ -163,26 +92,7 @@ function renderProducts(p) {
                 <div class ="js-inline-message" aria-live="polite"></div>
         </div>  
 
-        ${reviewCount 
-            ? `<section class="reviews">
-                <h3>Reviews</h3>
-                ${starsHTML(avg, { showNumber: true })} 
-                ${reviewCount 
-                ? `<p class="review-count">${reviewCount} review${reviewCount === 1 ? '' : 's'}</p>`
-                : '<p class="review-count">No reviews yet</p>'}
-                <ul class="review-list">
-                    ${p.reviews.map(
-                        r => `<li class="review">
-                                <div class="review-head">
-                                    ${starsHTML(Number(r?.rating) || 0)}
-                                    <span class="author">${r?.username || 'Anonymous'}</span>
-                                </div>
-                                ${r?.description ? `<p class="review-body">${r.description}</p>` : ''}
-                                </li>
-                    `).join('')}
-                </ul>
-            </section>
-            ` : ""}
+        ${reviewSectionHTML(p)}
     `;
 
 
@@ -247,7 +157,7 @@ async function initProductPage() {
     renderProducts(product);
     } catch (e) {
         console.error(e);
-        q("productContainer").innerHTML = `<p>Could not load product</p>`;
+        q("product-container").innerHTML = `<p>Could not load product</p>`;
         showMessage('Could not load product. Please try again', 'error');
     }   finally {
     showLoader(false); 

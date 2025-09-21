@@ -3,7 +3,7 @@ import { getApp } from "./utils/dom.js";
 import { money } from "./utils/money.js";
 import { prefillEmail, clearFieldErrors, fieldError, setMsg } from "./utils/forms.js";
 import { writeLastOrder } from "./utils/order.js";
-import { cartItemHTML } from "./utils/cart-item.js";
+import { cartItemHTML } from "./templates.js";
 
 
 function renderCheckoutShell() {

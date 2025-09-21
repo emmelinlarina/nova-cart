@@ -1,6 +1,6 @@
 import { getCart, setQuantity, clearCart, computeTotals, updateCartQuantity,} from "../cart.js";
 import { money } from "./utils/money.js";
-import { cartItemHTML } from "./utils/cart-item.js";
+import { cartItemHTML } from "./templates.js";
 
 const wrap = document.querySelector("main");
 
