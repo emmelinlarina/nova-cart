@@ -2,6 +2,7 @@ import { getCart, setQuantity, computeTotals, clearCart, updateCartQuantity } fr
 import { getApp } from "./utils/dom.js";
 import { money } from "./utils/money.js";
 import { prefillEmail, clearFieldErrors, fieldError, setMsg } from "./utils/forms.js";
+import { writeLastOrder } from "./utils/order.js";
 import { cartItemHTML } from "./utils/cart-item.js";
 
 
@@ -212,19 +213,19 @@ form.addEventListener("submit", (e) => {
         formMsg.textContent = "Success! Redirecting...";
         formMsg.className = "form-msg success";
         
-        sessionStorage.setItem("nc_last_order",
-            JSON.stringify({
-            total: t.pay || 0, 
-            count: t.count || 0, 
-            email: email || localStorage.getItem("email") || ""
-        }));
+        writeLastOrder({
+            total: t.pay || 0,
+            count: t.count || 0,
+            email: email || localStorage.getItem("email") || "",
+        });
+        try { if (email) localStorage.setItem("email", email); } catch {}
+        
 
         clearCart();
         updateCartQuantity();
 
         setTimeout(() => {
-             location.href = "success.html";
-        }, 400); }, 900);
+             location.href = "success.html"; }, 400); }, 900);
 });
 
 render();

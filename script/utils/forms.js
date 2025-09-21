@@ -12,7 +12,7 @@ export function clearFieldErrors(form) {
 }
 
 export function fieldError(form, name, text) {
-    const input = form.querySelector(`input[name="${name}"]` || form[name]);
+    const input = form.querySelector(`input[name="${name}"]`) || form[name];
     if (!input) return;
     input.classList.add("is-invalid");
     const err = input.nextElementSibling;
@@ -21,8 +21,6 @@ export function fieldError(form, name, text) {
         err.style.display = "block";
     }
 }
-
-export { fieldError as setFieldError };
 
 export function prefillEmail(form) {
     try {

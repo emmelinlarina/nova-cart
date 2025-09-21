@@ -1,35 +1,7 @@
-import { computeTotals, updateCartQuantity } from "./cart.js";
-
-const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD"});
-
-const q = (id) => document.getElementById(id);
-
-function getApp() {
-    let el = document.getElementById("app");
-    if (!el) {
-        el = document.createElement("main");
-        el.id = "app";
-        document.body.insertBefore(el, document.getElementById("site-footer") || null);
-    }
-    return el;
-}
-
-function makeOrderId() {
-    const t = Date.now().toString(36).toUpperCase();
-    const r = Math.floor(Math.random() * 46655).toString(36).toUpperCase();
-    return `NC-${t}-${r}`;
-}
-
-function getUserDisplayName() {
-    try {
-        const raw = localStorage.getItem("user");
-        if (!raw) return "";
-        const parsed = JSON.parse(raw);
-        return parsed?.name || parsed?.email || "";
-    } catch {
-        return localStorage.getItem("user") || "";
-    }
-}
+import { updateCartQuantity } from "./cart.js"; 
+import { money } from "./utils/money.js";
+import { getApp } from "./utils/dom.js";
+import { makeOrderId, readLastOrder } from "./utils/order.js";
 
 function renderSuccessShell() {
     const app = getApp();
@@ -57,7 +29,6 @@ function renderSuccessShell() {
     `;
 }
 
-
 function hydrate() {
 
     let snap = {};
@@ -81,11 +52,17 @@ function hydrate() {
     if (elCount) elCount.textContent = String(snap.count || 0);
 
 
-    const user = localStorage.getItem("user");
+    const rawUser = localStorage.getItem("user");
     const title = document.querySelector(".success-card h1");
-    
     if (title) {
-        title.textContent = user ? `Thank you, ${user}!` : "Thank you!"
+        try {
+            const u = JSON.parse(rawUser || "{}");
+            const name = u?.name || u || "";
+            title.textContent = user ? `Thank you, ${user}!` : "Thank you!"
+        } catch {
+            title.textContent = rawUser ? `Thank you, ${rawUser}!` : "Thank you!"
+        }
+        
     }
 
     const g = document.querySelector(".js-greeting");
