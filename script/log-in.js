@@ -1,8 +1,6 @@
 import { saveUser } from "./utils/storage.js";
+import { q } from "./utils/dom.js";
 
-const q = (id) => {
-    return document.getElementById(id);
-}
 
 function getApp() {
     let el = document.getElementById("app");

@@ -1,7 +1,7 @@
 import { addToCart, updateCartQuantity } from "./cart.js"
 import { getToken } from "./utils/storage.js";
 import { fetchProducts } from "./api/products.js";
-import { imgSrc, imgAlt, saleBadge, priceHTML, avgRating, starsHTML } from "./utils/templates.js";
+import { imgSrc, imgAlt, saleBadge, priceHTML, starsHTML, slideHTML, productCardHTML } from "./utils/templates.js";
 
 const isLoggedIn = !!getToken();
 const app = document.getElementById("app");
@@ -73,7 +73,7 @@ async function init() {
     ];
 
     const featured = products.filter(p => wantedIds.includes(p.id));
-    slidesWrap.innerHTML = featured.map((p, i) => slideHTML(p, i, featured.length)).join("");
+    slidesWrap.innerHTML = featured.map((p, i) => slideHTML(p, i, featured.length, { imgSrc, imgAlt, saleBadge, priceHTML, starsHTML, isLoggedIn})).join("");
     
     slideShow.setAttribute("role", "region");
     slideShow.setAttribute("aria-roledescription", "carousel");
@@ -154,7 +154,11 @@ async function init() {
     nextBtn.addEventListener("blur", play);
 
     const lastest12 = products.slice(-12).reverse();
-    latestGrid.innerHTML = lastest12.map(cardHTML).join("");
+    latestGrid.innerHTML = lastest12.map((p) => productCardHTML(p, { 
+        imgSrc, imgAlt, saleBadge, priceHTML, starsHTML, isLoggedIn
+    })
+    )
+        .join("");
 
     if (isLoggedIn) {
         wireAddToCartButtons(products);

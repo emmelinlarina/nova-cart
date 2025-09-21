@@ -1,6 +1,9 @@
 import { addToCart, updateCartQuantity } from "./cart.js";
 import { getToken } from "./utils/storage.js";
-import { getApp } from "./utils/dom.js";
+import { getApp, q, getQueryParam } from "./utils/dom.js";
+import { showLoader } from "./utils/loader.js";
+import { setMsg } from "./utils/forms.js";
+import { fetchingSingleProduct} from "./api/products.js"
 import { imgSrc, imgAlt, saleBadge, priceHTML, reviewSectionHTML } from "./utils/templates.js";
 
 const isLoggedIn = !!getToken();
@@ -19,40 +22,6 @@ function renderProductShell() {
             <div id="product-container"></div>
         </section>
     `;
-}
-
-const q = (id) => document.getElementById(id);
-
-
-function showLoader(show) {
-    const loader = q("page-loader");
-    if (!loader) return;
-    loader.style.display = show ? 'grid' : 'none';
-    document.body.classList.toggle("loading", show)
-}
-
-function showMessage(text, kind = "info") {
-    const box = q("page-message")
-    if (!box) return;
-    box.textContent = text;
-    box.className = `page-message ${kind}`;
-    setTimeout(() => { 
-        box.textContent = ""; 
-        box.className = "page-message";
-    }, 1500);
-   } 
-
-function getProductIdFromUrl() {
-    const params = new URLSearchParams(location.search);
-    return params.get("id");
-}
-
-async function fetchingSingleProduct(id) {
-    const url = `https://v2.api.noroff.dev/online-shop/${encodeURIComponent(id)}`;
-    const response = await fetch(url);
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const json = await response.json();
-    return json.data;
 }
    
 function renderProducts(p) {
@@ -96,11 +65,10 @@ function renderProducts(p) {
     `;
 
 
-    const buyBtn = container.querySelector(".js-add-to-cart");
-    const inlineMsg = container.querySelector(".js-inline-message");
+const buyBtn = container.querySelector(".js-add-to-cart");
+const inlineMsg = container.querySelector(".js-inline-message");
     
     if (buyBtn && isLoggedIn) {
-        
         buyBtn.addEventListener("click", () => {
             addToCart(p);
             updateCartQuantity();
@@ -139,10 +107,10 @@ async function initProductPage() {
         showLoader(true);
 
 
-    const id = getProductIdFromUrl();
+    const id = getQueryParam("id");
     if (!id) {
       q("product-container").innerHTML = "<p>Product not found</p>";
-      showMessage("Product not found", "error");
+      setMsg("page-message", "Product not found", "error");
       return;
     }
 
@@ -150,7 +118,7 @@ async function initProductPage() {
     const product = await fetchingSingleProduct(id);
     if (!product) {
         q("product-container").innerHTML = "<p>Product not found</p>";
-        showMessage("Product not found", "error");
+        setMsg("page-message", "Product not found", "error");
         return;
     }
 
@@ -158,7 +126,7 @@ async function initProductPage() {
     } catch (e) {
         console.error(e);
         q("product-container").innerHTML = `<p>Could not load product</p>`;
-        showMessage('Could not load product. Please try again', 'error');
+        setMsg('Could not load product. Please try again', 'error');
     }   finally {
     showLoader(false); 
     window.scrollTo(0,0);

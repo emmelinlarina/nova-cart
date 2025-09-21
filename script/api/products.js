@@ -11,4 +11,10 @@ export async function fetchProducts() {
   }
 }
 
-
+export async function fetchingSingleProduct(id) {
+    const url = `${API_URL}/${encodeURIComponent(id)}`;
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const json = await response.json();
+    return json.data;
+}

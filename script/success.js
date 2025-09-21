@@ -1,6 +1,7 @@
 import { updateCartQuantity } from "./cart.js"; 
 import { money } from "./utils/money.js";
 import { getApp } from "./utils/dom.js";
+import { computeTotals } from "./cart.js";
 import { makeOrderId, readLastOrder } from "./utils/order.js";
 
 function renderSuccessShell() {

@@ -1,7 +1,7 @@
 import { saveUser } from "./utils/storage.js";
 import { initPasswordToggleScoped } from "./log-in.js";
+import { q } from "./utils/dom.js";
 
-const q = (id) => document.getElementById(id);
 
 function getApp() {
     let el = document.getElementById("app");

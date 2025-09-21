@@ -9,3 +9,6 @@ export function getApp() {
     }
     return el;
 }
+
+export const getQueryParam = (name, search = location.search) => 
+    new URLSearchParams(search).get(name);
