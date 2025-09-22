@@ -300,18 +300,18 @@ header {
     line-height: 1;
 }
 
-.product .rating .star::before {
+.product .reviews .star::before {
     content: "★";
     font-size: 1.1rem;
 }
 
 /* Full star */
 
-.product .rating .star.full::before {
+.product .reviews .stars.full::before {
     color: #F8C362;
 }
 
-.product .rating .star.half::before {
+.product .reviews .stars.half::before {
     color: transparent;
     background: linear-gradient(90deg, #F4B400 50%, #EFEFEF 50%);
     -webkit-background-clip: text;
@@ -327,6 +327,14 @@ header {
     font-size: 0.95rem;
     color: #362E27;
     font-weight: 600;
+}
+
+/* new star */
+.stars {
+    color: #F4B400;
+    font-weight: 400;
+    font-size: 1rem;
+
 }
 
 /* Success Messages */

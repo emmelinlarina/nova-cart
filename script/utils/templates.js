@@ -60,7 +60,7 @@ export function reviewSectionHTML(p) {
             <h3>Reviews</h3>
             ${starsHTML(avg, { showNumber: true })}
             <p class="review-count">${count} review${count === 1 ? "" : "s"}</p>
-            <ul class="review-list">
+            <ul class="review-list>
                 ${
                     p.reviews.map(r => {
                         const rVal = Number(r?.rating) || 0;
