@@ -153,8 +153,8 @@ async function init() {
     prevBtn.addEventListener("blur", play);
     nextBtn.addEventListener("blur", play);
 
-    const lastest12 = products.slice(-12).reverse();
-    latestGrid.innerHTML = lastest12.map((p) => productCardHTML(p, { 
+    const latest12 = products.slice(-12).reverse();
+    latestGrid.innerHTML = latest12.map((p) => productCardHTML(p, { 
         imgSrc, imgAlt, saleBadge, priceHTML, starsHTML, isLoggedIn
     })
     )

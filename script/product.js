@@ -114,7 +114,6 @@ async function initProductPage() {
       return;
     }
 
-
     const product = await fetchingSingleProduct(id);
     if (!product) {
         q("product-container").innerHTML = "<p>Product not found</p>";
@@ -126,7 +125,7 @@ async function initProductPage() {
     } catch (e) {
         console.error(e);
         q("product-container").innerHTML = `<p>Could not load product</p>`;
-        setMsg('Could not load product. Please try again', 'error');
+        setMsg("page-message", "Please try again", "error");
     }   finally {
     showLoader(false); 
     window.scrollTo(0,0);

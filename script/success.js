@@ -50,7 +50,7 @@ function hydrate() {
         try {
             const u = JSON.parse(rawUser || "{}");
             const name = u?.name || u || "";
-            title.textContent = user ? `Thank you, ${name}!` : "Thank you!"
+            title.textContent = name ? `Thank you, ${name}!` : "Thank you!"
         } catch {
             title.textContent = rawUser ? `Thank you, ${rawUser}!` : "Thank you!"
         }

@@ -106,8 +106,6 @@ function wireForm() {
     });
 }
 
-
-
 (function init() {
     renderLoginShell();
     wireForm();

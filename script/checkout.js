@@ -75,8 +75,8 @@ function renderCheckoutShell() {
 
                 <fieldset class="pay-methods">
                     <label> <input type="radio" id="card" name="payment" value="card" checked>Card</label>
-                    <label> <input type="radio" id="vipps" name="payment" value="vipps" checked>Vipps </label>
-                    <label> <input type="radio" id="paypal" name="payment" value="paypal" checked>Paypal </label>
+                    <label> <input type="radio" id="vipps" name="payment" value="vipps">Vipps </label>
+                    <label> <input type="radio" id="paypal" name="payment" value="paypal">Paypal </label>
                 </fieldset>
             </form>
 

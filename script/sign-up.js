@@ -19,7 +19,6 @@ async function register({ name, email, password }) {
     return data;
 }
 
-
 function renderRegisterShell() {
     const app = getApp();
     app.innerHTML = `
@@ -133,10 +132,7 @@ form.addEventListener("submit", async (e) => {
         setFieldError(form, "email", "Please enter valid email");
         clientHasErrors = true;
     }
-    if (name.length < 3) {
-        setFieldError(form, "name", "Name must be at least 3 characters");
-        clientHasErrors = true;
-    }
+
     if (password.length < 3) {
         setFieldError(form, "password", "Password must be at least 3 characters");
         clientHasErrors = true;
@@ -158,9 +154,9 @@ form.addEventListener("submit", async (e) => {
         }, 1500);
     } catch (err) {
         const m = String(err?.message || "").toLowerCase();
-        if (m. includes("name")) setFieldError(form, "name", err.message);
-        else if (m. includes("email")) setFieldError(form, "email", err.message);
-        else if (m. includes("password")) setFieldError(form, "password", err.message);
+        if (m.includes("name")) setFieldError(form, "name", err.message);
+        else if (m.includes("email")) setFieldError(form, "email", err.message);
+        else if (m.includes("password")) setFieldError(form, "password", err.message);
         else setMsg(err.message || "Registration Failed", "error");
     } finally {
         if (submitBtn) submitBtn.disabled = false;
