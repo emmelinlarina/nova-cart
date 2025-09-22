@@ -1,30 +1,7 @@
 import { saveUser } from "./utils/storage.js";
-import { q } from "./utils/dom.js";
-
-
-function getApp() {
-    let el = document.getElementById("app");
-    if (!el) {
-        el = document.createElement("main");
-        el.id = "app";
-        document.body.insertBefore(el, document.getElementById("site-footer") || null);
-    }
-    return el;
-}
-
-function setMsg(text, kind = "info") {
-    const el = q("login-msg");
-    if (!el) return;
-    el.textContent = text;
-    el.className = `form-msg ${kind}`;
-}
-
-function showLoader(show) {
-    const loader = q("page-loader");
-    if (!loader) return;
-    loader.style.display = show ? 'grid' : 'none';
-    document.body.classList.toggle("loading", show)
-}
+import { getApp, q } from "./utils/dom.js";
+import { showLoader } from "./utils/loader.js";
+import { setMsg } from "./utils/forms.js";
 
 function renderLoginShell() {
     const app = getApp();
@@ -122,8 +99,6 @@ function wireForm() {
         setTimeout(() => { location.href = "index.html";}, 900);
     } catch (err) {
         setMsg(err.message || "Login Failed", "error");
-        submitBtn.disabled = false;
-        submitBtn.classList.remove("is-loading");
         form.querySelectorAll("input, button").forEach(el => el.removeAttribute("disabled"));
     } finally {
         showLoader(false);

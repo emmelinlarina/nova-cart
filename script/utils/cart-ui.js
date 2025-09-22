@@ -115,7 +115,7 @@ export function render() {
     shop.innerHTML = `
         <img src="images/logo/NovaCart_brown_cropped.png" alt="NovaCart logo" class="cart-logo">
         <h1>Your Cart</h1>
-        ${items.map(itemHTML).join("")}
+        ${items.map(cartItemHTML).join("")}
     `;
 
     wire();

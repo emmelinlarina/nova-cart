@@ -1,39 +1,9 @@
 import { saveUser } from "./utils/storage.js";
 import { initPasswordToggleScoped } from "./log-in.js";
-import { q } from "./utils/dom.js";
+import { getApp, q } from "./utils/dom.js";
+import { showLoader } from "./utils/loader.js";
+import { setMsg } from "./utils/forms.js";
 
-
-function getApp() {
-    let el = document.getElementById("app");
-    if (!el) {
-        el = document.createElement("main");
-        el.id = "app";
-        document.body.insertBefore(el, document.getElementById("site-footer") || null);
-    }
-    return el;
-}
-
-function setMsg(text, kind = "info") {
-    const msg = q("register-msg");
-    if (!msg) return;
-    msg.textContent = text;
-    msg.className = `form-msg ${kind}`;
-}
-
-function showLoader(show) {
-    let loader = q("page-loader");
-    if (!loader) {
-    loader = document.createElement("div");
-    loader.id = "page-loader";
-    loader.className = "page-loader";
-    loader.style.display = "none"
-    loader.innerHTML = `<div class="spinner"></div>`;
-    getApp().prepend(loader);
-    }
-
-    loader.style.display = show ? 'grid' : 'none';
-    document.body.classList.toggle("loading", show)
-}
 
 async function register({ name, email, password }) {
     const res = await fetch("https://v2.api.noroff.dev/auth/register", {
@@ -159,7 +129,7 @@ form.addEventListener("submit", async (e) => {
         setFieldError(form, "name", "Name must be at least 3 characters");
         clientHasErrors = true;
     }
-    if (email.includes("@")) {
+    if (!email.includes("@")) {
         setFieldError(form, "email", "Please enter valid email");
         clientHasErrors = true;
     }

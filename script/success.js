@@ -1,7 +1,6 @@
 import { updateCartQuantity } from "./cart.js"; 
 import { money } from "./utils/money.js";
 import { getApp } from "./utils/dom.js";
-import { computeTotals } from "./cart.js";
 import { makeOrderId, readLastOrder } from "./utils/order.js";
 
 function renderSuccessShell() {
@@ -32,15 +31,7 @@ function renderSuccessShell() {
 
 function hydrate() {
 
-    let snap = {};
-    try {
-        snap = JSON.parse(sessionStorage.getItem("nc_last_order") || "{}");
-    } catch {}
-
-    if (!snap || typeof snap.total !== "number") {
-        const t = computeTotals() || { pay: 0, count: 0 };
-        snap = { total: t.pay || 0, count: t.count || 0, email: localStorage.getItem("email") || "" };
-    }
+    const snap = readLastOrder();
 
     const elId = document.querySelector(".js-order-id");
     const elTotal = document.querySelector(".js-total");
@@ -59,7 +50,7 @@ function hydrate() {
         try {
             const u = JSON.parse(rawUser || "{}");
             const name = u?.name || u || "";
-            title.textContent = user ? `Thank you, ${user}!` : "Thank you!"
+            title.textContent = user ? `Thank you, ${name}!` : "Thank you!"
         } catch {
             title.textContent = rawUser ? `Thank you, ${rawUser}!` : "Thank you!"
         }

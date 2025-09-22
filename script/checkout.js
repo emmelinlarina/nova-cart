@@ -3,7 +3,7 @@ import { getApp } from "./utils/dom.js";
 import { money } from "./utils/money.js";
 import { prefillEmail, clearFieldErrors, fieldError, setMsg } from "./utils/forms.js";
 import { writeLastOrder } from "./utils/order.js";
-import { cartItemHTML } from "./templates.js";
+import { cartItemHTML } from "./utils/templates.js";
 
 
 function renderCheckoutShell() {
@@ -89,8 +89,8 @@ function renderCheckoutShell() {
 
 renderCheckoutShell();
 const app = getApp();
-const shopWrap = app.querySelector(".js-shop");
-const rightBar = app.querySelector(".js-right-bar");
+const shopWrap = document.querySelector(".js-shop");
+const rightBar = document.querySelector(".js-right-bar");
 const form = app.querySelector("#checkout-form");
 const formMsg = app.querySelector("#checkout-msg");
 
