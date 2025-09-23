@@ -6,25 +6,27 @@ html {
     letter-spacing: 1px;
     color: #362E27;
     background-color: #FAFAFA;
-    
 }
 
 /* lists and links */
 
-ul {list-style: none;}
-a {text-decoration: none; color: inherit;}
+ul { list-style: none; }
+a { text-decoration: none; color: inherit; }
 
-
-/* Container */
+/* utils */
 
 .container {width: 100%; max-width: 730px; margin: 0;}
 
 /* Buttons */
 
-.btn { border: 0; cursor: pointer; font-family: Poppins;}
+.btn { 
+  display: inline-flex; 
+  cursor: pointer;
+  border: 0; 
+  font-family: Poppins, Roboto;
+}
 
 .btn-primary {
-  display: inline-flex;
   align-items: center; justify-content: center;
   width: 196px; height: 45px; border-radius: 15px;
   font-weight: 700; font-size: 1.25rem; letter-spacing: .6px;
@@ -43,38 +45,48 @@ a {text-decoration: none; color: inherit;}
   display: inline-flex;
   margin: 16px auto; border-radius: 12px;
   font-size: .95rem; font-weight: 700; text-align: center;
+  border: 0;
 }
 
 .form-msg.info {color: #3A7CA5;}
 .form-msg.success { color: #4ABA82;}
 .form-msg.error { color: #DA5D47;}
 
-.stars { min-height: 1.2rem; display: flex; align-items: center; color: #F4B400; font-size: 1.2rem; font-weight: 400;}
+.stars { 
+  min-height: 1.2rem; 
+  display: flex; 
+  align-items: center; 
+  color: #F4B400; 
+  font-size: 1.2rem; 
+  font-weight: 400;
+}
+
 .rating-num { font-size: 0.95rem; color: #362E27; font-weight: 500;}
 
 /* Logo */ 
 
 .logo img { visibility: visible;}
 
- /* Spinner */
+
+ /* ---- Spinner ---- */
  
 #page-loader {
-    position: fixed;
-    inset: 0;
-    background-color: #ccc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
+  position: fixed;
+  inset: 0;
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
   }
   
-  .spinner {
-    width: 50px;
-    height: 50px;
-    border: 5px solid #ccc;
-    border-top-color: #343434;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #ccc;
+  border-top-color: #343434;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
   }
   
   @keyframes spin {
@@ -83,7 +95,5 @@ a {text-decoration: none; color: inherit;}
     }
   }
   
-  body.loading {
-    overflow: hidden;
-  }
+  body.loading { overflow: hidden; }
 

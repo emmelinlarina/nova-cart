@@ -2,25 +2,25 @@
 /* --- mobile nav bar / hamburger --- */
 
 @media (max-width: 768px) {
+    
     .navbar {
-        display: flex; align-items: center; justify-content: center;
+        justify-content: center;
         width: 100%;
         padding: 150px 55px;
         background-color: #FAFAFA;
     }
 
-    .navbar p {display: block; line-height: 5px;}
+    .navbar p { display: block; line-height: 5px; }
     
- .menu {
+    .menu {
         position: fixed; inset: 0 auto 20%;
-        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
         text-align: left; width: 80%; height: 100vh;
         right: -100%; z-index: 100;
         background-color: #B6E1F4;
         transition: all 0.2s ease-in-out;
     }
-
-    
 
     #check:checked ~ .menu {right: 0;}
 
@@ -29,42 +29,36 @@
 
     .open-menu , .close-menu {display: block;}
     
+    .logo {
+        padding-top: 0; 
+        flex-grow: 1; 
+        text-align: center; }
 
-    .logo {padding-top: 0;  flex-grow: 1; text-align: center; width: auto;  max-width: 100%;}
-    .logo a {display: inline-block; line-height: 0;}
+    .logo a { line-height: 0;}
     .logo img {
         display: block;
         width: 240px;
         height: 120px;
         aspect-ratio: 2/1;
     }
-
 }
 
 /* --- Desktop ---  */
 
-
-@media (min-width: 769px) and (max-width: 2560px) { 
-
+@media (min-width: 769px) and (max-width: 2560px) {  
     .logo img {width: 170px;}
-
-    
 }
-
-
 
 /* --- FOOTER Desktop --- */
 
 @media (min-width: 1200px) and (max-width: 2560px) {
     
-    footer {
-        padding: 40px 50px 25px; font-size: 0.7rem;}
-    .row {width: 100%; flex-direction: row;}
-    .col, .col h5, .col ul li  {font-size: 0.75rem;}
-    .col h3 {font-size: 0.85rem;}
-    form input {width: 90%;}
-
+    footer { padding: 40px 50px 25px; font-size: 0.7rem; }
+    .row { width: 100%; flex-direction: row; }
+    .col, .col h5, .col ul li  { font-size: 0.75rem; }
+    .col h3 { font-size: 0.85rem; }
     
+    form input { width: 90%; }
 
  }
 

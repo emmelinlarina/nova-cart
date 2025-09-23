@@ -3,7 +3,6 @@
 .logo img {visibility: visible; }
 .cart-logo { display: none; max-width: 282px; margin: 0 auto;}
 
-
 .checkout-grid {
     width: 100%;
     max-width: 506px;
@@ -72,8 +71,6 @@
 .shop .box .price:not(:has(.was)) .now {
     color: #111110; background-color: transparent;
 }
-
-
 
 .shop .box .qty {
     grid-column: 2;
@@ -174,7 +171,6 @@
     cursor: pointer;
 }
 
-
 .field .label {
     display: block;
     margin-bottom: 6px;
@@ -186,8 +182,6 @@
     width: 100%;
     height: 50px; padding: 0 10px;
 }
-
-
 
 .order-summary .total {
     display: flex;
@@ -242,11 +236,10 @@
 }
 
 .btn-primary {
-    display: flex; align-items: center; justify-content: center;
+    display: flex; 
     margin: 60px auto; padding: 10px 30px 10px 30px;
-    
-    width: 196px; height: 45px; border-radius: 15px; font-size: 1.5rem;
-    background: #883729; color: #fff; border: 0; font-weight: 700;
+    font-size: 1.5rem;
+    background: #883729; color: #fff;
 } 
 
 .btn-primary:hover {

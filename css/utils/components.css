@@ -1,14 +1,13 @@
 
 /* ----- Global Header ----- */
 
-
 .navbar {
     width: 100%;
+    height: 94px;
     display: flex; justify-content: space-between; align-items: center;
     position: relative;
     background-color: #D8EAF0;
     padding: 0 40px 0 94px;
-    height: 94px;
     color: #111110;
     font-weight: 500;
 }
@@ -27,11 +26,12 @@
     align-items: center;
 }
 
-.menu li, .menu .btn-link {font-size: 1.5rem;}
+.menu li, 
+.menu .btn-link { font-size: 1.5rem; }
 .menu a {
-display: inline-block;
-text-transform: uppercase;
-padding: 10px;
+    display: inline-block;
+    text-transform: uppercase;
+    padding: 10px;
 }
 
 .menu .btn-link {
@@ -51,11 +51,7 @@ padding: 10px;
     transition: 0.15s ease-in-out;
 }
 
-.btn-link:hover {
-    cursor: pointer;
-}
-
-
+.btn-link:hover { cursor: pointer; }
 
 /* -----  HAMBURGER MENU ----- */
 
@@ -84,7 +80,6 @@ padding: 10px;
     height: 108px;
 }
 
-
 /* ----- GLOBAL FOOTER ----- */
 
 footer {
@@ -97,9 +92,9 @@ footer {
 
 .row {
     width: 90%; margin: auto;
-    display: flex; flex-direction: column; 
-    align-items: flex-start; justify-content: space-between;
+    display: flex; flex-direction: column;
     gap: 8px;
+    align-items: flex-start; justify-content: space-between;
 }
 
 footer form input {
@@ -114,30 +109,25 @@ footer form input::placeholder {
 }
 
 .col img {max-width: 100%;width: 150px;}
-
 .col h4 {display: flex; align-items: center; justify-content: center; text-align: left;} 
-
 .col h3 {font-size: 0.9rem; margin: 20px 0 20px; position: relative;}
 .col h5 {font-size: 0.8rem; margin-top: 20px;  margin: 12px 0 25px;letter-spacing: 1px;}
-
 .col ul li {line-height: 30px; font-size: 0.9rem;}
 .col li a {color: #FAFAFA;}
-
 .col p {line-height: 25px;}
 
 /* form */
 
-form {
+footer form {
     display: flex; width: 270px;
     padding-bottom: 5px; margin-bottom: 15px;
     border-bottom: 1px solid #FAFAFA;
 }
 
-form input {
-    width: 100%; padding: 0; background: transparent; border: 0;}
-form button {background: transparent; border: 0; padding: 5px; font-size: 1.1rem;}
+footer form input { width: 100%; padding: 0; background: transparent; border: 0; }
 
+footer form button { background: transparent; border: 0; padding: 5px; font-size: 1.1rem; }
 
-.col a:hover {font-weight: 600;}
+.col a:hover { font-weight: 600; }
 
-.social-icons {font-size: 1.15rem;}
+.social-icons { font-size: 1.15rem; }
