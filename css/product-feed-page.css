@@ -292,6 +292,7 @@
 
     .media {
         margin-bottom: 25px;
+        gap: 2px;
     }
 
    .info h2 {
@@ -338,8 +339,6 @@
     .latest-products .media > .price, 
     .latest-products .media > .stars, 
     .latest-products .media > .btn { font-size: 1.25rem; line-height: 35px; }
-
-    
 
     /* title clamp */
 

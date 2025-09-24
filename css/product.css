@@ -168,14 +168,14 @@ header {
 /* Share */
 
 .product .btn.js-share {
+    height: 34px;
     display: inline-flex;
     align-items: center;
-    padding: 4px 12px;
-    margin-bottom: 35px;
+    margin-bottom: 50px;
     border-radius: 12.5px;
     border: 2px;
     font-family: Poppins;
-    font-size: 1rem;
+    font-size: .87rem;
     font-weight: 600;
     cursor: pointer;
 }
@@ -432,7 +432,7 @@ header {
     }
 
     .product .reviews {
-        margin-top: 300px;
+        margin-top: 250px;
     }
 
     .product .btn.js-add-to-cart {

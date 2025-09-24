@@ -130,4 +130,4 @@ footer form button { background: transparent; border: 0; padding: 5px; font-size
 
 .col a:hover { font-weight: 600; }
 
-.social-icons { font-size: 1.15rem; }
+.social-icons { display: flex; font-size: 1.15rem; gap: 6px;}

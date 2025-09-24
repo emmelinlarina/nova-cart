@@ -10,7 +10,7 @@ const logoutBtn = document.querySelector('.js-logout');
 const token = getToken();
 
 if (token) {
-    if (authLink)  authLink.href = 'account.html'; 
+    if (authLink)  authLink.href = ""; 
     if (authText)  authText.textContent = getUser() || 'Account'; 
     if (logoutBtn) logoutBtn.hidden = false; 
 } else {
