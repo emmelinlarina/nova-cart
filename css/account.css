@@ -99,13 +99,23 @@
 .auth-1 .btn-primary { margin: 12px 0 22px 0; }
 
 .form-msg {
+    display: none;
     margin-top: 15px;
     margin-bottom: 5px;
     font-size: 0.65rem;
+    font-weight: 500;
     padding: 2.5px 10px;
     text-align: center;
     border-radius: 12px;
-    opacity: 0;
+    background-color: transparent;
+    color: inherit;
+}
+
+.form-msg:not(:empty) {
+    display: block;
+    background-color: #DA5D47;
+    color: white;
+    animation: msg-pop 180ms ease;
 }
 
 .form-msg.success {
@@ -115,8 +125,7 @@
 }
 
 .form-msg.error {
-    background-color: #DA5D47;
-    color: white;
+    
     opacity: 1;
     font-weight: 500;
 }
