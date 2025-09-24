@@ -37,28 +37,24 @@ function renderRegisterShell() {
             <form id="register-form" class="auth-form" novalidate>
                 <label class="field">
                     <input type="text" name="name" placeholder="Name" minlength="3" required>
-                    <span class="error-msg" id="err-name" aria-live="polite"></span>
                 </label>
 
                 <label class="field">
                     <input type="email" name="email" placeholder="Email" required>
-                    <span class="error-msg" id="err-email" aria-live="polite"></span>
                 </label>
 
                 <label class="field password-field">
-                    
-                    <input type="password" name="password" id="register-password" placeholder="Password" minlength="3"
-                        required>
-                    <button type="button" class="toggle-pw" aria-label="Show Password" aria-pressed="false"
-                        title="Show Password"> <i class="fa-solid fa-eye"></i> </button>
+                    <input type="password" name="password" id="register-password" placeholder="Password" minlength="3" required>
+                    <button type="button" class="toggle-pw" aria-label="Show Password" aria-pressed="false" title="Show Password"> 
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
                 </label>
 
-                <span class="error-msg" id="err-password" aria-live="polite"></span>
-                <button class="btn btn-primary" type="submit">Sign up</button>
-                <p class="form-msg" id="register-msg" aria-live="polite"></p>
+                <button id="register-submit" class="btn btn-primary" type="submit">Sign up</button>
             </form>
         </section>
 
+        <p class="form-msg" id="register-msg" aria-live="polite"></p>
         <p class="auth-switch">
             Already have an account?
             <a href="login.html">Log in</a>
@@ -67,79 +63,61 @@ function renderRegisterShell() {
     `;
 }
 
-function clearAllFieldErrors(form) {
-    form.querySelectorAll(".error-msg").forEach(el => { 
-        el.textContent = "";
-        el.style.display = "none"; 
+function clearFieldStyles(form) {
+    form.querySelectorAll("input").forEach((i) => { 
+        i.classList.remove("is-invalid");
+        i.removeAttribute("aria-invalid");
     });
-    form.querySelectorAll("input").forEach(i => i.classList.remove("is-invalid"));
 }
 
-function setFieldError(form, name, text) {
-    const input = form.querySelector(`input[name="${name}"]`);
-
-    let errEl = input?.closest(".field")?.querySelector(".error-msg");
-    if (!errEl && input) {
-        errEl = document.createElement("span");
-        errEl.className = "error-msg";
-        errEl.setAttribute("aria-live", "polite");
-        input.insertAdjacentElement("afterend", errEl);
-    }
-    if (input) input.classList.add("is-invalid");
-    if (errEl) {
-        errEl.textContent = text;
-        errEl.style.display = "block";
-    }
+function markInvalid(input) {
+    if (!input) return;
+    input.classList.add("is-invalid");
+    input.setAttribute("aria-invalid", "true");
 }
 
 function wireForm() {
     const form = q("register-form");
     if (!form) return;
 
+    initPasswordToggleScoped('.password-field');
+
     form.querySelectorAll("input").forEach((input) => {
-    input.addEventListener("input", () => {
-        input.classList.remove("is-invalid");
-        const errEl = input.closest(".field")?.querySelector(".error-msg") || input.nextElementSibling;
-        if (errEl && errEl.classList.contains("error-msg")) {
-            errEl.textContent = "";
-            errEl.style.display = "none";
-        }
+        input.addEventListener("input", () => {
+            input.classList.remove("is-invalid");
+            input.removeAttribute("aria-invalid");
+        
     });
 });
 
-initPasswordToggleScoped('.password-field');
-
 const submitBtn = q("register-submit");
+
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    clearAllFieldErrors(form);
-    setMsg("");
+
+    clearFieldStyles(form);
+    setMsg("register-msg");
     showLoader(true);
-    if (submitBtn) submitBtn.disabled = true;
+    submitBtn?.setAttribute("disabled", "true");
     form.querySelectorAll("input, button").forEach((el) => el.setAttribute("disabled", "true"));
 
     const formData = new FormData(form);
-    const name = (formData.get("name") || "").trim();
-    const email = (formData.get("email")|| "").trim();
-    const password = formData.get("password") || "";
+    const name = (formData.get("name") || "").toString().trim();
+    const email = (formData.get("email")|| "").toString().trim();
+    const password = (formData.get("password") || "").toString();
 
-    let clientHasErrors = false;
-    if (name.length < 3) {
-        setFieldError(form, "name", "Name must be at least 3 characters");
-        clientHasErrors = true;
+    let hasErrors = false;
+    if (name.length < 3) { markInvalid(form.querySelector('[name="name"]')); hasErrors = true;
     }
-    if (!email.includes("@")) {
-        setFieldError(form, "email", "Please enter valid email");
-        clientHasErrors = true;
+    if (!email || !email.includes("@")) { markInvalid(form.querySelector('[name="email"]')); hasErrors = true;
+    }
+    if (password.length < 3) { markInvalid(form.querySelector('[name="password"]')); hasErrors = true;
     }
 
-    if (password.length < 3) {
-        setFieldError(form, "password", "Password must be at least 3 characters");
-        clientHasErrors = true;
-    }
-    if (clientHasErrors) {
-        setMsg("Please fix the hightlighted fields", "error");
-        if (submitBtn) submitBtn.disabled = false;
+    if (hasErrors) {
+        setMsg("register-msg", "Please fix the hightlighted fields", "error");
+        form.querySelector("input.is-invalid")?.focus();
+        submitBtn?.removeAttribute("disabled");
         form.querySelectorAll("input, button").forEach((el) => el.removeAttribute("disabled"));
         showLoader(false);
         return;
@@ -148,25 +126,31 @@ form.addEventListener("submit", async (e) => {
     try {
         const data = await register({ name, email, password });
         saveUser(data.data);
-        setMsg("Account created! Redirecting...", "success");
+        setMsg("register-msg", "Account created! Redirecting...", "success");
         setTimeout(() => {
             location.href = "index.html";
         }, 1500);
     } catch (err) {
-        const m = String(err?.message || "").toLowerCase();
-        if (m.includes("name")) setFieldError(form, "name", err.message);
-        else if (m.includes("email")) setFieldError(form, "email", err.message);
-        else if (m.includes("password")) setFieldError(form, "password", err.message);
-        else setMsg(err.message || "Registration Failed", "error");
+        const m = String(err?.message || "");
+
+        if (/name/i.test(m)) markInvalid(form.querySelector('[name="name"]'));
+        if (/email/i.test(m))  markInvalid(form.querySelector('[name="email"]'));
+        if (/password/i.test(m))  markInvalid(form.querySelector('[name="password"]'));
+        if (/name|email|password/i.test(m)) {
+            markInvalid(form.querySelector('[name="name"]'));
+            markInvalid(form.querySelector('[name="email"]'));
+            markInvalid(form.querySelector('[name="password"]'));
+        }
+        setMsg("register-msg", err.message || "Registration Failed", "error");
+        form.querySelector("input.is-invalid")?.focus();
     } finally {
-        if (submitBtn) submitBtn.disabled = false;
-        form.querySelectorAll("input, button").forEach((el) => el.removeAttribute("disabled"));
-        showLoader(false);
+        submitBtn?.removeAttribute("disabled");
+            form.querySelectorAll("input, button").forEach(el => el.removeAttribute("disabled"));
+            showLoader(false);
         }
     });
 
 }
-
 
 (function init() {
     renderRegisterShell();
