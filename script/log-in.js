@@ -101,6 +101,7 @@ function wireForm() {
         input.addEventListener("input", () => {
             input.classList.remove("is-invalid");
             input.removeAttribute("aria-invalid");
+            setMsg("login-msg", "");
         });
     });
 
@@ -110,31 +111,34 @@ function wireForm() {
     e.preventDefault();
 
     clearFieldStyles(form);
-    setMsg("login-msg");
+    setMsg("login-msg", "");
     showLoader(true);
     submitBtn?.setAttribute("disabled", "true");
     form.querySelectorAll("input, button").forEach((el) => el.setAttribute("disabled", "true"));
 
-    const formData = new FormData(form);
-    const email = (formData.get("email") || "").toString().trim();
-    const password = (formData.get("password") || "").toString();
+    const emailEl = form.querySelector('[name="email"]');
+    const passEl = form.querySelector('[name="password"]');
+    const email = (emailEl?.value || "").trim();
+    const password = (passEl?.value || "");
 
-    let hasErrors = false;
-    if (!email || !email.includes("@")) { 
-        markInvalid(form.querySelector('[name="email"]'));
-        hasErrors  = true; }
-    if (!password) { 
-        markInvalid(form.querySelector('[name="password"]'));
-        hasErrors = true; }
-
-    if (hasErrors) {
-        setMsg("login-msg", "Please fix the highlighted fields", "error");
-        form.querySelector("input.is-invalid")?.focus();
-        submitBtn?.removeAttribute("disabled");
-        form.querySelectorAll("input, button").forEach((el) => el.removeAttribute("disabled"));
-        showLoader(false);
-        return;
-    }
+    const messages = [];
+        if (!email || !email.includes("@")) { 
+            markInvalid(emailEl);
+            messages.push("Please enter valid email");
+        }
+        if (password.length < 3) { 
+            markInvalid(passEl);
+            messages.push("Password enter your password");
+        }
+    
+        if (messages.length) {
+            setMsg("login-msg", messages[0], "error");
+            form.querySelector("input.is-invalid")?.focus();
+            submitBtn?.removeAttribute("disabled");
+            form.querySelectorAll("input, button").forEach((el) => el.removeAttribute("disabled"));
+            showLoader(false);
+            return;
+        }
 
     try {
         const data = await login({email, password });
@@ -143,17 +147,33 @@ function wireForm() {
         setTimeout(() => { location.href = "index.html";}, 900);
 
     } catch (err) {
-        const m = String(err.message || "").toLowerCase();
-        if (m.includes("email")) markInvalid(form.querySelector('[name="email"]'));
-        if (m.includes("password")) markInvalid(form.querySelector('[name="password"]'));
-        if (!m.includes("email") && !m.includes("password")) {
-            markInvalid(form.querySelector('[name="email"]'));
-            markInvalid(form.querySelector('[name="password"]'));
+        const raw = String(err?.message || "Login Failed");
+        const lower = raw.toLowerCase();
+
+        const emailBad = /email/.test(lower);
+        const passBad = /password/.test(lower);
+
+        if (emailBad) markInvalid(emailEl);
+        if (passBad) markInvalid(passEl);
+        if (!emailBad && !passBad) {
+            markInvalid(emailEl);
+            markInvalid(passEl);
         }
-        setMsg("login-msg", err.message || "Invalid email or password", "error");
-        form.querySelector("input.is-invalid")?.focus();
-        } finally {
-            submitBtn?.removeAttribute("disabled");
+
+        let display = raw;
+        if (/exist|taken|registered|already|conflict/.test(lower)) {
+            display = "Email is already registered"
+        } else if (/password/.test(lower) && /short|least|length/.test(lower)) {
+            display = "Password must have at least 3 characters"
+        } else if (/password/.test(lower)) {
+            display = "Password is incorrect";
+        }
+
+        setMsg("login-msg", "error");
+        (form.querySelector("input.is-invalid") || form.querySelector('[name="name"]'))?.focus();
+
+    } finally {
+        submitBtn?.removeAttribute("disabled");
             form.querySelectorAll("input, button").forEach(el => el.removeAttribute("disabled"));
             showLoader(false);
         }
