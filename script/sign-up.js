@@ -102,10 +102,13 @@ form.addEventListener("submit", async (e) => {
     submitBtn?.setAttribute("disabled", "true");
     form.querySelectorAll("input, button").forEach((el) => el.setAttribute("disabled", "true"));
 
-    const formData = new FormData(form);
-    const name = (formData.get("name") || "").toString().trim();
-    const email = (formData.get("email")|| "").toString().trim();
-    const password = (formData.get("password") || "").toString();
+    const nameEl = form.querySelector('[name="name"]');
+    const emailEl = form.querySelector('[name="email"]');
+    const passEl = form.querySelector('[name="password"]');
+
+    const name = (nameEl?.value || "").trim();
+    const email = (emailEl?.value || "").trim();
+    const password = passEl?.value || "";
 
     const messages = [];
     if (name.length < 3) { 
