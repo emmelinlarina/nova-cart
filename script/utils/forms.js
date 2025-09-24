@@ -7,7 +7,7 @@ export function setMsg(elOrId, text, kind = "info") {
 
 export function clearFieldErrors(form) {
     if (!form) return;
-    form.querySelectorAll(".error-msg").forEach((el) => { el.textContent = ""; el.style.display = "none"; });
+    form.querySelectorAll(".error-msg").forEach((el) => { el.textContent = ""; el.style.display = ""; });
     form.querySelectorAll("input").forEach((i) => i.classList.remove("is-invalid"));
 }
 

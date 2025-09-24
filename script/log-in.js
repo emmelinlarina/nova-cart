@@ -1,7 +1,7 @@
 import { saveUser } from "./utils/storage.js";
 import { getApp, q } from "./utils/dom.js";
 import { showLoader } from "./utils/loader.js";
-import { setMsg, clearFieldErrors, fieldError } from "./utils/forms.js";
+import { setMsg } from "./utils/forms.js";
 
 async function login({ email, password }) {
     const res = await fetch("https://v2.api.noroff.dev/auth/login", {
@@ -35,7 +35,6 @@ function renderLoginShell() {
             <form id="login-form" class="auth-form" novalidate>
                 <label class="field ">
                     <input type="email" name="email" placeholder="Email" autocomplete="email" required>
-                    <span class="error-msg" aria-live="polite"></span>
                 </label>
 
                 <label class="field password-field">
@@ -43,10 +42,9 @@ function renderLoginShell() {
                     <button type="button" class="toggle-pw" aria-label="Show Password" aria-pressed="false" title="Show Password">
                         <i class="fa-solid fa-eye"></i> 
                     </button>
-                    <span class="error-msg" aria-live="polite"></span>
                 </label>
 
-                <button class="btn btn-primary" type="submit">Log in</button>
+                <button id="login-submit" class="btn btn-primary" type="submit">Log in</button>
             </form>
         </section>
 
@@ -80,6 +78,19 @@ export function initPasswordToggleScoped(fieldSelector) {
         setPwState(false);
 }
 
+function clearFieldStyles(form) {
+    form.querySelectorAll("input").forEach((i) => { 
+        i.classList.remove("is-invalid");
+        i.removeAttribute("aria-invalid");
+    });
+}
+
+function markInvalid(input) {
+    if (!input) return;
+    input.classList.add("is-invalid");
+    input.setAttribute("aria-invalid", "true");
+}
+
 function wireForm() {
     const form = q("login-form");
     if (!form) return;
@@ -89,55 +100,60 @@ function wireForm() {
     form.querySelectorAll("input").forEach((input) => {
         input.addEventListener("input", () => {
             input.classList.remove("is-invalid");
-            const em = input.closest(".field")?.querySelector(".error-msg");
-            if (em) { em.textContent = ""; em.style.display = "none"; }
-            setMsg("login-msg", "");
+            input.removeAttribute("aria-invalid");
         });
     });
+
+    const submitBtn = q("login-submit");
 
     form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    clearFieldErrors(form);
-    setMsg("login-msg", "");
+    clearFieldStyles(form);
+    setMsg("login-msg");
+    showLoader(true);
+    submitBtn?.setAttribute("disabled", "true");
+    form.querySelectorAll("input, button").forEach((el) => el.setAttribute("disabled", "true"));
 
     const formData = new FormData(form);
-    const email = String(formData.get("email") || "").trim();
-    const password = String(formData.get("password") || "");
+    const email = (formData.get("email") || "").toString().trim();
+    const password = (formData.get("password") || "").toString();
 
-    let hasError = false;
-    if (!email) { fieldError(form, "email", "Please enter your email"); hasError = true; }
-    if (!password) { fieldError(form, "password", "Please enter your password"); hasError = true; }
+    let hasErrors = false;
+    if (!email || !email.includes("@")) { 
+        markInvalid(form.querySelector('[name="email"]'));
+        hasErrors  = true; }
+    if (!password) { 
+        markInvalid(form.querySelector('[name="password"]'));
+        hasErrors = true; }
 
-    if (hasError) {
-        (form.querySelector("input.is-invalid" || form.querySelector("[name=email]"))?.focus());
+    if (hasErrors) {
+        setMsg("login-msg", "Please fix the highlighted fields", "error");
+        form.querySelector("input.is-invalid")?.focus();
+        submitBtn?.removeAttribute("disabled");
+        form.querySelectorAll("input, button").forEach((el) => el.removeAttribute("disabled"));
+        showLoader(false);
         return;
     }
-
-    
-    form.querySelectorAll("input, button").forEach(el => el.setAttribute("disabled", "true"));
 
     try {
         const data = await login({email, password });
         saveUser(data.data);
         setMsg("login-msg", "Logged in! Redirecting...", "success");
         setTimeout(() => { location.href = "index.html";}, 900);
+
     } catch (err) {
         const m = String(err.message || "").toLowerCase();
-        if (m.includes("email")) {
-            fieldError(form, "email", err.message);
-            form.querySelector("[name=email]")?.focus();
-        } else if (m.includes("password")) {
-            fieldError(form, "password", err.message);
-            form.querySelector("[name=password]")?.focus();
-        } else {
-            fieldError(form, "email", "Check your email or password");
-            fieldError(form, "password", "Check your email or password");
-            form.querySelector("[name=email]")?.focus();
-            setMsg("login-msg", err.message || "Login Failed", "error");
-        } 
-    
-        }finally {
+        if (m.includes("email")) markInvalid(form.querySelector('[name="email"]'));
+        if (m.includes("password")) markInvalid(form.querySelector('[name="password"]'));
+        if (!m.includes("email") && !m.includes("password")) {
+            markInvalid(form.querySelector('[name="email"]'));
+            markInvalid(form.querySelector('[name="password"]'));
+        }
+        setMsg("login-msg", err.message || "Invalid email or password", "error");
+        form.querySelector("input.is-invalid")?.focus();
+        } finally {
+            submitBtn?.removeAttribute("disabled");
             form.querySelectorAll("input, button").forEach(el => el.removeAttribute("disabled"));
             showLoader(false);
         }

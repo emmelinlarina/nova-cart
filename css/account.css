@@ -31,7 +31,7 @@
 
 .auth-switch {
     font-size: 0.87rem;
-    margin: 25px 0 350px;
+    margin: 5px 0 350px;
 }
 
 .auth-switch a {
@@ -57,8 +57,8 @@
 .auth-form {
     width: min(265px, 100%);
     display: grid;
-    gap: 10px;
     text-align: left;
+    gap: 19px;
 }
 
 .auth .field { display: grid; gap: 6px; }
@@ -73,10 +73,11 @@
     background-color: white;
     border: none;
     font-family: Poppins;
-    font-size: 0.87rem;
+    font-size: 0.75rem;
     font-style: normal;
     font-weight: 600;
     letter-spacing: 0.42px;
+    
 }
 
 .btn-primary {
@@ -99,32 +100,36 @@
 
 .form-msg {
     margin-top: 15px;
-    font-size: 0.87rem;
-    min-height: 1.3rem;
+    margin-bottom: 5px;
+    font-size: 0.65rem;
+    padding: 2.5px 10px;
     text-align: center;
     border-radius: 12px;
+    opacity: 0;
+}
+
+.form-msg.success {
+    background-color: #4ABA82;
+    color: white;
+    opacity: 1;
+}
+
+.form-msg.error {
+    background-color: #DA5D47;
+    color: white;
+    opacity: 1;
+    font-weight: 500;
 }
 
 .is-invalid {
-    outline: 2px solid #e74c3c;
+    outline: 2px solid #DA5D47;
     outline-offset: 0;
 }
 
 /* ---- Error msg ----*/
 
 .auth .field { gap: 6px; }
-
-.auth .error-msg {
-    font-weight: 500;
-    min-height: 40px;
-    color: #ffffff;
-    background-color: #DA5D47;
-    display: block;
-    font-size: 0.70rem;
-    padding: 5px;
-    border-radius: 8px;
-}
-
+.auth .error-msg { background-color: #DA5D47; }
 .auth .error-msg:empty { background-color: transparent; }
 
 /* Toggle Password */
@@ -132,7 +137,7 @@
 .password-field {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     position: relative;
 }
 
@@ -140,7 +145,9 @@
 
 .toggle-pw {
     position: absolute;
+    top: 25%;
     display: grid;
+    justify-items: center;
     right: 8px;
     border: none;
     background-color: transparent;
