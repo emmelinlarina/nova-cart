@@ -143,6 +143,7 @@
     display: grid;
     right: 8px;
     border: none;
+    background-color: transparent;
     color: #A09C97;
     font-size: .87rem;
     margin-top: 2.5px;
