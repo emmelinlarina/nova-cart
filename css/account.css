@@ -97,6 +97,7 @@
 }
 
 .auth-1 .btn-primary { margin: 12px 0 22px 0; }
+.auth-1 .btn-primary:active { transform: translateY(1px) scale(.95); }
 
 .form-msg {
     display: none;

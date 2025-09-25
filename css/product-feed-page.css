@@ -47,11 +47,18 @@
     text-align: left;
 }
 
-/* placeholder for no stars */
+
 
 .stars { min-height: 1.2rem; display: flex; align-items: center; }
-.btn { border: none; background-color: #FAFAFA; font-size: 1.2rem; }
-.btn:hover{ color: #883729; cursor: pointer; }
+
+/* add to cart btn */
+.btn { border: none; background-color: transparent; font-size: 1.2rem; border-radius: 12px; }
+
+
+.btn i:hover {  color: #883729; cursor: pointer; filter: brightness(.98); } 
+.btn i:active { color: #883729; transform: translateY(1px) scale(.95); }
+
+
 
 /* ---- SLIDESHOW ---- */
 

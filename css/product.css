@@ -184,7 +184,8 @@ header { margin-bottom: 30px; }
 }
 
 
-.product .btn.js-add-to-cart:hover { filter: brightness(1.1); cursor: pointer;}
+.product .btn.js-add-to-cart:hover { background: #66291e;  cursor: pointer;}
+.product .btn.js-add-to-cart:active {  transform: translateY(1px) scale(.95); }
 
 /* Login to buy */
 
