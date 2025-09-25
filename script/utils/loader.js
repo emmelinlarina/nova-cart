@@ -8,7 +8,7 @@ export function ensurePageLoader() {
         loader.className = "page-loader";
         loader.style.display = "none";
         loader.innerHTML = `<div class="spinner"></div>`;
-        getApp().prepend(loader);
+        document.body.appendChild(loader);
     }
     return loader;
 }

@@ -73,8 +73,8 @@ a { text-decoration: none; color: inherit; }
 #page-loader {
   position: fixed;
   inset: 0;
-  background-color: #ccc;
-  display: flex;
+  background-color: #EFEFEF;
+  display: none;
   justify-content: center;
   align-items: center;
   z-index: 9999;

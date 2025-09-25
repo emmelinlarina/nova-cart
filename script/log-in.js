@@ -108,75 +108,81 @@ function wireForm() {
     const submitBtn = q("login-submit");
 
     form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    clearFieldStyles(form);
-    setMsg("login-msg", "");
-    showLoader(true);
-    submitBtn?.setAttribute("disabled", "true");
-    form.querySelectorAll("input, button").forEach((el) => el.setAttribute("disabled", "true"));
+        clearFieldStyles(form);
+        setMsg("login-msg", "");
 
-    const emailEl = form.querySelector('[name="email"]');
-    const passEl = form.querySelector('[name="password"]');
-    const email = (emailEl?.value || "").trim();
-    const password = (passEl?.value || "");
+        const emailEl = form.querySelector('[name="email"]');
+        const passEl = form.querySelector('[name="password"]');
+        const email = (emailEl?.value || "").trim();
+        const password = (passEl?.value || "");
 
-    const messages = [];
-        if (!email || !email.includes("@")) { 
-            markInvalid(emailEl);
-            messages.push("Please enter valid email");
-        }
-        if (password.length < 3) { 
-            markInvalid(passEl);
-            messages.push("Please enter your password");
-        }
-    
-        if (messages.length) {
-            setMsg("login-msg", messages[0], "error");
-            form.querySelector("input.is-invalid")?.focus();
+        const messages = [];
+            if (!email || !email.includes("@")) { 
+                markInvalid(emailEl);
+                messages.push("Please enter valid email");
+            }
+            if (password.length < 3) { 
+                markInvalid(passEl);
+                messages.push("Please enter your password");
+            }
+
+            if (messages.length) {
+                setMsg("login-msg", messages[0], "error");
+                form.querySelector("input.is-invalid")?.focus();
+                submitBtn?.removeAttribute("disabled");
+                form.querySelectorAll("input, button").forEach((el) => el.removeAttribute("disabled"));
+                showLoader(false);
+                return;
+            }
+
+            const submitBtn = q("login-submit");
+            submitBtn?.setAttribute("disabled", "true");
+            form.querySelectorAll("input, button").forEach(el => el.setAttribute("disabled", "true"));
+
+            let success = false;
+
+        try {
+            const data = await login({email, password });
+            saveUser(data.data);
+
+            success = true;
+            setMsg("login-msg", "Logged in! Redirecting...", "success");
+            showLoader(true);
+            setTimeout(() => { location.href = "index.html";}, 900);
+
+        } catch (err) {
+            const raw = String(err?.message || "Login Failed");
+            const lower = raw.toLowerCase();
+
+            const emailBad = /email/.test(lower);
+            const passBad = /password/.test(lower);
+
+            if (emailBad) markInvalid(emailEl);
+            if (passBad) markInvalid(passEl);
+            if (!emailBad && !passBad) {
+                markInvalid(emailEl);
+                markInvalid(passEl);
+            }
+
+            let display = raw;
+            if (/exist|taken|registered|already|conflict/.test(lower)) {
+                display = "Email is already registered"
+            } else if (/password/.test(lower) && /short|least|length/.test(lower)) {
+                display = "Password must have at least 3 characters"
+            } else if (/password/.test(lower)) {
+                display = "Password is incorrect";
+            }
+
+            setMsg("login-msg", "error");
+            (form.querySelector("input.is-invalid") || form.querySelector('[name="name"]'))?.focus();
+
+        } finally {
             submitBtn?.removeAttribute("disabled");
-            form.querySelectorAll("input, button").forEach((el) => el.removeAttribute("disabled"));
-            showLoader(false);
-            return;
-        }
-
-    try {
-        const data = await login({email, password });
-        saveUser(data.data);
-        setMsg("login-msg", "Logged in! Redirecting...", "success");
-        setTimeout(() => { location.href = "index.html";}, 900);
-
-    } catch (err) {
-        const raw = String(err?.message || "Login Failed");
-        const lower = raw.toLowerCase();
-
-        const emailBad = /email/.test(lower);
-        const passBad = /password/.test(lower);
-
-        if (emailBad) markInvalid(emailEl);
-        if (passBad) markInvalid(passEl);
-        if (!emailBad && !passBad) {
-            markInvalid(emailEl);
-            markInvalid(passEl);
-        }
-
-        let display = raw;
-        if (/exist|taken|registered|already|conflict/.test(lower)) {
-            display = "Email is already registered"
-        } else if (/password/.test(lower) && /short|least|length/.test(lower)) {
-            display = "Password must have at least 3 characters"
-        } else if (/password/.test(lower)) {
-            display = "Password is incorrect";
-        }
-
-        setMsg("login-msg", "error");
-        (form.querySelector("input.is-invalid") || form.querySelector('[name="name"]'))?.focus();
-
-    } finally {
-        submitBtn?.removeAttribute("disabled");
-            form.querySelectorAll("input, button").forEach(el => el.removeAttribute("disabled"));
-            showLoader(false);
-        }
+                form.querySelectorAll("input, button").forEach(el => el.removeAttribute("disabled"));
+                showLoader(false);
+            }
     });
 }
 
