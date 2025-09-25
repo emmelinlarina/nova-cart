@@ -30,7 +30,7 @@ function renderHomeShell() {
             aria-label="Featured products"
             aria-live="polite"
             tabindex="0">
-            <h2 class="visually-hidden">Featured products</h2>
+            <h1 class="visually-hidden">Featured products</h1>
             <div class="slides" id="slides"></div>
                 <div class="controls">
                     <button class="prev" type="button" aria-label="Previous" aria-controls="slides">
