@@ -34,17 +34,20 @@ function renderCheckoutShell() {
                 <h2>Delivery</h2>
 
                 <label class="field">
+                <span class="visually-hidden">Name</span>
                     <input type="text" id="fullName" name="fullName" placeholder="Full name" autocomplete="name"
                         required />
                     <span class="error-msg" aria-live="polite"></span>
                 </label>
 
                 <label class="field">
+                <span class="visually-hidden">Email</span>
                     <input type="text" id="email" name="email" placeholder="Email" autocomplete="email" required />
                     <span class="error-msg" aria-live="polite"></span>
                 </label>
 
                 <label class="field">
+                <span class="visually-hidden">Address</span>
                     <input type="text" id="address" name="address" placeholder="Address" autocomplete="street-address"
                         required />
                     <span class="error-msg" aria-live="polite"></span>
@@ -52,12 +55,14 @@ function renderCheckoutShell() {
 
                 <div class="grid-2">
                     <label class="field">
+                    <span class="visually-hidden">City</span>
                         <input type="text" id="city" name="city" placeholder="City" autocomplete="address-level2"
                             required />
                         <span class="error-msg" aria-live="polite"></span>
                     </label>
 
                     <label class="field">
+                    <span class="visually-hidden">Postal code</span>
                         <input type="text" id="postal" name="postal" placeholder="Postal code"
                             autocomplete="postal-code" required />
                         <span class="error-msg" aria-live="polite"></span>
@@ -65,6 +70,7 @@ function renderCheckoutShell() {
 
                 </div>
                 <label class="field">
+                <span class="visually-hidden">Country</span>
                     <input type="text" id="country" name="country" placeholder="Country" autocomplete="country-name"
                         required />
                     <span class="error-msg" aria-live="polite"></span>
@@ -73,6 +79,7 @@ function renderCheckoutShell() {
                 <h2>Payment</h2>
 
                 <fieldset class="pay-methods">
+                <legend class="visually-hidden">Payment method</legend>
                     <label> <input type="radio" id="card" name="payment" value="card" checked>Card</label>
                     <label> <input type="radio" id="vipps" name="payment" value="vipps">Vipps </label>
                     <label> <input type="radio" id="paypal" name="payment" value="paypal">Paypal </label>

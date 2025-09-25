@@ -3,7 +3,7 @@ export const SITE = {
     logo: {
         header: "images/logo/NovaCart_brown_cropped.png",
         footer: "images/logo/NovaCart_logo_cropped.png", 
-        alt: "Novacart logo",
+        alt: "NovaCart logo",
     },
     address: [
         "789 Shopping Avenue, Suite 101",

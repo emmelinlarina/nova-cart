@@ -1,8 +1,17 @@
 export function setMsg(elOrId, text, kind = "info") {
     const el = typeof elOrId === "string" ? document.getElementById(elOrId) : elOrId;
     if (!el) return;
+
     el.textContent = text;
     el.className = `form-msg ${kind}`;
+
+    if (kind === "error") {
+        el.setAttribute("role", "alert");
+        el.setAttribute("aria-live", "assertive");
+    } else {
+        el.setAttribute("role", "status");
+        el.setAttribute("aria-live", "polite");
+    }
 }
 
 export function clearFieldErrors(form) {

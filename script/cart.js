@@ -74,7 +74,7 @@ export function updateCartQuantity() {
     const el = document.querySelector(".js-cart-quantity");
     if (el) el.textContent = total;
 }
-
+    
 export function computeTotals() {
     const original = cart.reduce((sum, it) => sum + it.p.price * it.q, 0);
     const pay = cart.reduce(

@@ -5,6 +5,8 @@ export function getApp() {
     if (!el) {
         el = document.createElement("main");
         el.id = "app";
+        el.setAttribute("role", "main");
+        el.setAttribute("tabindex", "-1")
         document.body.insertBefore(el, document.getElementById("site-footer") || null);
     }
     return el;

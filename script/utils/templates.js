@@ -1,7 +1,7 @@
 import { money } from "./money.js";
 
 export const imgSrc = (p) => p?.image?.url || "images/fallback.png";
-export const imgAlt = (p) => p?.image?.alt || p?.title || "Product image";
+export const imgAlt = (p) => p?.image?.alt || p?.title ? `Image of ${p.title}` : "Product image";
 
 export function saleBadge(p) {
     if (typeof p.price !== 'number' || typeof p.discountedPrice !== 'number') return '';
@@ -16,11 +16,12 @@ export function priceHTML(p) {
                         p.discountedPrice < p.price;
 
     if (hasDiscount) {
-        const now = money.format(p.discountedPrice);
-        const was = money.format(p.price);
         return `<div class="price">
                     <span class="now">${money.format(p.discountedPrice)}</span>
-                    <span class="was" aria-label="was price">${money.format(p.price)}</span>
+                    <del class="was">
+                        <span class="visually-hidden">Previous price: </span>
+                        ${money.format(p.price)}
+                    </del>
                 </div>`;
     }
         return ` <div class="price">
@@ -43,7 +44,7 @@ export function starsHTML(rating, { showNumber = false } = {}) {
     const full = Math.floor(r);
     const empty = 5 - full;
     return `
-        <span class="stars" aria-label="Rated ${rating.toFixed(1)} out of 5">
+        <span class="stars" aria-hidden="true">
             ${'★'.repeat(full)}${'☆'.repeat(empty)}
         </span>${showNumber ? `<span class="rating-num">${r.toFixed(1)}</span>` : ""}
     `;
@@ -143,18 +144,20 @@ export function cartItemHTML({ p, q }) {
                 ${
                     hasDiscount
                     ? `<span class="now">${money.format(p.discountedPrice)}</span>
-                        <span class="was">${money.format(p.price)}</span>`
+                        <del class="was">${money.format(p.price)}</del>`
                     : `<span class="now">${money.format(p.price)}</span>`
                 }
             </div>
             <div class="qty">
-                <button class="qty-dec" data-id="${p.id}" aria-label="Decrease">-</button>
+                <button class="qty-dec" data-id="${p.id}"
+                 aria-label="Decrease quantity">-</button>
                 <span class="qty-val">${q}</span>
-                <button class="qty-inc" data-id="${p.id}" aria-label="Increase">+</button>
+                <button class="qty-inc" data-id="${p.id}" 
+                aria-label="Increase quantity">+</button>
             </div>
             <p class="btn-area">
-                <button class="btn2 js-delete-link" data-product-id="${p.id}">
-                    <i class="fa-solid fa-trash"></i> Remove
+                <button class="btn2 js-delete-link" data-product-id="${p.id}" aria-label="Remove ${p.title} from cart">
+                    <i class="fa-solid fa-trash" aria-hidden="true"></i> Remove
                 </button>
             </p>
         </div>
