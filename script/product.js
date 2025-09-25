@@ -8,6 +8,7 @@ import { imgSrc, imgAlt, saleBadge, priceHTML, reviewSectionHTML } from "./utils
 
 const isLoggedIn = !!getToken();
 
+
 function renderProductShell() {
     const app = getApp();
     app.innerHTML = `
@@ -27,7 +28,7 @@ function renderProducts(p) {
 
     const imageUrl = imgSrc(p);
     const imageAlt = imgAlt(p);
-
+    const redirectURL = encodeURIComponent(location.pathname + location.search);
 
     container.innerHTML = `
 
@@ -50,10 +51,12 @@ function renderProducts(p) {
 
                 <button class="btn btn-outline js-share" aria-label="Copy product link">Share</button>
             </div>
+
+            
             
             ${isLoggedIn 
                 ? `<button class="btn js-add-to-cart" data-product-id="${p.id}" aria-label="Add ${p.title} to cart">Buy</button>`
-                : `<a class="btn btn-outline" href="login.html">Log in to buy</a>`}
+                : `<a class="btn btn-outline" href="login.html?redirect=${redirectURL}">Log in to buy</a>`}
 
                 <div class ="js-inline-message" aria-live="polite"></div>
         </div>  

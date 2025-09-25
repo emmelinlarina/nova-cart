@@ -1,9 +1,22 @@
-import { saveUser } from "./utils/storage.js";
+import { getToken, saveUser } from "./utils/storage.js";
 import { initPasswordToggleScoped } from "./log-in.js";
 import { getApp, q } from "./utils/dom.js";
 import { showLoader } from "./utils/loader.js";
 import { setMsg } from "./utils/forms.js";
 
+function getRedirectParam() {
+    const params = new URLSearchParams(location.search);
+    return params.get("redirect")
+}
+
+function isSafeRedirect(url) {
+    return typeof url === "string" && url.startsWith("/");
+}
+
+function normalizeRedirect(r) {
+    if (!r) return null;
+    return r.startsWith("/") ? r : `/${r}`;
+}
 
 async function register({ name, email, password }) {
     const res = await fetch("https://v2.api.noroff.dev/auth/register", {
@@ -17,10 +30,27 @@ async function register({ name, email, password }) {
         const err = data?.errors?.[0]?.message || data?.message || `HTTP ${res.status}`;
         throw new Error(err);
     }
+    return data;
+}
+
+async function loginAfterRegister({email, password}) {
+    const res = await fetch("https://v2.api.noroff.dev/auth/login", {
+        method: "POST", 
+        headers: { "Content-Type": "application/json" }, 
+        body: JSON.stringify({ email, password })
+    });
+    const data = await res.json();
+    if (!res.ok) {
+        const err = data?.errors?.[0]?.message || data?.message || `HTTP ${res.status}`;
+        throw new Error(err);
+    }
+    return data;
 }
 
 function renderRegisterShell() {
     const app = getApp();
+    const r = normalizeRedirect(getRedirectParam());
+    const loginHref = `login.html${r ? `?redirect=${encodeURIComponent(r)}` : ""}`;
     app.innerHTML = `
 
     <main class="auth auth-1">
@@ -53,7 +83,7 @@ function renderRegisterShell() {
         <p class="form-msg" id="register-msg" aria-live="polite"></p>
         <p class="auth-switch">
             Already have an account?
-            <a href="login.html">Log in</a>
+            <a href="${loginHref}">Log in</a>
         </p>
     </main>
     `;
@@ -117,7 +147,7 @@ form.addEventListener("submit", async (e) => {
     }
     if (password.length < 3) { 
         markInvalid(form.querySelector('[name="password"]'));
-        messages.push("Password must have at least 3 characters");
+        messages.push("Password must have at least 8 characters");
     }
 
     if (messages.length) {
@@ -131,11 +161,13 @@ form.addEventListener("submit", async (e) => {
 
     try {
         const data = await register({ name, email, password });
-        saveUser(data.data);
+
+        const auth = await loginAfterRegister({email, password});
+        saveUser(auth.data)
         setMsg("register-msg", "Account created! Redirecting...", "success");
-        setTimeout(() => {
-            location.href = "index.html";
-        }, 1500);
+        const r = normalizeRedirect(getRedirectParam());
+            const target = isSafeRedirect(r) ? r : "/index.html";
+            setTimeout(() => { location.replace(target); }, 900);
 
     } catch (err) {
         const raw = String(err?.message || "Registration Failed");
@@ -163,5 +195,11 @@ form.addEventListener("submit", async (e) => {
 
 (function init() {
     renderRegisterShell();
+    if (getToken()) {
+        const r = normalizeRedirect(getRedirectParam());
+        const target = isSafeRedirect(r) ? r : "/index.html";
+        location.replace(target);
+        return;
+    }
     wireForm();
 })();

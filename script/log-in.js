@@ -1,7 +1,21 @@
-import { saveUser } from "./utils/storage.js";
+import { getToken, saveUser } from "./utils/storage.js";
 import { getApp, q } from "./utils/dom.js";
 import { showLoader } from "./utils/loader.js";
 import { setMsg } from "./utils/forms.js";
+
+function getRedirectParam() {
+    const params = new URLSearchParams(location.search);
+    return params.get("redirect")
+}
+
+function isSafeRedirect(url) {
+    return typeof url === "string" && url.startsWith("/");
+}
+
+function normalizeRedirect(r) {
+    if (!r) return null;
+    return r.startsWith("/") ? r : `/${r}`;
+}
 
 async function login({ email, password }) {
     const res = await fetch("https://v2.api.noroff.dev/auth/login", {
@@ -19,6 +33,8 @@ async function login({ email, password }) {
 
 function renderLoginShell() {
     const app = getApp();
+    const r = normalizeRedirect(getRedirectParam());
+    const registerHref = `register.html${r ? `?redirect=${encodeURIComponent(r)}` : ""}`;
     app.innerHTML = `
 
     <main class="auth auth-1">
@@ -47,7 +63,7 @@ function renderLoginShell() {
         <p class="form-msg" id="login-msg" aria-live="polite"></p>
         <p class="auth-switch">
             Don't have an account?
-            <a href="register.html">Register here</a>
+            <a href="${registerHref}">Register here</a>
         </p>
     </main>
     `;
@@ -146,7 +162,9 @@ function wireForm() {
             success = true;
             setMsg("login-msg", "Logged in! Redirecting...", "success");
             showLoader(true);
-            setTimeout(() => { location.href = "index.html";}, 900);
+            const r = normalizeRedirect(getRedirectParam());
+            const target = isSafeRedirect(r) ? r : "/index.html";
+            setTimeout(() => { location.replace(target); }, 900);
 
         } catch (err) {
             const raw = String(err?.message || "Login Failed");
@@ -184,6 +202,12 @@ function wireForm() {
 
 (function init() {
     renderLoginShell();
+    if (getToken()) {
+        const r = normalizeRedirect(getRedirectParam());
+        const target = isSafeRedirect(r) ? r : "/index.html";
+        location.replace(target);
+        return;
+    }
     wireForm();
 })();
 
