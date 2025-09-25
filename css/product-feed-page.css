@@ -62,13 +62,13 @@
 
 /* ---- SLIDESHOW ---- */
 
-.slideshowm, .slides {
+.slideshow, .slides {
     max-width: 294px;
     margin: 0 auto;
     position: relative;
 }
 
-.slidesshow  { overflow: hidden; }
+.slideshow  { overflow: hidden; }
 .slideshow .mySlide {display: none;}
 .slideshow .btn { display: none;}
 

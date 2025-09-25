@@ -65,7 +65,7 @@ export function reviewSectionHTML(p) {
                     p.reviews.map(r => {
                         const rVal = Number(r?.rating) || 0;
                         const body = r?.description ? `<p class="review-body">${r.description}</p>` : "";
-                        const user = r?.username || "Anynomous";
+                        const user = r?.username || "Anonymous";
                         return `
                         <li class="review">
                             <div class="review-head">

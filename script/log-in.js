@@ -135,7 +135,7 @@ function wireForm() {
                 markInvalid(emailEl);
                 messages.push("Please enter valid email");
             }
-            if (password.length < 3) { 
+            if (password.length < 8) { 
                 markInvalid(passEl);
                 messages.push("Please enter your password");
             }
