@@ -23,10 +23,6 @@ function renderRegisterShell() {
     const app = getApp();
     app.innerHTML = `
 
-    <div id="page-loader" class="page-loader" style="display:none">
-        <div class="spinner"></div>
-    </div>
-
     <main class="auth auth-1">
         <div class="auth-brand">
             <img src="images/logo/NovaCart_Ring.png" alt="NovaCart Logo" class="auth-logo">

@@ -10,6 +10,11 @@ export function ensurePageLoader() {
         loader.innerHTML = `<div class="spinner"></div>`;
         document.body.appendChild(loader);
     }
+
+    if (loader.parentElement !== document.body) {
+        document.body.appendChild(loader);
+    }
+    loader.style.display = "none";
     return loader;
 }
 
@@ -18,3 +23,4 @@ export function showLoader(show) {
     loader.style.display = show ? "grid" : "none";
     document.body.classList.toggle("loading", show);
 }
+

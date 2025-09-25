@@ -11,9 +11,6 @@ const isLoggedIn = !!getToken();
 function renderProductShell() {
     const app = getApp();
     app.innerHTML = `
-        <div id="page-loader" class="page-loader" style="display:none">
-            <div class="spinner"></div>
-        </div>
 
         <div id="page-message" class="page-message" aria-live="polite"></div>
 

@@ -11,10 +11,6 @@ function renderCheckoutShell() {
     app.innerHTML = `
     <main class="checkout-grid">
 
-        <div id="page-loader" class="page-loader" style="display:none">
-            <div class="spinner"></div>
-        </div>
-
         <section class="shop js-shop"></section>
 
         <div class="cart-actions">

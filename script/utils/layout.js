@@ -32,10 +32,8 @@ export function renderHeader() {
                     <a href="index.html">
                         <img src="${SITE.logo.header}" alt="${SITE.logo.alt}">
                     </a>
-                    
                 </li>
-                
-
+        
                 <input type="checkbox" id="check" />
                 <span class="menu">
                     ${NAV.map(navItemHTML).join("")}

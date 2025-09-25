@@ -2,6 +2,7 @@ import { addToCart, updateCartQuantity } from "./cart.js"
 import { getToken } from "./utils/storage.js";
 import { fetchProducts } from "./api/products.js";
 import { imgSrc, imgAlt, saleBadge, priceHTML, starsHTML, slideHTML, productCardHTML } from "./utils/templates.js";
+import { showLoader } from "./utils/loader.js";
 
 const isLoggedIn = !!getToken();
 const app = document.getElementById("app");
@@ -23,10 +24,7 @@ function wireAddToCartButtons(products) {
 
 function renderHomeShell() {
     app.innerHTML = `
-        <div id="page-loader" class="page-loader" style="display:none">
-            <div class="spinner"></div>
-        </div>
-
+        
         <section class="slideshow" id="slideshow" role="region" aria-label="Featured products">
             <div class="slides" aria-live="polite"></div>
             <div class="controls">
@@ -46,6 +44,7 @@ function renderHomeShell() {
         <section class="latest-products">
             <div class="grid"></div>
         </section>
+    
     `;
 }
 
@@ -54,7 +53,7 @@ function renderHomeShell() {
 async function init() {
     renderHomeShell();
 
-    const loader = document.getElementById("page-loader");
+    
     const slideShow = document.getElementById("slideshow");
     const slidesWrap = slideShow.querySelector(".slides");
     const prevBtn = slideShow.querySelector(".prev");
@@ -62,7 +61,7 @@ async function init() {
     const latestGrid = document.querySelector(".latest-products .grid");
 
     try { 
-    loader.style.display = "grid";
+    showLoader(true);
     const products = await fetchProducts();
 
     // Carousel
@@ -150,7 +149,7 @@ async function init() {
     slideShow.addEventListener("mouseleave", play);
     prevBtn.addEventListener("focus", stop);
     nextBtn.addEventListener("focus", stop);
-    prevBtn.addEventListener("blur", play);
+    prevBtn.addEventListener("focus", play);
     nextBtn.addEventListener("blur", play);
 
     const latest12 = products.slice(-12).reverse();
@@ -172,7 +171,7 @@ async function init() {
 
     if (latestGrid) latestGrid.innerHTML = `<p>Could not load products</p>`;
  } finally {
-    loader.style.display = "none";
+    showLoader(false);
  }
 
 }
