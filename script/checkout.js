@@ -4,7 +4,10 @@ import { money } from "./utils/money.js";
 import { prefillEmail, clearFieldErrors, fieldError, setMsg } from "./utils/forms.js";
 import { writeLastOrder } from "./utils/order.js";
 import { cartItemHTML } from "./utils/templates.js";
+import { showLoader } from "./utils/loader.js";
 
+const fromCart = sessionStorage.getItem("navFromCart") === "1";
+if (fromCart) showLoader(true);
 
 function renderCheckoutShell() {
     const app = getApp();
@@ -225,3 +228,7 @@ form.addEventListener("submit", (e) => {
 });
 
 render();
+if (fromCart) {
+    showLoader(false);
+    sessionStorage.removeItem("navFromCart");
+}

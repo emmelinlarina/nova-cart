@@ -149,7 +149,6 @@ function wireForm() {
                 return;
             }
 
-            const submitBtn = q("login-submit");
             submitBtn?.setAttribute("disabled", "true");
             form.querySelectorAll("input, button").forEach(el => el.setAttribute("disabled", "true"));
 

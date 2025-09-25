@@ -1,9 +1,9 @@
 import { getCart, setQuantity, clearCart, computeTotals, updateCartQuantity,} from "../cart.js";
 import { money } from "./money.js";
 import { cartItemHTML } from "./templates.js";
+import { showLoader } from "./utils/loader.js";
 
 const wrap = document.querySelector("main");
-
 document.body.classList.add("cart-page");
 
 const shellHTML = () => `
@@ -88,14 +88,11 @@ function wire() {
 }
 
 export function render() {
-    if (document.querySelector(".checkout-grid")) {
-        wrap.innerHTML = shellHTML();
-    }
+    wrap.innerHTML = shellHTML();
 
     const shop = document.querySelector(".js-shop");
     const actions = document.querySelector(".cart-actions");
     const rightBar = document.querySelector(".js-right-bar");
-    const checkoutBtn = document.querySelector(".checkout-btn");
     const items = getCart();
 
     if (!items.length) {
@@ -110,13 +107,24 @@ export function render() {
 
     if (actions) actions.style.display = "flex";
     if (rightBar) rightBar.style.display = "";
-    if (checkoutBtn) checkoutBtn.style.display = "";
 
     shop.innerHTML = `
         <img src="images/logo/NovaCart_brown_cropped.png" alt="NovaCart logo" class="cart-logo">
         <h1>Your Cart</h1>
         ${items.map(cartItemHTML).join("")}
     `;
+
+    const checkoutBtn = document.querySelector(".checkout-btn");
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            showLoader(true);
+            sessionStorage.setItem("navFromCart", "1");
+            setTimeout(() => {
+                location.href = "checkout.html";
+            }, 50);
+        })
+    }
 
     wire();
     renderTotals();
