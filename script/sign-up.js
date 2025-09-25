@@ -70,7 +70,7 @@ function renderRegisterShell() {
                 </label>
 
                 <label class="field password-field">
-                    <input type="password" name="password" id="register-password" placeholder="Password" minlength="3" required>
+                    <input type="password" name="password" id="register-password" placeholder="Password" minlength="8" required>
                     <button type="button" class="toggle-pw" aria-label="Show Password" aria-pressed="false" title="Show Password"> 
                         <i class="fa-solid fa-eye"></i>
                     </button>
@@ -145,7 +145,7 @@ form.addEventListener("submit", async (e) => {
         markInvalid(form.querySelector('[name="email"]'));
         messages.push("Please enter valid email");
     }
-    if (password.length < 3) { 
+    if (password.length < 8) { 
         markInvalid(form.querySelector('[name="password"]'));
         messages.push("Password must have at least 8 characters");
     }
@@ -176,7 +176,7 @@ form.addEventListener("submit", async (e) => {
         if (/exist|taken|registered|already|conflict/.test(lower)) {
             display = "Email is already registered"
         } else if (/password/.test(lower) && /short|least|length/.test(lower)) {
-            display = "Password must have at least 3 characters"
+            display = "Password must have at least 8 characters"
         } else if (/password/.test(lower)) {
             display = "Password is incorrect";
         }

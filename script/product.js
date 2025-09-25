@@ -56,7 +56,7 @@ function renderProducts(p) {
             
             ${isLoggedIn 
                 ? `<button class="btn js-add-to-cart" data-product-id="${p.id}" aria-label="Add ${p.title} to cart">Buy</button>`
-                : `<a class="btn btn-outline" href="login.html?redirect=${redirectURL}">Log in to buy</a>`}
+                : `<a class="btn btn-outline login-cta" href="login.html?redirect=${redirectURL}">Log in to buy</a>`}
 
                 <div class ="js-inline-message" aria-live="polite"></div>
         </div>  

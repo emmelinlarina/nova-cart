@@ -194,7 +194,7 @@ header { margin-bottom: 30px; }
     color: #362E27;
 }
 
-.product .btn.btn-outline[href="login.html"] {
+.product .btn.login-cta {
     display: flex;
     width: 256px; height: 45px;
     margin: 0 auto 45px;
