@@ -30,6 +30,7 @@ function renderHomeShell() {
             aria-label="Featured products"
             aria-live="polite"
             tabindex="0">
+            <h2 class="visually-hidden">Featured products</h2>
             <div class="slides" id="slides"></div>
                 <div class="controls">
                     <button class="prev" type="button" aria-label="Previous" aria-controls="slides">
@@ -43,7 +44,7 @@ function renderHomeShell() {
             <div class="info">
                 <h2>Latest Products</h2>
                 <p>Browse our newest items <br> and top deals</p>
-                <h3>CATEGORY 1</h3>
+                <h3></h3>
             </div>
         </section>
 
