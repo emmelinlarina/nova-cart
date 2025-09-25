@@ -2,7 +2,7 @@ import { getToken, logoutUser, getUser } from "./utils/storage.js";
 import { updateCartQuantity } from "./cart.js";
 
 function syncHeader() { 
-const authLink = document.querySelector('.js-auth-link');
+const authLink = document.querySelector('.js-auth-link .auth-text');
 const authText = document.querySelector('.auth-text');
 const logoutBtn = document.querySelector('.js-logout');
 

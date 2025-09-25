@@ -1,6 +1,7 @@
 import { SITE, NAV, FOOTER_LINKS, SOCIALS } from "./site.js";
 
 function navItemHTML(item) {
+    
     if (item.type === "cart") {
         return `
         <li>
@@ -10,11 +11,13 @@ function navItemHTML(item) {
             </a>
         </li>`;
     }
+     const isAuth = (item.cls || "").includes("js-auth-link");
+
         return `
         <li>
             <a href="${item.href}" class="${item.cls || ""}" aria-label="${item.text}">
                 <i class="${item.icon}"></i>
-                <span class="auth-text">${item.text}</span>
+                <span class="${isAuth ? "auth-text" : "nav-text"}">${item.text}</span>
             </a>
         </li>`;
 }
@@ -29,7 +32,9 @@ export function renderHeader() {
                     <a href="index.html">
                         <img src="${SITE.logo.header}" alt="${SITE.logo.alt}">
                     </a>
+                    
                 </li>
+                
 
                 <input type="checkbox" id="check" />
                 <span class="menu">

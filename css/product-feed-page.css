@@ -225,7 +225,7 @@
 
 /* Tablet */
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
 
     .latest-products, .info {
         grid-template-columns: repeat(3, minmax(0, 1fr));

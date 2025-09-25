@@ -14,6 +14,7 @@ export const SITE = {
 };
 
 export const NAV = [
+    { type: "link", href: "index.html", icon: "fa-solid fa-house", text: "Home", cls: "home-link" },
     { type: "link", href: "login.html", icon: "fa-regular fa-circle-user", text: "Log in", cls: "js-auth-link" },
     { type: "cart", href: "cart.html", icon: "fa-solid fa-cart-shopping", cls: "cart-link" }
 ];

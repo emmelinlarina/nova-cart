@@ -46,6 +46,7 @@
 /* --- Desktop ---  */
 
 @media (min-width: 769px) and (max-width: 2560px) {  
+    .navbar a.home-link { display: none;}
     .logo img {width: 170px;}
     .menu li, .menu .btn-link {
     font-size: 1.4rem;
