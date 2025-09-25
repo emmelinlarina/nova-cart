@@ -25,12 +25,18 @@ function wireAddToCartButtons(products) {
 function renderHomeShell() {
     app.innerHTML = `
         
-        <section class="slideshow" id="slideshow" role="region" aria-label="Featured products">
-            <div class="slides" aria-live="polite"></div>
-            <div class="controls">
-                <button class="prev" aria-label="Previous"><i class="fa-solid fa-arrow-left"></i></button>
-                <button class="next" aria-label="Next"><i class="fa-solid fa-arrow-right"></i></button>
-            </div>
+        <section class="slideshow" id="slideshow" role="region" 
+            aria-roledescription="carousel"
+            aria-label="Featured products"
+            aria-live="polite"
+            tabindex="0">
+            <div class="slides" id="slides"></div>
+                <div class="controls">
+                    <button class="prev" type="button" aria-label="Previous" aria-controls="slides">
+                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+                    <button class="next" type="button" aria-label="Next" aria-controls="slides">
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+                </div>
         </section>
 
         <section class="home-info">
@@ -141,7 +147,10 @@ async function init() {
         timer = setInterval(() => showSlide(++slideIndex), 4000);
         slideShow.setAttribute("aria-live", "off");
     };
-    const stop = () => { if (timer) { clearInterval(timer); timer = null; slideShow.setAttribute("aria-live", "polite"); } };
+    const stop = () => { 
+        if (timer) { clearInterval(timer); timer = null; }
+            slideShow.setAttribute("aria-live", "polite"); 
+        };
 
     play();
 
@@ -149,7 +158,7 @@ async function init() {
     slideShow.addEventListener("mouseleave", play);
     prevBtn.addEventListener("focus", stop);
     nextBtn.addEventListener("focus", stop);
-    prevBtn.addEventListener("focus", play);
+    prevBtn.addEventListener("blur", play);
     nextBtn.addEventListener("blur", play);
 
     const latest12 = products.slice(-12).reverse();
