@@ -37,19 +37,21 @@ function renderLoginShell() {
     const registerHref = `register.html${r ? `?redirect=${encodeURIComponent(r)}` : ""}`;
     app.innerHTML = `
 
-    <main class="auth auth-1">
+    <section class="auth auth-1">
         <div class="auth-brand">
             <img src="images/logo/NovaCart_Ring.png" alt="NovaCart Logo" class="auth-logo">
-            <h1 class="auth-heading">Welcome Back!</h1>
+            <h1 class="auth-heading" id="login-heading">Welcome Back!</h1>
         </div>
 
         <section class="auth-card">
             <form id="login-form" class="auth-form" novalidate>
                 <label class="field ">
+                <span class="visually-hidden">Email</span>
                     <input type="email" name="email" placeholder="Email" autocomplete="email" required>
                 </label>
 
                 <label class="field password-field">
+                <span class="visually-hidden">Password</span>
                     <input type="password" name="password" id="login-password" placeholder="Password" required>
                     <button type="button" class="toggle-pw" aria-label="Show Password" aria-pressed="false" title="Show Password">
                         <i class="fa-solid fa-eye"></i> 
@@ -65,7 +67,7 @@ function renderLoginShell() {
             Don't have an account?
             <a href="${registerHref}">Register here</a>
         </p>
-    </main>
+    </section>
     `;
 }
 

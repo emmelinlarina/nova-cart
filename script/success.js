@@ -6,11 +6,11 @@ import { makeOrderId, readLastOrder } from "./utils/order.js";
 function renderSuccessShell() {
     const app = getApp();
     app.innerHTML = `
-    <main class="success">
-        <section class="success-card">
+    <section class="success" aria-labelledby="success-title">
+        <div class="success-card">
             <img src="images/logo/NovaCart_brown_cropped.png" alt="NovaCart logo" class="cart-logo">
-            <div class="icon"><i class="fa-solid fa-circle-check"></i></div>
-            <h1>Thank You</h1>
+            <div class="icon"><i class="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+            <h1 id="success-title">Thank You</h1>
             <h2>Your payment was successful</h2>
             <p class="greeting js-greeting"></p>
 
@@ -24,8 +24,8 @@ function renderSuccessShell() {
             <div class="actions">
                 <a class="btn btn-outline" href="index.html">Home page</a>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
     `;
 }
 
@@ -61,6 +61,8 @@ function hydrate() {
     if (g) g.textContent = "";
 
     updateCartQuantity?.();
+
+    getApp()?.focus.apply();
 }
 
 (function init() {

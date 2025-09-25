@@ -53,7 +53,7 @@ function renderRegisterShell() {
     const loginHref = `login.html${r ? `?redirect=${encodeURIComponent(r)}` : ""}`;
     app.innerHTML = `
 
-    <main class="auth auth-1">
+    <section class="auth auth-1" aria-labelledby="register-heading">
         <div class="auth-brand">
             <img src="images/logo/NovaCart_Ring.png" alt="NovaCart Logo" class="auth-logo">
             <h1 class="auth-heading">Register Account</h1>
@@ -61,15 +61,19 @@ function renderRegisterShell() {
 
         <section class="auth-card">
             <form id="register-form" class="auth-form" novalidate>
+                
                 <label class="field">
+                <span class="visually-hidden">Name</span>
                     <input type="text" name="name" placeholder="Name" minlength="3" required>
                 </label>
 
                 <label class="field">
+                <span class="visually-hidden">Email</span>
                     <input type="email" name="email" placeholder="Email" required>
                 </label>
 
                 <label class="field password-field">
+                <span class="visually-hidden">Password</span>
                     <input type="password" name="password" id="register-password" placeholder="Password" minlength="8" required>
                     <button type="button" class="toggle-pw" aria-label="Show Password" aria-pressed="false" title="Show Password"> 
                         <i class="fa-solid fa-eye"></i>
@@ -85,7 +89,7 @@ function renderRegisterShell() {
             Already have an account?
             <a href="${loginHref}">Log in</a>
         </p>
-    </main>
+    </section>
     `;
 }
 
@@ -151,7 +155,8 @@ form.addEventListener("submit", async (e) => {
     }
 
     if (messages.length) {
-        setMsg("register-msg", messages[0], "Please fix the highlighted fields", "error");
+
+        setMsg("register-msg", messages[0], "error");
         form.querySelector("input.is-invalid")?.focus();
         submitBtn?.removeAttribute("disabled");
         form.querySelectorAll("input, button").forEach((el) => el.removeAttribute("disabled"));
@@ -166,7 +171,7 @@ form.addEventListener("submit", async (e) => {
         saveUser(auth.data)
         setMsg("register-msg", "Account created! Redirecting...", "success");
         const r = normalizeRedirect(getRedirectParam());
-            const target = isSafeRedirect(r) ? r : "/index.html";
+        const target = isSafeRedirect(r) ? r : "index.html";
             setTimeout(() => { location.replace(target); }, 900);
 
     } catch (err) {
