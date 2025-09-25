@@ -1,7 +1,7 @@
 import { getCart, setQuantity, clearCart, computeTotals, updateCartQuantity,} from "../cart.js";
 import { money } from "./money.js";
 import { cartItemHTML } from "./templates.js";
-import { showLoader } from "./utils/loader.js";
+import { showLoader } from "./loader.js";
 
 const wrap = document.querySelector("main");
 document.body.classList.add("cart-page");
@@ -93,6 +93,7 @@ export function render() {
     const shop = document.querySelector(".js-shop");
     const actions = document.querySelector(".cart-actions");
     const rightBar = document.querySelector(".js-right-bar");
+    const checkoutBtn = document.querySelector(".checkout-btn");
     const items = getCart();
 
     if (!items.length) {
@@ -114,8 +115,8 @@ export function render() {
         ${items.map(cartItemHTML).join("")}
     `;
 
-    const checkoutBtn = document.querySelector(".checkout-btn");
     if (checkoutBtn) {
+        checkoutBtn.style.display = "";
         checkoutBtn.addEventListener("click", (e) => {
             e.preventDefault();
             showLoader(true);

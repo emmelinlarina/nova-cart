@@ -153,9 +153,9 @@ export function cartItemHTML({ p, q }) {
                 <button class="qty-inc" data-id="${p.id}" aria-label="Increase">+</button>
             </div>
             <p class="btn-area">
-                <span class="btn2 js-delete-link" data-product-id="${p.id}">
+                <button class="btn2 js-delete-link" data-product-id="${p.id}">
                     <i class="fa-solid fa-trash"></i> Remove
-                </span>
+                </button>
             </p>
         </div>
     </div>
