@@ -110,7 +110,8 @@ export function renderFooter() {
                 </form>
                 <div class="social-icons">
                     ${SOCIALS.map(s => `
-                        <a href="${s.href}"><i class="${s.icon}" aria-hidden="true"></i></a>`).join("")}
+                        <a href="${s.href}" aria-label="${s.name}">
+                        <i class="${s.icon}" aria-hidden="true"></i></a>`).join("")}
                 </div>
             </div>
         </div>

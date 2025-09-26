@@ -29,8 +29,8 @@ export const FOOTER_LINKS = [
 ];
 
 export const SOCIALS = [
-    { icon: "fa-brands fa-discord", href: "#"},
-    { icon: "fa-brands fa-instagram", href: "#"},
-    { icon: "fa-brands fa-facebook", href: "#"},
-    { icon: "fa-brands fa-x-twitter", href: "#"},
-]
+    { icon: "fa-brands fa-discord", href: "#", name: "Discord"},
+    { icon: "fa-brands fa-instagram", href: "#", name: "Instagram"},
+    { icon: "fa-brands fa-facebook", href: "#", name: "Facebook"},
+    { icon: "fa-brands fa-x-twitter", href: "#", name: "X (Twitter)"},
+];
