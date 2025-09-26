@@ -44,7 +44,7 @@ function renderHomeShell() {
             <div class="info">
                 <h2>Latest Products</h2>
                 <p>Browse our newest items <br> and top deals</p>
-                <h3></h3>
+                
             </div>
         </section>
 
