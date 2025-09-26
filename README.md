@@ -20,10 +20,10 @@ Nova Cart is a modern, stylish online store that brings together everyday essent
 
 ## Links:
 
-- GitHub repo: (link here)
-- Live site (GitHub Pages): (link here)
-- Figma style guide & prototypes: (link here)
-- GitHub Projects board: (link here)
+- GitHub repo: https://github.com/emmelinlarina/nova-cart
+- Live site (GitHub Pages): https://emmelinlarina.github.io/nova-cart/
+- Figma style guide & prototypes: https://www.figma.com/design/BQ473WSNPW092EyZVp5cLq/NovaCart-AS?node-id=1-3&t=mvacEIKYGBvtdI6t-1
+- GitHub Projects board: https://github.com/users/emmelinlarina/projects/10
 
 ## Admin / Test user:
 
@@ -36,7 +36,7 @@ Nova Cart is a modern, stylish online store that brings together everyday essent
     If you want to register a new user, you can absolutely do that as long as you:
 
     - use @stud.noroff.no
-    - make a unique username and email with letters, numbers and _
+    - make a unique username and email with letters and numbers
     - Password anything 8+ chars is fine
 
 ## Features and User Stories:
