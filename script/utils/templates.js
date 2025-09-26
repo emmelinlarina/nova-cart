@@ -7,7 +7,7 @@ export function saleBadge(p) {
     if (typeof p.price !== 'number' || typeof p.discountedPrice !== 'number') return '';
     if (p.discountedPrice >= p.price) return '';
     const pct = Math.round((1 - (p.discountedPrice / p.price)) * 100);
-    return `<span class="badge-sale" aria-label="Save ${pct}%">-${pct}%</span>`;
+    return `<span class="badge-sale" aria-label="true">-${pct}%</span>`;
 }
 
 export function priceHTML(p) {
@@ -90,7 +90,7 @@ export const slideHTML = (p, i, total, { imgSrc, imgAlt, saleBadge, priceHTML, s
             <a class="card" href="product.html?id=${p.id}">
                 <div class="media">
                     <div class="thumb">
-                        <img src="${imgSrc(p)}" alt="${imgAlt(p)}"/>
+                        <img src="${imgSrc(p)}" alt=""/>
                         ${saleBadge(p)}
                     </div>            
                 <h3>${p.title}</h3>
@@ -115,7 +115,7 @@ export const productCardHTML = (p, { imgSrc, imgAlt, saleBadge, priceHTML, stars
         <a class="card-link" href="product.html?id=${p.id}">
             <div class="media">
                 <div class="thumb">
-                    <img src="${imgSrc(p)}" alt="${imgAlt(p)}"/>
+                    <img src="${imgSrc(p)}" alt=""/>
                     ${saleBadge(p)}
                 </div>               
                 <h3>${p.title}</h3>
@@ -138,7 +138,7 @@ export function cartItemHTML({ p, q }) {
     return `
     <div class="box js-cart-item-container-${p.id}">
         <div class="content">
-            <img src="${p.image.url}" alt="${p.image.alt}">
+            <img src="${p.image.url}" alt="">
             <h3>${p.title}</h3>
             <div class="price">
                 ${
