@@ -28,6 +28,9 @@ export function renderHeader() {
     if (!root) return;
 
     root.innerHTML = `
+
+    <a class="skip-link" href="#app">Skip to main content</a>
+
         <nav aria-label="Primary">
             <ul class="navbar">
                 <li class="logo">

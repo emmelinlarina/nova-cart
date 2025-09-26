@@ -138,7 +138,7 @@ export function cartItemHTML({ p, q }) {
     return `
     <div class="box js-cart-item-container-${p.id}">
         <div class="content">
-            <img src="${p.image.url}" alt="">
+            <img src="${p.image.url}" alt="${imgAlt(p)}">
             <h3>${p.title}</h3>
             <div class="price">
                 ${
