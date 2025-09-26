@@ -46,13 +46,14 @@ export function renderHeader() {
                         </button>
                     </li>
                     <li>
-                    <label for="check" class="close-menu" role="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Close menu">
+                    <button class="close-menu" role="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Close menu">
                         <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-                    </label>
+                    </button>
                     </li>
                 </ul>
-                <label for="check" class="open-menu" role="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu">
-                    <i class="fa-solid fa-bars" aria-hidden="true"></i></label>
+                <button class="open-menu" role="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                </button>
             </ul>
         </nav>
     `;
@@ -65,6 +66,8 @@ export function renderHeader() {
         open?.setAttribute("aria-expanded", ex);
         close?.setAttribute("aria-expanded", ex);
     };
+    open.addEventListener("click", () => { chk.checked = true; sync(); });
+    close.addEventListener("click", () => { chk.checked = false; sync(); });
     chk?.addEventListener("change", sync);
     sync();
 }

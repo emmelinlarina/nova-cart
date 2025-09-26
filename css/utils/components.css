@@ -64,10 +64,15 @@
     color: black;
     font-size: 2.25rem;
     display: none;
+    background-color: transparent;
+    border: none;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
 }
 
 .open-menu { top: 20px; right: 30px; transform: none; }
-.close-menu { top: 30px; right: 30px; }
+.close-menu { top: 20px; right: 35px; }
 
 .logo a {display: inline-block; line-height: 0;}
 .logo img {width: 178px; margin-top: 10px; visibility: hidden; }
