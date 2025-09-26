@@ -1,7 +1,7 @@
 import { money } from "./money.js";
 
 export const imgSrc = (p) => p?.image?.url || "images/fallback.png";
-export const imgAlt = (p) => p?.image?.alt || p?.title ? `Image of ${p.title}` : "Product image";
+export const imgAlt = (p) => p?.image?.alt || p?.title || "";
 
 export function saleBadge(p) {
     if (typeof p.price !== 'number' || typeof p.discountedPrice !== 'number') return '';
